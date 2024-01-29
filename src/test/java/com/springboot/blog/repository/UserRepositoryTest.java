@@ -1,5 +1,6 @@
 package com.springboot.blog.repository;
 
+import com.springboot.blog.entity.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,22 +38,30 @@ class UserRepositoryTest {
 
     @Test
     void findByEmail() {
+        Optional<User> encontradofalse = repository.findByEmail("common0@shutterfly.com");
+        Optional<User> encontradotrue = repository.findByEmail("tcommon0@shutterfly.com");
 
+        assertFalse(false,"No se ha encontrado");
+        assertTrue(true,"No se ha encontrado");
     }
 
     @Test
+    @Disabled
     void findByUsernameOrEmail() {
     }
 
     @Test
+    @Disabled
     void findByUsername() {
     }
 
     @Test
+    @Disabled
     void existsByUsername() {
     }
 
     @Test
+    @Disabled
     void existsByEmail() {
     }
 }

@@ -1,6 +1,6 @@
-insert into users (id, name, last_name, email, password) values (1, 'Taffy', 'Common', 'tcommon0@shutterfly.com', '$2a$04$XYMmByPJ8ohTBk7CCk4cse9/TrqrqB8z79ORVdn/kEM83FnraChUu');
-insert into users (id, name, last_name, email, password) values (2, 'Malinda', 'Winsiowiecki', 'mwinsiowiecki1@home.pl', '$2a$04$Dwia0i1V2tDKZNhNwcKVDeVq5ZVyn8TvOa.9z4IFxPTb.hGobrL4S');
-insert into users (id, name, last_name, email, password) values (3, 'Katharine', 'Shuttell', 'kshuttell2@ucla.edu', '$2a$04$Geb0HcdMj9jNpI4e5SOFJeAb3KkefvSrLC832Lu8spQdruUXt2vf2');
-insert into users (id, name, last_name, email, password) values (4, 'Wilow', 'Ferrant', 'wferrant3@bing.com', '$2a$04$nZu2di2BuRd/PwI4VTztm.Nal.970LzvcIElBXDxuN0e82nwtTK46');
-insert into users (id, name, last_name, email, password) values (5, 'Larisa', 'Crehan', 'lcrehan4@seattletimes.com', '$2a$04$J6How80qL2.aLLOP8mYau.UykYu3W5OjM2TZ.674B1upkReuD3WsW');
-insert into users (id, name, last_name, email, password) values (6, 'Gerry', 'Van Velden', 'gvanvelden5@youtube.com', '$2a$04$m..8ZkAafK2P4IQmaRcdXOd5wr./oy1E5Ih/K2AeixRGLi8KXH5xu');
+insert into users (id, name, username, email, password) values (1, 'Leticia', 'lcroxton0', 'loliva0@europa.eu', '$2a$04$/Qpy.M7Xg3ksrC6MvKYHeOMbTkBEBmXYdOaERRVGLgm/0mIL1CP1.');
+insert into users (id, name, username, email, password) values (2, 'Faunie', 'fspincke1', 'fyuryev1@senate.gov', '$2a$04$Q7fd8kNaFpGUEuHd1/ukZu6Ho7FvDby/u4G7cBgC8xr47bdFSp6r.');
+insert into users (id, name, username, email, password) values (3, 'Tades', 'tchallicum2', 'tkiddy2@1und1.de', '$2a$04$CNKxyEeHC0VGm4hpDgx1cO2sx2dSf.qRqQd9pZZe/0WEme/C/KG5i');
+insert into users (id, name, username, email, password) values (4, 'Leonore', 'lquick3', 'lklamman3@ezinearticles.com', '$2a$04$9kQULjLmwXjua92iDZclF.UMQVfYd25lTB7v5f8CvHOy2wwiZt1h6');
+insert into users (id, name, username, email, password) values (5, 'Brigit', 'bsanti4', 'bmatejic4@youku.com', '$2a$04$kZVI1yFE92tr3dQSJd6zze.tpvqPZv51HtV8BXcL3xHIOOqNpIVPK');
+insert into users (id, name, username, email, password) values (6, 'Shayne', 'slawden5', 'soaker5@addthis.com', '$2a$04$Qbni2vSWt9fHlT1YaXDnX.Gzpv9Wf2rdTDEvfR22rn4CeeWAHHC/i');

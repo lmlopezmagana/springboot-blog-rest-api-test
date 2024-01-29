@@ -4,20 +4,30 @@ import com.springboot.blog.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 import com.springboot.blog.repository.config.ConfigTestClass;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserRepositoryTest extends ConfigTestClass{
 
     @Autowired
-    private UserRepository userRepository;
-
+    UserRepository userRepository;
 
     @Test
-    void findByEmail() {
+    void findByEmailFound() {
+        String emailExpected = "fernando@gmail.com";
+        Optional<User> userOptional = userRepository.findByEmail(emailExpected);
+
+        assertEquals(userOptional.get().getEmail(), emailExpected);
+    }
+
+    @Test
+    void findByEmailNotFound(){
+        Optional<User> userOptional = userRepository.findByEmail("fakeEmail@gmail.com");
+
+        assertTrue(userOptional.isEmpty());
     }
 
     @Test

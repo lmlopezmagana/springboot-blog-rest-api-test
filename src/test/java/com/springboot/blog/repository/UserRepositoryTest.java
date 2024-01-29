@@ -1,6 +1,8 @@
 package com.springboot.blog.repository;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
@@ -21,6 +23,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @Sql(value = "classpath:delete-test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 class UserRepositoryTest {
 
+    @Autowired
+    UserRepository repository;
+
     @Container
     @ServiceConnection
     static PostgreSQLContainer postgres = new PostgreSQLContainer(DockerImageName.parse("postgres:16-alpine"))
@@ -30,6 +35,7 @@ class UserRepositoryTest {
 
     @Test
     void findByEmail() {
+
     }
 
     @Test

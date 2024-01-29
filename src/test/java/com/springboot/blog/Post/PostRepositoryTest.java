@@ -17,7 +17,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
 @DataJpaTest
-@Sql(scripts = {"../../../sql/myblog-ddl-script.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"classpath:import-test-post.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class PostRepositoryTest {
     @Container
@@ -25,7 +24,11 @@ public class PostRepositoryTest {
     static PostgreSQLContainer postgres = new PostgreSQLContainer(DockerImageName.parse("postgres:16.0"))
             .withUsername("blog")
             .withPassword("blog")
+            .withCopyFileToContainer(
+                    MountableFile.forClasspathResource("../../../sql/"),
+                    "/docker-entrypoint-initdb.d").
             .withDatabaseName("postgres-blog");
+
 
     @Autowired
     PostRepository repository;

@@ -13,12 +13,9 @@ class CommentRepositoryTest extends ConfigTestClass{
 
     @Test
     void findByPostId() {
-        String name = "";
 
-        if (commentRepository.findByPostId(1).stream().findFirst().isPresent())
-            name = commentRepository.findByPostId(1).stream().findFirst().get().getName();
-
-        assertEquals("Comentario 1", name);
+        assertEquals("Comentario 1", commentRepository.findByPostId(1).stream().findFirst().get().getName());
+        assertTrue();
 
     }
 }

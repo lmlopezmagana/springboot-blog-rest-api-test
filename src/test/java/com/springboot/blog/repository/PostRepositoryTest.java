@@ -72,7 +72,7 @@ class PostRepositoryTest {
         List<Post> result = postRepository.findByCategoryId(2L);
 
         Assertions.assertThat(result).isNotNull();
-        Assertions.assertThat(result.size()).isEqualTo(0);
+        Assertions.assertThat(result).isEmpty();
     }
 
     @Test
@@ -84,6 +84,6 @@ class PostRepositoryTest {
 
         List<Post> result = postRepository.findByCategoryId(3L);
 
-        Assertions.assertThat(result).isNull();
+        Assertions.assertThat(result).isEmpty();
     }
 }

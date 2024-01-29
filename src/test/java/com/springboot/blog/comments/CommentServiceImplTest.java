@@ -5,6 +5,7 @@ import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
+import com.springboot.blog.service.CommentService;
 import com.springboot.blog.service.impl.CommentServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,25 +15,26 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CommentServiceImplTest {
+    @Mock
+    static CommentRepository commentRepository;
+    @Mock
+    static PostRepository postRepository;
+    static ModelMapper mapper = new ModelMapper();
+    Post p = Mockito.mock(Post.class);
+    static Comment comment = new Comment();
+    static CommentDto c = new CommentDto();
 
     @InjectMocks
-    CommentServiceImpl commentService;
-
-    @Mock
-    CommentRepository commentRepository;
-
-    @Mock
-    PostRepository postRepository;
-
-    static ModelMapper mapper = new ModelMapper();
+    static CommentService commentService = new CommentServiceImpl(commentRepository, postRepository, mapper);
 
     @BeforeAll
     static void init() {
@@ -43,20 +45,17 @@ class CommentServiceImplTest {
 
         comment = mapper.map(c, Comment.class);
     }
-
-    Post p = Mockito.mock(Post.class);
-    static Comment comment = new Comment();
-    static CommentDto c = new CommentDto();
-
     @Test
     void createComment() {
-        when(postRepository.findById(p.getId())).thenReturn(Optional.ofNullable(p));
-        when(commentRepository.save(comment)).thenReturn(comment);
         when(p.getId()).thenReturn(1L);
+        when(postRepository.findById(p.getId())).thenReturn(Optional.ofNullable(p));
+        when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(comment);
 
         CommentDto result = commentService.createComment(p.getId(),c);
 
         assertEquals("Comment name", result.getName());
+        verify(commentRepository, times(1)).save(Mockito.any(Comment.class));
+        verify(postRepository).findById(eq(1L));
     }
 
     @Test

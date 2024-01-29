@@ -1,5 +1,7 @@
 package com.springboot.blog.repository;
 
+import com.springboot.blog.entity.Category;
+import com.springboot.blog.entity.Post;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 import javax.sql.DataSource;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,12 +50,40 @@ class PostRepositoryTest {
 
     //Alejandro Rubens
     @Test
-    void findByCategoryId() {
+    void findByCategoryIdWhereCategoryIsFound() {
         Assertions.assertThat(dataSource).isNotNull();
         Assertions.assertThat(jdbcTemplate).isNotNull();
         Assertions.assertThat(entityManager).isNotNull();
         Assertions.assertThat(postRepository).isNotNull();
 
+        List<Post> result = postRepository.findByCategoryId(1L);
 
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result.size()).isEqualTo(1);
+    }
+
+    @Test
+    void findByCategoryIdWhereNoPostWithCategory() {
+        Assertions.assertThat(dataSource).isNotNull();
+        Assertions.assertThat(jdbcTemplate).isNotNull();
+        Assertions.assertThat(entityManager).isNotNull();
+        Assertions.assertThat(postRepository).isNotNull();
+
+        List<Post> result = postRepository.findByCategoryId(2L);
+
+        Assertions.assertThat(result).isNotNull();
+        Assertions.assertThat(result.size()).isEqualTo(0);
+    }
+
+    @Test
+    void findByCategoryIdWhereCategoryNotFound() {
+        Assertions.assertThat(dataSource).isNotNull();
+        Assertions.assertThat(jdbcTemplate).isNotNull();
+        Assertions.assertThat(entityManager).isNotNull();
+        Assertions.assertThat(postRepository).isNotNull();
+
+        List<Post> result = postRepository.findByCategoryId(3L);
+
+        Assertions.assertThat(result).isNull();
     }
 }

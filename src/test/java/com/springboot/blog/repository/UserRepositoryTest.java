@@ -74,6 +74,7 @@ class UserRepositoryTest {
 
     }
 
+    //Alejandro Rubens
     @Test
     void existsByEmailFalseStatement() {
         Assertions.assertThat(dataSource).isNotNull();

@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cd2e4b5c-3aaf-4142-8ffb-5b3e7f9eb9fb" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/CommentRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/CommentRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/delete-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/delete-data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/insert-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/insert-data.sql" afterDir="false" />
-    </list>
+    <list default="true" id="62faa19d-b4e1-4a8a-9689-0dfdaddaed9e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,7 +31,6 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "findByPostId",
     "settings.editor.selected.configurable": "com.haulmont.jpb.viewMode"
   }
 }]]></component>

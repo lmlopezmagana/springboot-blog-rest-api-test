@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -17,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Testcontainers
 @DataJpaTest
+@ActiveProfiles({"test"})
 @Sql(value = {"classpath:import-test-post.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class PostRepositoryTest {
     @Container
@@ -24,9 +26,6 @@ public class PostRepositoryTest {
     static PostgreSQLContainer postgres = new PostgreSQLContainer(DockerImageName.parse("postgres:16.0"))
             .withUsername("blog")
             .withPassword("blog")
-            .withCopyFileToContainer(
-                    MountableFile.forClasspathResource("../../../sql/"),
-                    "/docker-entrypoint-initdb.d").
             .withDatabaseName("postgres-blog");
 
 

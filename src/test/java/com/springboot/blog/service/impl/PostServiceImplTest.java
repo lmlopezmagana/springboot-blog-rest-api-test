@@ -12,16 +12,21 @@ import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class PostServiceImplTest {
 
     @Mock
@@ -33,15 +38,16 @@ class PostServiceImplTest {
    @InjectMocks
    PostServiceImpl postService;
 
+   @Mock
+    ModelMapper mapper;
+
     @BeforeAll
-    void init (){
+    static void init (){
 
         CommentDto commentDto = new CommentDto();
 
         CategoryDto categoryDto = new CategoryDto();
         categoryDto.setId(1L);
-
-        PostDto postDto = new PostDto();
 
         postDto.setId(1L);
         postDto.setTitle("titulo 1");
@@ -51,13 +57,19 @@ class PostServiceImplTest {
         postDto.setId(1L);
     }
 
-    Category c = new Category();
+    static Category category = new Category();
+    static PostDto postDto = new PostDto();
 
     @Test
     void createPost() {
 
-        when(categoryRepository.findById(1L)).thenReturn(Optional.of(c));
-        
+        when(categoryRepository.findById(category.getId())).thenReturn(Optional.of(category));
+
+        when(postRepository.save(any(Post.class))).thenReturn(new Post());
+
+        PostDto result = postService.createPost(postDto);
+
+        assertEquals("titulo 1", result.getTitle());
 
     }
 

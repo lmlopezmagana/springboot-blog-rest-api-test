@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Container
     @ServiceConnection
@@ -39,18 +39,25 @@ class UserRepositoryTest {
     void findByEmail() {
     }
 
+    //Sebastián Millán
     @Test
-    void findByUsernameOrEmail() {
+    void whenUsernameIsPresentAndEmailIsPresent_thenUserIsPresent() {
+        Optional<User> result = userRepository.findByUsernameOrEmail("lcroxton0", "loliva0@europa.eu");
+        assertTrue(result.isPresent());
+        assertEquals(result.get().getUsername(),"lcroxton0");
+        assertEquals(result.get().getEmail(),"loliva0@europa.eu");
     }
 
+    //Marco Pertegal
     @Test
     void WhenExistingUserNameThenReturnUser() {
-        String username = "marcopp";
+        String username = "fspincke1";
         Optional<User> user = userRepository.findByUsername(username);
         assertTrue(user.isPresent());
-        assertEquals("marco", user.get().getName());
+        assertEquals("Faunie", user.get().getName());
     }
 
+    //Marco Pertegal
     @Test
     void WhenNonExistingUserNameThenReturnEmpty() {
         String username = "a";
@@ -59,13 +66,15 @@ class UserRepositoryTest {
         assertTrue(user.isEmpty());
     }
 
-
+    //Marco Pertegal
     @Test
     void WhenExistingUserNameThenReturnTrue() {
-        String username = "marcopp";
+        String username = "fspincke1";
         Boolean user = userRepository.existsByUsername(username);
         assertTrue(user);
     }
+
+    //Marco Pertegal
     @Test
     void WhenNonExistingUserNameThenReturnFalse() {
         String username = "a";

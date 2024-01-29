@@ -48,12 +48,38 @@ class UserRepositoryTest {
         assertEquals(result.get().getEmail(),"loliva0@europa.eu");
     }
 
+    //Marco Pertegal
     @Test
-    void findByUsername() {
+    void WhenExistingUserNameThenReturnUser() {
+        String username = "fspincke1";
+        Optional<User> user = userRepository.findByUsername(username);
+        assertTrue(user.isPresent());
+        assertEquals("Faunie", user.get().getName());
     }
 
+    //Marco Pertegal
     @Test
-    void existsByUsername() {
+    void WhenNonExistingUserNameThenReturnEmpty() {
+        String username = "a";
+        Optional<User> user = userRepository.findByUsername(username);
+        assertFalse(user.isPresent());
+        assertTrue(user.isEmpty());
+    }
+
+    //Marco Pertegal
+    @Test
+    void WhenExistingUserNameThenReturnTrue() {
+        String username = "fspincke1";
+        Boolean user = userRepository.existsByUsername(username);
+        assertTrue(user);
+    }
+
+    //Marco Pertegal
+    @Test
+    void WhenNonExistingUserNameThenReturnFalse() {
+        String username = "a";
+        Boolean user = userRepository.existsByUsername(username);
+        assertFalse(user);
     }
 
     @Test

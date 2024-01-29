@@ -5,6 +5,7 @@ INSERT INTO posts (id, title, description, content) VALUES (3, 'Ejercicio gimnas
 INSERT INTO comments (id, post_id, name, email, body) VALUES (1, 1, 'Sebastián', 'sebas@gmail.com', 'Me ha gustado la lectura de esta experiencia');
 INSERT INTO comments (id, post_id, name, email, body) VALUES (2, 1, 'Christian', 'cristian@gmail.com', 'Intentaré hacerlo el año que viene');
 INSERT INTO comments (id, post_id, name, email, body) VALUES (3, 1, 'Alejandro', 'alejandro@gmail.com', 'Me ha encantado');
+INSERT INTO comments (id, post_id, name, email, body) VALUES (4, 2, 'Marco', 'marco@gmail.com', 'Una experiencia unica');
 
 insert into users (id, name, username, email, password) values (1, 'Leticia', 'lcroxton0', 'loliva0@europa.eu', '$2a$04$/Qpy.M7Xg3ksrC6MvKYHeOMbTkBEBmXYdOaERRVGLgm/0mIL1CP1.');
 insert into users (id, name, username, email, password) values (2, 'Faunie', 'fspincke1', 'fyuryev1@senate.gov', '$2a$04$Q7fd8kNaFpGUEuHd1/ukZu6Ho7FvDby/u4G7cBgC8xr47bdFSp6r.');

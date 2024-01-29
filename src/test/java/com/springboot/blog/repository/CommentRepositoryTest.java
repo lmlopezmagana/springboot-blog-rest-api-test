@@ -16,7 +16,7 @@ class CommentRepositoryTest extends ConfigTestClass{
 
         assertNotNull(commentRepository.findByPostId(9));
         assertEquals(2, commentRepository.findByPostId(9).size());
-        assertEquals("Nunc nisl.", commentRepository.findByPostId(32).get(0).getBody());
+        assertEquals("Suspendisse potenti.", commentRepository.findByPostId(10).get(0).getBody());
 
     }
 }

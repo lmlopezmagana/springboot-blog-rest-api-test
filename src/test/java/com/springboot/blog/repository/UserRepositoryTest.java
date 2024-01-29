@@ -20,7 +20,12 @@ class UserRepositoryTest extends ConfigTestClass{
 
     @Test
     void findByUsernameOrEmail() {
-        Optional <User> user = userRepository.findByUsernameOrEmail("")
+
+        Optional <User> user = userRepository.findByUsernameOrEmail("sbrane1", "sbrane1");
+        assertEquals("Silva", user.get().getName());
+        assertEquals(2L, user.get().getId());
+        assertNotNull(user);
+
     }
 
     @Test
@@ -34,4 +39,5 @@ class UserRepositoryTest extends ConfigTestClass{
     @Test
     void existsByEmail() {
     }
+
 }

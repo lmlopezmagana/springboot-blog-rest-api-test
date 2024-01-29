@@ -14,8 +14,9 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.List;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserRepositoryTest {
 
     @Autowired
-    UserRepository repository;
+    private UserRepository userRepository;
 
     @Container
     @ServiceConnection
@@ -46,23 +47,48 @@ class UserRepositoryTest {
         assertTrue(encontradotrue.isPresent(),"Se ha encontrado");
     }
 
+    //Sebastián Millán
     @Test
-    @Disabled
-    void findByUsernameOrEmail() {
+    void whenUsernameIsPresentAndEmailIsPresent_thenUserIsPresent() {
+        Optional<User> result = userRepository.findByUsernameOrEmail("lcroxton0", "loliva0@europa.eu");
+        assertTrue(result.isPresent());
+        assertEquals(result.get().getUsername(),"lcroxton0");
+        assertEquals(result.get().getEmail(),"loliva0@europa.eu");
+    }
+
+    //Marco Pertegal
+    @Test
+    void WhenExistingUserNameThenReturnUser() {
+        String username = "fspincke1";
+        Optional<User> user = userRepository.findByUsername(username);
+        assertTrue(user.isPresent());
+        assertEquals("Faunie", user.get().getName());
     }
 
     @Test
-    @Disabled
-    void findByUsername() {
+    void WhenNonExistingUserNameThenReturnEmpty() {
+        String username = "a";
+        Optional<User> user = userRepository.findByUsername(username);
+        assertFalse(user.isPresent());
+        assertTrue(user.isEmpty());
     }
 
     @Test
-    @Disabled
-    void existsByUsername() {
+    void WhenExistingUserNameThenReturnTrue() {
+        String username = "fspincke1";
+        Boolean user = userRepository.existsByUsername(username);
+        assertTrue(user);
+    }
+
+    //Marco Pertegal
+    @Test
+    void WhenNonExistingUserNameThenReturnFalse() {
+        String username = "a";
+        Boolean user = userRepository.existsByUsername(username);
+        assertFalse(user);
     }
 
     @Test
-    @Disabled
     void existsByEmail() {
     }
 }

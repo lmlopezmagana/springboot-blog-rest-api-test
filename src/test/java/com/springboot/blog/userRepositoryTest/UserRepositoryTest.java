@@ -35,15 +35,35 @@ class UserRepositoryTest {
             .withDatabaseName("testDatabase");
 
     @Test
-    void findByUsernamel() {
+    void findByUsername() {
         Optional<User> usuario = userRepository.findByUsername("ToRechulon");
-        Assertions.assertEquals("ToRechulon", usuario.get().getName());
+        Assertions.assertEquals("ToRechulon", usuario.get().getUsername());
 
     }
 
     @Test
-    void  findByEmail(){
+    void findByEmail(){
         Optional<User> usuario = userRepository.findByEmail("pedro@gmail.com");
         Assertions.assertEquals("pedro@gmail.com", usuario.get().getEmail());
+    }
+
+    @Test
+    void  findByUsernameOrEmail(){
+        Optional<User> usuario = userRepository.findByEmail("pedro@gmail.com");
+        Assertions.assertEquals("pedro@gmail.com", usuario.get().getEmail());
+        usuario = userRepository.findByUsername("ToRechulon");
+        Assertions.assertEquals("ToRechulon", usuario.get().getUsername());
+    }
+
+    @Test
+    void existsByUsername(){
+        boolean respuesta = userRepository.existsByUsername("ToRechulon");
+        Assertions.assertTrue(respuesta);
+    }
+
+    @Test
+    void existsByEmail(){
+        boolean respuesta = userRepository.existsByEmail("pedro@gmail.com");
+        Assertions.assertTrue(respuesta);
     }
 }

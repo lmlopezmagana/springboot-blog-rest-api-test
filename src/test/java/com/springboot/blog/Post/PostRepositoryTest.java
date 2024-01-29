@@ -4,6 +4,7 @@ import com.springboot.blog.repository.PostRepository;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.test.context.ActiveProfiles;
@@ -19,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Testcontainers
 @DataJpaTest
 @ActiveProfiles({"test"})
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Sql(value = {"classpath:import-test-post.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class PostRepositoryTest {
     @Container

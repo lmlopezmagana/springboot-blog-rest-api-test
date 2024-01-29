@@ -14,6 +14,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,11 +39,11 @@ class UserRepositoryTest {
 
     @Test
     void findByEmail() {
-        Optional<User> encontradofalse = repository.findByEmail("common0@shutterfly.com");
-        Optional<User> encontradotrue = repository.findByEmail("tcommon0@shutterfly.com");
+        Optional<User> encontradofalse = repository.findByEmail("oliva0@europa.eu");
+        Optional<User> encontradotrue = repository.findByEmail("loliva0@europa.eu");
 
-        assertFalse(false,"No se ha encontrado");
-        assertTrue(true,"No se ha encontrado");
+        assertTrue(encontradofalse.isEmpty(),"No se ha encontrado");
+        assertTrue(encontradotrue.isPresent(),"Se ha encontrado");
     }
 
     @Test

@@ -14,8 +14,9 @@ class CommentRepositoryTest extends ConfigTestClass{
     @Test
     void findByPostId() {
 
-        assertEquals("Comentario 1", commentRepository.findByPostId(1).stream().findFirst().get().getName());
-        assertTrue();
+        assertNotNull(commentRepository.findByPostId(9));
+        assertEquals(2, commentRepository.findByPostId(9).size());
+        assertEquals("Nunc nisl.", commentRepository.findByPostId(32).get(0).getBody());
 
     }
 }

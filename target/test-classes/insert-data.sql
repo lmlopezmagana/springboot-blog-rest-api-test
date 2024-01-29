@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-INSERT INTO categories (id, name, description) VALUES (1, 'Prueba1', 'Esto es la prueba 1');
-
-INSERT INTO posts (id, title, description, content, category_id) VALUES (1, 'Post1', 'Este es el primero post', 'Lorem ipsum', 1);
-
-INSERT INTO comments (id, name, email, body, post_id) VALUES (1, 'Comentario 1', 'aaaaaaa@gmail.com', 'lorem ipsum', 1);
-
-=======
 insert into categories (id, name, description) values (1, 'Teal', 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.');
 insert into categories (id, name, description) values (2, 'Fuscia', 'Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam. Nam tristique tortor eu pede.');
 insert into categories (id, name, description) values (3, 'Indigo', 'Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.');
@@ -165,4 +157,3 @@ insert into comments (id, body, email, name, post_id) values (97, 'Nulla suscipi
 insert into comments (id, body, email, name, post_id) values (98, 'Vestibulum quam sapien, varius ut, blandit non, interdum in, ante.', 'jtidd2p@sun.com', 'Jú', 20);
 insert into comments (id, body, email, name, post_id) values (99, 'Nunc purus.', 'ecorton2q@narod.ru', 'Célestine', 25);
 insert into comments (id, body, email, name, post_id) values (100, 'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', 'sblodgetts2r@nasa.gov', 'Dà', 26);
->>>>>>> testing-proyecto

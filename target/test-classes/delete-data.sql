@@ -1,5 +1,0 @@
-DELETE FROM categories
-DELETE FROM comments
-DELETE FROM posts
-DELETE FROM roles
-DELETE FROM users

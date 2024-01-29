@@ -1,5 +1,7 @@
-DELETE FROM categories
-DELETE FROM comments
-DELETE FROM posts
-DELETE FROM roles
-DELETE FROM users
+delete from comments;
+delete from posts;
+delete from categories;
+delete from users_roles;
+delete from roles;
+delete from users;
+

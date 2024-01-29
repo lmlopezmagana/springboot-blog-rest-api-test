@@ -3,10 +3,12 @@ insert into categories (id, name, description) values (2, 'Fuscia', 'Quisque arc
 insert into categories (id, name, description) values (3, 'Indigo', 'Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.');
 insert into categories (id, name, description) values (4, 'Turquoise', 'In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat.');
 insert into categories (id, name, description) values (5, 'Crimson', 'Proin at turpis a pede posuere nonummy. Integer non velit.');
+insert into categories (id, name, description) values (6, 'Crimson2', 'Proin at turpis a pede posuere nonummy. Integer non velit.');
 
-insert into posts (id, title, description, content, category_id) values (1, 'Monster Walks, The', 'Nullam molestie nibh in lectus.', 'Donec semper sapien a libero.', 5);
-insert into posts (id, title, description, content, category_id) values (2, 'Leave It to Beaver', 'In blandit ultrices enim.', 'Pellentesque ultrices mattis odio.', 5);
-insert into posts (id, title, description, content, category_id) values (3, 'Wah-Wah', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', 'Suspendisse ornare consequat lectus.', 1);
+
+insert into posts (id, title, description, content, category_id) values (1, 'Monster Walks, The', 'Nullam molestie nibh in lectus.', 'Donec semper sapien a libero.', 6);
+insert into posts (id, title, description, content, category_id) values (2, 'Leave It to Beaver', 'In blandit ultrices enim.', 'Pellentesque ultrices mattis odio.', 6);
+insert into posts (id, title, description, content, category_id) values (3, 'Wah-Wah', 'Proin leo odio, porttitor id, consequat in, consequat ut, nulla.', 'Suspendisse ornare consequat lectus.', 6);
 insert into posts (id, title, description, content, category_id) values (4, 'Protocol', 'Curabitur at ipsum ac tellus semper interdum.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', 5);
 insert into posts (id, title, description, content, category_id) values (5, 'Irreconcilable Differences', 'Etiam vel augue.', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.', 1);
 insert into posts (id, title, description, content, category_id) values (6, 'Sokkotanssi', 'Morbi quis tortor id nulla ultrices aliquet.', 'Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.', 3);

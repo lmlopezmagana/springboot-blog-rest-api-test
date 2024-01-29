@@ -38,10 +38,11 @@ class UserRepositoryTest {
             .withPassword("testSecret")
             .withDatabaseName("testDatabase");
 
+    //Cristian Pulido
     @Test
     void findByEmail() {
-        Optional<User> encontradofalse = repository.findByEmail("oliva0@europa.eu");
-        Optional<User> encontradotrue = repository.findByEmail("loliva0@europa.eu");
+        Optional<User> encontradofalse = userRepository.findByEmail("oliva0@europa.eu");
+        Optional<User> encontradotrue = userRepository.findByEmail("loliva0@europa.eu");
 
         assertTrue(encontradofalse.isEmpty(),"No se ha encontrado");
         assertTrue(encontradotrue.isPresent(),"Se ha encontrado");

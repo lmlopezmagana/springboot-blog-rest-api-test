@@ -1,5 +1,7 @@
 package com.springboot.blog.Post;
 
+import com.springboot.blog.entity.Category;
+import com.springboot.blog.entity.Post;
 import com.springboot.blog.repository.PostRepository;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,6 +16,9 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 import org.testcontainers.utility.MountableFile;
+
+import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,9 +42,16 @@ public class PostRepositoryTest {
     @ParameterizedTest
     @CsvSource({"1", "2"})
     void findByCategoryIdTest(Long categoryId){
-        if(categoryId == 1)
+        List<Post> postList = List.of(new Post(1L,
+                "hola",
+                "hola mundo java",
+                "System.out.println(Hola Mundo)",
+                Set.of(), new Category()));
+        if(categoryId == 1) {
             assertEquals(1, repository.findByCategoryId(categoryId).size());
-        else
-            assertEquals(0, repository.findByCategoryId(categoryId));
+            assertEquals(postList.get(0).getDescription(), repository.findByCategoryId(categoryId).get(0).getDescription());
+        }else {
+            assertEquals(0, repository.findByCategoryId(categoryId).size());
+        }
     }
 }

@@ -1,2 +1,3 @@
 com\springboot\blog\SpringbootBlogRestApiApplicationTests.class
 com\springboot\blog\Role\RoleRepositoryTest.class
+com\springboot\blog\Post\PostRepositoryTest.class

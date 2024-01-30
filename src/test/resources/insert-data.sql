@@ -16,6 +16,7 @@ insert into posts (id, title, description, content, category_id) values (7, 'Cal
 insert into posts (id, title, description, content, category_id) values (8, 'Frankenstein Unbound', 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi.', 'Donec vitae nisi.', 5);
 insert into posts (id, title, description, content, category_id) values (9, 'Jesus of Montreal (Jésus de Montréal)', 'Praesent blandit lacinia erat.', 'Duis aliquam convallis nunc.', 3);
 insert into posts (id, title, description, content, category_id) values (10, 'Young Törless, The (Junge Törless, Der)', 'Integer a nibh.', 'Proin interdum mauris non ligula pellentesque ultrices.', 3);
+insert into posts (id, title, description, content, category_id) values (11, 'comment for test', 'Integer a nibh.', 'Proin interdum mauris non ligula pellentesque ultrices.', 3);
 
 insert into comments (id, body, email, name, post_id) values (1, 'Ut tellus.', 'tpetteford0@linkedin.com', 'Lén', 1);
 insert into comments (id, body, email, name, post_id) values (2, 'Proin at turpis a pede posuere nonummy.', 'tpetteford0@linkedin.com', 'Anaël', 1);

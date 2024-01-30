@@ -47,6 +47,16 @@ class UserRepositoryTest extends ConfigTestClass{
     }
 
     @Test
-    void existsByEmail() {
+    void existsByEmailFound() {
+        boolean usuarioEncontrado = userRepository.existsByEmail("tpetteford0@linkedin.com");
+
+        assertTrue(usuarioEncontrado);
+    }
+
+    @Test
+    void existsByEmailNotFound(){
+        boolean usuarioEncontrado = userRepository.existsByEmail("fakeEmail@gmail.com");
+
+        assertFalse(usuarioEncontrado);
     }
 }

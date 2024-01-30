@@ -1,2 +1,6 @@
 com\springboot\blog\SpringbootBlogRestApiApplicationTests.class
+<<<<<<< HEAD
 com\springboot\blog\userRepositoryTest\UserRepositoryTest.class
+=======
+com\springboot\blog\Post\PostRepositoryTest.class
+>>>>>>> test

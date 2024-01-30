@@ -8,6 +8,7 @@ import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.repository.PostRepository;
+import com.springboot.blog.service.PostService;
 import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,39 +34,48 @@ class PostServiceImplTest {
     PostRepository postRepository;
 
    @Mock
-    CategoryRepository categoryRepository;
+   CategoryRepository categoryRepository;
+
+   @Mock
+   ModelMapper mapper;
 
    @InjectMocks
    PostServiceImpl postService;
+//   static PostService postService = new PostServiceImpl(postRepository, mapper, categoryRepository);
 
-   @Mock
-    ModelMapper mapper;
+    private Category category;
+    private PostDto postDto;
+    private Post post;
 
-    @BeforeAll
-    static void init (){
+    @BeforeEach
+    void init (){
+
+        category = new Category();
+        postDto = new PostDto();
+        post = new Post();
 
         CommentDto commentDto = new CommentDto();
 
-        CategoryDto categoryDto = new CategoryDto();
-        categoryDto.setId(1L);
+        category = new Category();
+        category.setId(1L);
+        category.setName("Example Category");
+
 
         postDto.setId(1L);
         postDto.setTitle("titulo 1");
         postDto.setDescription("eferf");
         postDto.setContent("wefewf");
-        postDto.setComments(Set.of(commentDto));
-        postDto.setId(1L);
-    }
+        postDto.setCategoryId(category.getId());
 
-    static Category category = new Category();
-    static PostDto postDto = new PostDto();
+        post = mapper.map(postDto, Post.class);
+//        post.setCategory(category);
+    }
 
     @Test
     void createPost() {
 
         when(categoryRepository.findById(category.getId())).thenReturn(Optional.of(category));
-
-        when(postRepository.save(any(Post.class))).thenReturn(new Post());
+        when(postRepository.save(any(Post.class))).thenReturn(post);
 
         PostDto result = postService.createPost(postDto);
 

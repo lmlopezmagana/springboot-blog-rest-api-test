@@ -1,10 +1,13 @@
 package com.springboot.blog.repository;
 
+import com.springboot.blog.entity.Comment;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import com.springboot.blog.repository.config.ConfigTestClass;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 class CommentRepositoryTest extends ConfigTestClass{
 
@@ -12,11 +15,23 @@ class CommentRepositoryTest extends ConfigTestClass{
     CommentRepository commentRepository;
 
     @Test
-    void findByPostId() {
-
-        assertNotNull(commentRepository.findByPostId(9));
-        assertEquals(2, commentRepository.findByPostId(9).size());
-        assertEquals("Suspendisse potenti.", commentRepository.findByPostId(10).get(0).getBody());
-
+    void findByPostId_CommentsExist() {
+        List<Comment> comments = commentRepository.findByPostId(9);
+        assertNotNull(comments);
+        assertEquals(3, comments.size());
+        assertEquals("In blandit ultrices enim.", comments.get(0).getBody());
     }
+
+    @Test
+    void findByPostId_NoComments(){
+        List<Comment> comments = commentRepository.findByPostId(11);
+        assertTrue(comments.isEmpty());
+    }
+
+    @Test
+    void findByPostId_PostIdDontExist(){
+        List<Comment> comments = commentRepository.findByPostId(99);
+        assertTrue(comments.isEmpty());
+    }
+
 }

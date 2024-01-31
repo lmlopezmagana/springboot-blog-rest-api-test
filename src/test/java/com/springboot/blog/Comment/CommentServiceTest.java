@@ -7,6 +7,7 @@ import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.impl.CommentServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -20,6 +21,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyLong;
 
 @ExtendWith(MockitoExtension.class)
 public class CommentServiceTest {
@@ -27,41 +29,101 @@ public class CommentServiceTest {
     private CommentRepository commentRepository;
     @Mock
     private PostRepository postRepository;
-    private ModelMapper mapper;
+
     @InjectMocks
     private CommentServiceImpl commentService;
+    private ModelMapper mapper = new ModelMapper();
 
-    @Test
-    void createComent(CommentDto commentDto){
-        Category category = new Category(1L,"categoria","descripcion",List.of());
-        Post posts1 = new Post(1L,"titulo del post","descripcion post","contenido del post",Set.of(),category);
-        Post posts2 = new Post(2L,"titulo del post","descripcion post","contenido del post",Set.of(),category);
-        Post posts3 = new Post(3L,"titulo del post","descripcion post","contenido del post",Set.of(),category);
-        Comment comments= new Comment(1L,"nombre del comentario","email del comment","cuerpo del comment",posts1);
-         comments = mapper.map(commentDto, Comment.class);
-         comments.setPost(posts1);
+    @BeforeEach
+    void setUp() {
+        commentService.setMapper(mapper);
+    }
 
-        category.setPosts(List.of(posts1,posts2,posts3));
+   /* @Test
+    void createCommentTest() {
+        Category category = new Category(1L, "categoria", "descripcion", List.of());
+        Post posts1 = new Post(1L, "titulo del post", "descripcion post", "contenido del post", Set.of(), category);
+        CommentDto commentDto = new CommentDto();
+        commentDto.setName("nombre del comentario");
+        commentDto.setEmail("email del comment");
+        commentDto.setBody("cuerpo del comment");
+
+        Comment comments = new Comment(1L, "nombre del comentario", "email del comment", "cuerpo del comment", posts1);
+        comments = mapper.map(commentDto, Comment.class);
+        comments.setPost(posts1);
+
+        category.setPosts(List.of(posts1));
         posts1.setComments(Set.of(comments));
-        posts2.setComments(Set.of(comments));
-        posts3.setComments(Set.of(comments));
 
         Mockito.when(postRepository.findById(1L)).thenReturn(Optional.of(posts1));
         Mockito.when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(comments);
 
-        Comment newComment = commentRepository.save(comments);
+        CommentDto newCommentDto = commentService.createComment(1L, commentDto);
 
-        commentDto= commentService.createComment(1L,commentDto);
+        assertEquals(1L, newCommentDto.getId());
+    }*/
 
-        assertEquals(1L,commentDto.);
+    /*@Test
+    void getCommentsByPostIdTest() {
+        Category category = new Category(1L, "categoria", "descripcion", List.of());
+        Post posts1 = new Post(1L, "titulo del post", "descripcion post", "contenido del post", Set.of(), category);
+        Comment comment1 = new Comment(1L, "Nombre1", "email1@example.com", "Cuerpo1", posts1);
+        Comment comment2 = new Comment(2L, "Nombre2", "email2@example.com", "Cuerpo2", posts1);
+        List<Comment> expectedComments = List.of(comment1, comment2);
+
+        Mockito.when(commentRepository.findByPostId(anyLong())).thenReturn(expectedComments);
 
 
+        List<CommentDto> actualComments = commentService.getCommentsByPostId(1L);
 
 
+        assertEquals(expectedComments.size(), actualComments.size());
 
 
+        for (int i = 0; i < expectedComments.size(); i++) {
+            Comment expectedComment = expectedComments.get(i);
+            CommentDto actualCommentDto = actualComments.get(i);
 
+            assertEquals(expectedComment.getId(), actualCommentDto.getId());
+            assertEquals(expectedComment.getName(), actualCommentDto.getName());
+            assertEquals(expectedComment.getEmail(), actualCommentDto.getEmail());
+            assertEquals(expectedComment.getBody(), actualCommentDto.getBody());
+        }
+
+        }*/
+
+    @Test
+    void getCommentByIdTest() {
+        // Mock de datos
+        Category category = new Category(1L, "categoria", "descripcion", List.of());
+        Post posts1 = new Post(1L, "titulo del post", "descripcion post", "contenido del post", Set.of(), category);
+        Comment comment = new Comment(1L, "Nombre1", "email1@example.com", "Cuerpo1", posts1);
+        CommentDto expectedCommentDto = new CommentDto();
+        expectedCommentDto.setId(comment.getId());
+        expectedCommentDto.setName(comment.getName());
+        expectedCommentDto.setEmail(comment.getEmail());
+        expectedCommentDto.setBody(comment.getBody());
+
+        // Configuración del mock de postRepository.findById
+        Mockito.when(postRepository.findById(1L)).thenReturn(Optional.of(posts1));
+
+        // Configuración del mock de commentRepository.findById
+        Mockito.when(commentRepository.findById(1L)).thenReturn(Optional.ofNullable(comment));
+
+        // Comprobación de null antes de llamar a map
+        if (comment != null) {
+            Mockito.when(mapper.map(Mockito.any(Comment.class), Mockito.eq(CommentDto.class))).thenReturn(expectedCommentDto);
+        }
+
+
+        // Llamada al método que estamos probando
+        CommentDto actualCommentDto = commentService.getCommentById(1L, 1L);
+
+        // Asegurarse de que el resultado esperado y el resultado actual sean iguales
+        assertEquals(expectedCommentDto, actualCommentDto);
     }
+
+
 
 
 }

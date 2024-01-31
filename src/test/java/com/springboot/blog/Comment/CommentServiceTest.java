@@ -104,22 +104,22 @@ public class CommentServiceTest {
         expectedCommentDto.setEmail(comment.getEmail());
         expectedCommentDto.setBody(comment.getBody());
 
-        // Configuración del mock de postRepository.findById
+        
         Mockito.when(postRepository.findById(1L)).thenReturn(Optional.of(posts1));
 
-        // Configuración del mock de commentRepository.findById
+
         Mockito.when(commentRepository.findById(1L)).thenReturn(Optional.ofNullable(comment));
 
-        // Comprobación de null antes de llamar a map
+
         if (comment != null) {
             Mockito.when(mapper.map(Mockito.any(Comment.class), Mockito.eq(CommentDto.class))).thenReturn(expectedCommentDto);
         }
 
 
-        // Llamada al método que estamos probando
+
         CommentDto actualCommentDto = commentService.getCommentById(1L, 1L);
 
-        // Asegurarse de que el resultado esperado y el resultado actual sean iguales
+
         assertEquals(expectedCommentDto, actualCommentDto);
     }
 

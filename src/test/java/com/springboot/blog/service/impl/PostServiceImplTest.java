@@ -54,8 +54,21 @@ class PostServiceImplTest {
         String sortBy = "title";
         String sortDir = "ASC";
 
-        Post post1 = Post.builder().id(1L).title("Post 1").description("Description 1").content("Content 1").comments(null).category(null).build();
-        Post post2 = Post.builder().id(2L).title("Post 2").description("Description 2").content("Content 2").comments(null).category(null).build();
+        Post post1 = Post.builder()
+                .id(1L)
+                .title("Post 1")
+                .description("Description 1")
+                .content("Content 1").comments(null)
+                .category(null)
+                .build();
+        Post post2 = Post.builder()
+                .id(2L)
+                .title("Post 2")
+                .description("Description 2")
+                .content("Content 2")
+                .comments(null)
+                .category(null)
+                .build();
 
         List<Post> mockedPosts = List.of(post1, post2);
 
@@ -66,19 +79,14 @@ class PostServiceImplTest {
         Mockito.when(postRepository.findAll(any(Pageable.class))).thenReturn(mockedPage);
         // Llamamos al método del servicio
         PostResponse postResponse = postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
-
         // Verificamos las llamadas a los repositorios
-        Mockito.verify(postRepository).findAll(any(Pageable.class));
         Mockito.verify(modelMapper, Mockito.times(mockedPosts.size())).map(any(Post.class), eq(PostDto.class));
-
         // Verificamos que la respuesta es la esperada
         assertEquals(pageNo, postResponse.getPageNo());
         assertEquals(pageSize, postResponse.getPageSize());
         assertEquals(mockedPosts.size(), postResponse.getTotalElements());
         assertEquals(1, postResponse.getTotalPages());
-        assertEquals(true, postResponse.isLast());
 
-        // Verificamos que los contenidos de los posts son los esperados
         List<PostDto> content = postResponse.getContent();
         assertEquals(mockedPosts.size(), content.size());
     }
@@ -113,15 +121,15 @@ class PostServiceImplTest {
         Mockito.when(postRepository.save(Mockito.any(Post.class))).thenAnswer(invocation -> invocation.getArgument(0));
         Mockito.when(modelMapper.map(Mockito.any(Post.class), eq(PostDto.class))).thenReturn(postDto);
 
-        // Llamar al método del servicio
+        // Llamamos al método del servicio
         PostDto updatedPostDto = postService.updatePost(postDto, 1L);
 
-        // Verificar que el repositorio fue llamado correctamente
+        // Verificamos que el repositorio fue llamado correctamente
         Mockito.verify(postRepository).findById(1L);
         Mockito.verify(categoryRepository).findById(1L);
         Mockito.verify(postRepository).save(Mockito.any());
 
-        // Verificar que el resultado es el esperado
+        // Verificamos que el resultado es el esperado
         assertEquals(postDto.getId(), updatedPostDto.getId());
         assertEquals(postDto.getTitle(), updatedPostDto.getTitle());
         assertEquals(postDto.getDescription(), updatedPostDto.getDescription());

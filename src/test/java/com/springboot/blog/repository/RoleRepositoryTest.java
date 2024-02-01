@@ -1,6 +1,7 @@
 package com.springboot.blog.repository;
 
 import com.springboot.blog.entity.Role;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +17,8 @@ class RoleRepositoryTest extends ConfigTestClass{
 
     @Test
     void findByName() {
-        Optional<Role> role = roleRepository.findByName("")
+        Optional<Role> role = roleRepository.findByName("USER");
+        Assertions.assertNotNull(role);
+        Assertions.assertEquals(role.get().getName(),"USER");
     }
 }

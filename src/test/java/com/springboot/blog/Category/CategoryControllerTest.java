@@ -2,6 +2,8 @@ package com.springboot.blog.Category;
 
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.service.impl.CategoryServiceImpl;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.test.web.servlet.MvcResult;
 import org.testcontainers.shaded.org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
@@ -36,19 +39,10 @@ class CategoryControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    CategoryDto dto;
-
-    @BeforeEach
-    void setUp() {
-        dto = new CategoryDto();
-        dto.setId(1L);
-        dto.setName("Category test");
-        dto.setDescription("Category description test");
-    }
-
     @Test
-    @WithMockUser(username = "Alvaro", roles = {"USER","ADMIN"})
+    @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
     void addCategory() throws Exception {
+        CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         when(service.addCategory(dto)).thenReturn(dto);
 
         mockMvc.perform(post("/api/v1/categories")
@@ -56,10 +50,20 @@ class CategoryControllerTest {
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isCreated());
 
+        MvcResult result = mockMvc.perform(post("/api/v1/categories")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(dto)))
+                .andReturn();
+
+        String response = result.getResponse().getContentAsString();
+
+        Assertions.assertThat(response).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(dto));
+
     }
 
     @Test
     void getCategory() throws Exception {
+        CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         when(service.getCategory(dto.getId())).thenReturn(dto);
 
         mockMvc.perform(get("/api/v1/categories/{id}",dto.getId()))
@@ -70,6 +74,7 @@ class CategoryControllerTest {
 
     @Test
     void getCategories() throws Exception {
+        CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         CategoryDto dto2 = new CategoryDto(2L,"Name 2","Description 2");
         List<CategoryDto> data = List.of(dto,dto2);
 
@@ -83,8 +88,9 @@ class CategoryControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "Alvaro", roles = {"USER","ADMIN"})
+    @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
     void updateCategory() throws Exception {
+        CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         CategoryDto dtoUpdated = new CategoryDto(1L,"Category test UPDATED","Description UPDATED");
 
         when(service.updateCategory(dto,dto.getId())).thenReturn(dtoUpdated);
@@ -96,9 +102,9 @@ class CategoryControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "Alvaro", roles = {"USER","ADMIN"})
+    @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
     void deleteCategory() throws Exception {
-
+        CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         mockMvc.perform(delete("/api/v1/categories/{id}",dto.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Category deleted successfully!."));

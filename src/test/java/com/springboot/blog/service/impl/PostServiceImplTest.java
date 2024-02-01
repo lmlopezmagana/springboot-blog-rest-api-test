@@ -25,6 +25,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -36,11 +37,10 @@ class PostServiceImplTest {
    @Mock
    CategoryRepository categoryRepository;
 
-   @Mock
-   ModelMapper mapper;
+   ModelMapper mapper = new ModelMapper();
 
    @InjectMocks
-   PostServiceImpl postService;
+   PostService postService = new PostServiceImpl(postRepository, mapper, categoryRepository);
 //   static PostService postService = new PostServiceImpl(postRepository, mapper, categoryRepository);
 
     private Category category;
@@ -74,7 +74,7 @@ class PostServiceImplTest {
     @Test
     void createPost() {
 
-        when(categoryRepository.findById(category.getId())).thenReturn(Optional.of(category));
+        when(categoryRepository.findById(anyLong())).thenReturn(Optional.ofNullable(category));
         when(postRepository.save(any(Post.class))).thenReturn(post);
 
         PostDto result = postService.createPost(postDto);
@@ -85,10 +85,14 @@ class PostServiceImplTest {
 
     @Test
     void getAllPosts() {
+
+
     }
 
     @Test
     void getPostById() {
+
+//        when(postRepository.findBy()).thenReturn()
     }
 
     @Test

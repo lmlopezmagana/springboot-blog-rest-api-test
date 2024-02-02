@@ -4,16 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/blog/entity/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/blog/entity/Category.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerTest.java" afterDir="false" />
+=======
+    <list default="true" id="64acd7a5-82d8-4846-bc34-be7a59cd3cd5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/springboot/blog/config/ModelMapperConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_20_56__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_20_56__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_25__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_25__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_27__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_27__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_27__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_27__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_28__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_28__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_35__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_35__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_36__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_36__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_36__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_29_01_2024_21_36__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> 58fa66894373a981d1b0e3ae01e0c8ddf73a2aa9
       <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CategoryServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,7 +61,11 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;addCategoria&quot;,
+<<<<<<< HEAD
     &quot;last_opened_file_path&quot;: &quot;C:/Users/alexl/Desktop/springboot-blog-rest-api-test&quot;
+=======
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ferna/Desktop/2ºDAM/ADyPSP/springboot-blog-rest-api-test&quot;
+>>>>>>> 58fa66894373a981d1b0e3ae01e0c8ddf73a2aa9
   }
 }</component>
   <component name="RunManager" selected="JUnit.CommentRepositoryTest">
@@ -127,6 +154,46 @@
         <item itemvalue="JUnit.CommentRepositoryTest.findByPostId_NoComments" />
         <item itemvalue="JUnit.CommentRepositoryTest.findByPostId_CommentExists" />
         <item itemvalue="JUnit.UserRepositoryTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="RunManager" selected="JUnit.CategoryServiceTest.addCategory">
+    <configuration name="CategoryServiceMockTest.addCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.CategoryServiceMockTest" />
+      <option name="METHOD_NAME" value="addCategory" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategoryServiceTest.addCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.CategoryServiceTest" />
+      <option name="METHOD_NAME" value="addCategory" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.CategoryServiceTest.addCategory" />
+        <item itemvalue="JUnit.CategoryServiceMockTest.addCategory" />
       </list>
     </recent_temporary>
   </component>

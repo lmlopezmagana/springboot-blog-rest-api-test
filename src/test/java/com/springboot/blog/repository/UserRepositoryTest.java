@@ -69,7 +69,15 @@ class UserRepositoryTest extends ConfigTestClass {
     }
 
     @Test
-    void existsByUsername() {
+    void existsByUsernameFound() {
+        boolean usuarioEncontrado = userRepository.existsByUsername("tvenneur0");
+        assertTrue(usuarioEncontrado);
+    }
+
+    @Test
+    void existsByUsernameNotFound() {
+        boolean usuarioEncontrado = userRepository.existsByUsername("fake_user");
+        assertFalse(usuarioEncontrado);
     }
 
     @Test

@@ -26,6 +26,9 @@
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2bduEOR5bjrXnRUWIqvwMbjTMUO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -47,6 +50,7 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.springboot.blog.*" />
+          <option name="PATTERN" value="com.springboot.blog.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -58,6 +62,7 @@
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
@@ -147,7 +152,21 @@
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>
+          <line>42</line>
+          <properties class="com.springboot.blog.controller.AuthControllerTest" method="testLogin">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/service/AuthServiceTest.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>

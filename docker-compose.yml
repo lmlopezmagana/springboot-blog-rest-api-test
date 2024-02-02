@@ -17,9 +17,20 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./sql://docker-entrypoint-initdb.d
+    profiles: ['dev']
 
 
-
+  pg-integration-test:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345678
+    ports:
+      - "55432:5432"
+    profiles: ['integration']
+    tmpfs:
+      - /var/lib/postgresql/data
 
   pgadmin:
     image: dpage/pgadmin4

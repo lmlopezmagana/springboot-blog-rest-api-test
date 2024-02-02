@@ -6,6 +6,7 @@ import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.payload.PostDto;
+import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
@@ -18,7 +19,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,7 +31,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceImplTest {
@@ -85,25 +90,62 @@ class PostServiceImplTest {
 
     @Test
     void getAllPosts() {
+        List<Post> posts = Arrays.asList(
+                new Post(1L, "Título 1", "des 1", "fewrfoerre", null, null),
+                new Post(2L, "Título 2", "des 2", "erfref", null, null)
+        );
+        Page<Post> postPage = new PageImpl<>(posts);
 
+        when(postRepository.findAll(any(Pageable.class))).thenReturn(postPage);
 
+        PostResponse result = postService.getAllPosts(0, 10, "title", "ASC");
+
+        assertEquals(0, result.getPageNo());
+        assertEquals(2, result.getPageSize());
+        assertEquals(posts.size(), result.getTotalElements());
+        assertEquals(1, result.getTotalPages());
     }
 
     @Test
     void getPostById() {
 
-//        when(postRepository.findBy()).thenReturn()
+        when(postRepository.findById(anyLong())).thenReturn(Optional.of(post));
+
+        PostDto result = postService.getPostById(1L);
+
+        assertEquals(1, result.getId());
     }
 
     @Test
     void updatePost() {
+//        Post post = new Post(1L, "Título 1", "des 1", "fewrfoerre", null, null);
+        Post postedit = new Post(1L, "Editado", "des 1", "fewrfoerre", null, null);
+
+        when(postRepository.findById(anyLong())).thenReturn(Optional.of(post));
+        when(categoryRepository.findById(anyLong())).thenReturn(Optional.ofNullable(category));
+        when(postRepository.save(any(Post.class))).thenReturn(postedit);
+
+        PostDto result = postService.updatePost(postDto, 1L);
+
+        assertEquals(1, result.getId());
+        assertEquals("Editado", result.getTitle());
+
     }
 
     @Test
     void deletePostById() {
+
+        when(postRepository.findById(anyLong())).thenReturn(Optional.ofNullable(post));
+        postService.deletePostById(1L);
+
+        verify(postRepository, times(1)).findById(1L);
+        verify(postRepository, times(1)).delete(post);
+
     }
 
     @Test
     void getPostsByCategory() {
+
+        
     }
 }

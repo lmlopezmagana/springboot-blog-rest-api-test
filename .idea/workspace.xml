@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/CommentRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/CommentRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/insert-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/insert-data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/UserRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/UserRepositoryTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +21,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2bduEOR5bjrXnRUWIqvwMbjTMUO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -37,14 +32,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "findbyusernameoremail",
+    "git-widget-placeholder": "hu07-existbyusername",
     "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.CommentRepositoryTest">
+  <component name="RunManager" selected="JUnit.UserRepositoryTest.existsByUsernameNotFound">
     <configuration name="CommentRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
@@ -56,38 +50,6 @@
       <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.CommentRepositoryTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CommentRepositoryTest.findByPostId_CommentExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.CommentRepositoryTest" />
-      <option name="METHOD_NAME" value="findByPostId_CommentExists" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CommentRepositoryTest.findByPostId_NoComments" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.CommentRepositoryTest" />
-      <option name="METHOD_NAME" value="findByPostId_NoComments" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -108,7 +70,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RoleRepositoryTest.findByName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.RoleRepositoryTest" />
+      <option name="METHOD_NAME" value="findByName" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserRepositoryTest.existsByUsernameFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -118,18 +96,35 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.UserRepositoryTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="existsByUsernameFound" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserRepositoryTest.existsByUsernameNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.UserRepositoryTest" />
+      <option name="METHOD_NAME" value="existsByUsernameNotFound" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserRepositoryTest.existsByUsernameNotFound" />
+        <item itemvalue="JUnit.UserRepositoryTest.existsByUsernameFound" />
+        <item itemvalue="JUnit.RoleRepositoryTest.findByName" />
         <item itemvalue="JUnit.CommentRepositoryTest" />
         <item itemvalue="JUnit.CommentRepositoryTest.findByPostId_PostIdDontExist" />
-        <item itemvalue="JUnit.CommentRepositoryTest.findByPostId_NoComments" />
-        <item itemvalue="JUnit.CommentRepositoryTest.findByPostId_CommentExists" />
-        <item itemvalue="JUnit.UserRepositoryTest" />
       </list>
     </recent_temporary>
   </component>
@@ -150,7 +145,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java</url>
           <line>53</line>
-          <properties class="com.springboot.blog.repository.UserRepositoryTest" method="findByUsernameOrEmail_BothDontExist">
+          <properties class="com.springboot.blog.repository.UserRepositoryTest">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

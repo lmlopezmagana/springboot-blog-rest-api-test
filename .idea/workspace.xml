@@ -6,8 +6,66 @@
   <component name="ChangeListManager">
     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CommentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CommentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application-dev.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application-postgres.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application-prod.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application-qa.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/SpringbootBlogRestApiApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/SpringbootBlogRestApiApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/CategoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/CommentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/PostController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Category.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Comment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Post.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/BlogAPIException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/BlogAPIException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/GlobalExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/ResourceNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/ResourceNotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/CategoryDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/CategoryDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/CommentDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/CommentDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/ErrorDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/ErrorDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/JWTAuthResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/JWTAuthResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/LoginDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/LoginDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/PostDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/PostDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/PostResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/PostResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/RegisterDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/RegisterDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/CategoryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/CategoryRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/CommentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/CommentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/PostRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/PostRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/RoleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/RoleRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/CustomUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/CustomUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtAuthenticationEntryPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtAuthenticationEntryPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtTokenProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtTokenProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/AuthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/CategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/CommentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/CommentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/PostService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/AuthServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/AuthServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/CategoryServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/CommentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/CommentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/PostServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/PostServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/utils/AppConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/utils/AppConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/utils/PasswordGeneratorEncoder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/utils/PasswordGeneratorEncoder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/SpringbootBlogRestApiApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/SpringbootBlogRestApiApplicationTests.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/AuthControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/AuthControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CategoryControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CategoryControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CommentControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CommentControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/PostControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/PostControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/PostRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/PostRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/RoleRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/RoleRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/config/ConfigTestClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/config/ConfigTestClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/AuthServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/AuthServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/CategoryServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/CategoryServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/CommentServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/CommentServiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/PostServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/PostServiceTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,30 +84,26 @@
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
-}</component>
   <component name="ProjectId" id="2bduEOR5bjrXnRUWIqvwMbjTMUO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;login-service-controller&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexl/Desktop/springboot-blog-rest-api-test&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "updateComment",
+    "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="JUnit.AuthControllerTest">
     <configuration name="SpringbootBlogRestApiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.SpringbootBlogRestApiApplication" />
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.*" />
           <option name="PATTERN" value="com.springboot.blog.*" />
           <option name="ENABLED" value="true" />
         </pattern>
@@ -62,7 +116,6 @@
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
@@ -142,6 +195,9 @@
     </task>
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -157,7 +213,16 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>
           <line>42</line>
-          <properties class="com.springboot.blog.controller.AuthControllerTest" method="testLogin">
+          <properties class="com.springboot.blog.controller.AuthControllerTest" method="loginSuccessful">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>
+          <line>42</line>
+          <properties class="com.springboot.blog.controller.AuthControllerTest" method="loginSuccessful">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
@@ -167,15 +232,6 @@
           <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/service/AuthServiceTest.java</url>
           <line>25</line>
           <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>
-          <line>42</line>
-          <properties class="com.springboot.blog.controller.AuthControllerTest" method="testLogin">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/service/AuthServiceTest.java</url>

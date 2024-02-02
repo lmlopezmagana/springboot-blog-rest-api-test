@@ -19,7 +19,8 @@ class CommentServiceTest {
     }
 
     @Test
-    void updateComment() {
+    void updateComment_PostIdNotFound() {
+
     }
 
     @Test

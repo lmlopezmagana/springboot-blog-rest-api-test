@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_02_02_2024_10_18_[Changes]" date="1706865484892" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_02_2024_10_18_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 02/02/2024 10:18 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/springboot/blog/controller/CategoryController.class" />
+    <option name="AFTER_PATH" value="target/classes/com/springboot/blog/controller/CategoryController.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_02_2024_10_18_[Changes]/CategoryController.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="target/classes/com/springboot/blog/service/CategoryService.class" />
+    <option name="AFTER_PATH" value="target/classes/com/springboot/blog/service/CategoryService.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_02_2024_10_18_[Changes]/CategoryService.class" />
+  </binary>
+</changelist>

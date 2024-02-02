@@ -1,7 +1,6 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springboot.blog.entity.User;
 import com.springboot.blog.payload.LoginDto;
 import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.AuthService;
@@ -10,17 +9,18 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(AuthControllerTest.class)
+@WebMvcTest(AuthController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class AuthControllerTest {
 
     @Autowired
@@ -29,7 +29,7 @@ class AuthControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Mock
+    @MockBean
     private AuthService authService;
 
     @MockBean
@@ -40,10 +40,11 @@ class AuthControllerTest {
 
 
     @Test
-    @WithMockUser(username = "username")
-    public void testLogin() throws Exception {
-        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn("generated-token");
+    public void loginSuccessful() throws Exception {
 
+        String token = "generated-token";
+
+        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn(token);
 
         LoginDto loginDto = new LoginDto("username", "password");
 
@@ -52,10 +53,6 @@ class AuthControllerTest {
                         .content(objectMapper.writeValueAsString(loginDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accessToken").value("generated-token"));
-    }
-
-    @Test
-    void login() {
     }
 
     @Test

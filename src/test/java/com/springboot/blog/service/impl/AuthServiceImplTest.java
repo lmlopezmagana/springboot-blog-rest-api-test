@@ -4,6 +4,7 @@ import com.springboot.blog.entity.Role;
 import com.springboot.blog.entity.User;
 import com.springboot.blog.exception.BlogAPIException;
 import com.springboot.blog.exception.ResourceNotFoundException;
+import com.springboot.blog.payload.LoginDto;
 import com.springboot.blog.payload.RegisterDto;
 import com.springboot.blog.repository.RoleRepository;
 import com.springboot.blog.repository.UserRepository;
@@ -36,9 +37,32 @@ class AuthServiceImplTest {
 
     @Mock
     PasswordEncoder passwordEncoder;
+    /*
+     @Override
+    public String login(LoginDto loginDto) {
+
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtTokenProvider.generateToken(authentication);
+
+        return token;
+    }
+     */
+
+    //Marco Pertega l
+    @Test
+    void whenCorrectCredentialsThenReturnToken() {
+        LoginDto loginDto = new LoginDto("marco@gmail.com", "$2a$04$Qbni2vSWt9fHlT1YaXDnX.Gzpv9Wf2rdTDEvfR22rn4CeeWAHHC/i");
+        String login = authService.login(loginDto);
+        assertEquals("marco@gmail.com", login);
+    }
 
     @Test
-    void login() {
+    void whenIncorrectCredentialsThenThrowException(){
+
     }
 
     //Sebastián Millán

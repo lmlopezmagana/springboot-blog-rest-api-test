@@ -48,7 +48,6 @@ class AuthControllerTest {
 
         RegisterDto registerDto = new RegisterDto("manolo","manolo","manolo.manolo@gmail.com","manolo1234");
 
-
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
                 .content(objectMapper.writeValueAsString(registerDto))
                 .contentType(MediaType.APPLICATION_JSON)

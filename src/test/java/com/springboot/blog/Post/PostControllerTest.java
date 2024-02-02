@@ -21,6 +21,7 @@ import java.util.Set;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -61,5 +62,29 @@ public class PostControllerTest {
 
         Assertions.assertThat(actualResponse).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(postDto));
 
+    }
+
+    @Test
+    @WithMockUser(username = "Pedro", roles = {"ADMIN"})
+    void updatePost_201() throws Exception{
+        PostDto postDto = new PostDto();
+        postDto.setId(1L);
+        postDto.setTitle("title");
+        postDto.setContent("editado");
+        postDto.setDescription("description");
+        postDto.setComments(Set.of());
+        postDto.setCategoryId(1L);
+        when(postService.updatePost(postDto, postDto.getId())).thenReturn(postDto);
+        mockMvc.perform(put("/{id}")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(postDto)).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
+        MvcResult result = mockMvc.perform(put("7{id}")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(postDto)).accept(MediaType.APPLICATION_JSON))
+                .andReturn();
+        String response = result.getResponse().getContentAsString();
+
+        Assertions.assertThat(response).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(postDto));
     }
 }

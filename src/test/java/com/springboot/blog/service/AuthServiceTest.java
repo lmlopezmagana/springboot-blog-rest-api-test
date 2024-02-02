@@ -57,10 +57,6 @@ class AuthServiceTest {
     @InjectMocks
     private AuthServiceImpl authService;
 
-
-    @InjectMocks
-    private AuthServiceImpl authService;
-
     @Mock
     private AuthenticationManager authenticationManager;
 

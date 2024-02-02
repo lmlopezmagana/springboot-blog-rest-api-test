@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CategoryServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,53 +36,51 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "hu07-existbyusername",
+    "git-widget-placeholder": "getAllCategories-test",
     "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.UserRepositoryTest.existsByUsernameNotFound">
-    <configuration name="CommentRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CategoryControllerTest.getCategories">
+    <configuration name="SpringbootBlogRestApiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.SpringbootBlogRestApiApplication" />
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
+          <option name="PATTERN" value="com.springboot.blog.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.CommentRepositoryTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CommentRepositoryTest.findByPostId_PostIdDontExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CategoryControllerTest.getCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.CommentRepositoryTest" />
-      <option name="METHOD_NAME" value="findByPostId_PostIdDontExist" />
+      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerTest" />
+      <option name="METHOD_NAME" value="getCategories" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RoleRepositoryTest.findByName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CategoryServiceTest.getAllCategories_ReturnsAllCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
+          <option name="PATTERN" value="com.springboot.blog.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.RoleRepositoryTest" />
-      <option name="METHOD_NAME" value="findByName" />
+      <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.CategoryServiceTest" />
+      <option name="METHOD_NAME" value="getAllCategories_ReturnsAllCategories" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -120,11 +120,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CategoryControllerTest.getCategories" />
+        <item itemvalue="Application.SpringbootBlogRestApiApplication" />
+        <item itemvalue="JUnit.CategoryServiceTest.getAllCategories_ReturnsAllCategories" />
         <item itemvalue="JUnit.UserRepositoryTest.existsByUsernameNotFound" />
         <item itemvalue="JUnit.UserRepositoryTest.existsByUsernameFound" />
-        <item itemvalue="JUnit.RoleRepositoryTest.findByName" />
-        <item itemvalue="JUnit.CommentRepositoryTest" />
-        <item itemvalue="JUnit.CommentRepositoryTest.findByPostId_PostIdDontExist" />
       </list>
     </recent_temporary>
   </component>
@@ -143,13 +143,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java</url>
-          <line>53</line>
-          <properties class="com.springboot.blog.repository.UserRepositoryTest">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerTest.java</url>
+          <line>60</line>
+          <properties class="com.springboot.blog.controller.CategoryControllerTest" method="getCategories">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

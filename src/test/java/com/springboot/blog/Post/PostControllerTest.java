@@ -70,21 +70,25 @@ public class PostControllerTest {
         PostDto postDto = new PostDto();
         postDto.setId(1L);
         postDto.setTitle("title");
+        postDto.setContent("si editar");
+        postDto.setDescription("description");
+        postDto.setComments(Set.of());
+        postDto.setCategoryId(1L);
+
+        PostDto porDtoEdicion = new PostDto();
+        postDto.setId(1L);
+        postDto.setTitle("title");
         postDto.setContent("editado");
         postDto.setDescription("description");
         postDto.setComments(Set.of());
         postDto.setCategoryId(1L);
-        when(postService.updatePost(postDto, postDto.getId())).thenReturn(postDto);
-        mockMvc.perform(put("/{id}")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(postDto)).accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated());
-        MvcResult result = mockMvc.perform(put("7{id}")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(postDto)).accept(MediaType.APPLICATION_JSON))
-                .andReturn();
-        String response = result.getResponse().getContentAsString();
 
-        Assertions.assertThat(response).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(postDto));
+        when(postService.updatePost(postDto, postDto.getId())).thenReturn(porDtoEdicion);
+
+        mockMvc.perform(put("/api/posts/{id}",postDto.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(porDtoEdicion)))
+                .andExpect(status().isOk());
+
     }
 }

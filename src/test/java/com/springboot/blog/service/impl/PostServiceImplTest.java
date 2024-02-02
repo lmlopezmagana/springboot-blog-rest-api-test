@@ -75,13 +75,12 @@ class PostServiceImplTest {
         Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.Order.asc(sortBy) : Sort.Order.desc(sortBy)));
         Page<Post> mockedPage = new PageImpl<>(mockedPosts, pageable, mockedPosts.size());
 
-        // Configuramos los mocks
         Mockito.when(postRepository.findAll(any(Pageable.class))).thenReturn(mockedPage);
-        // Llamamos al método del servicio
+
         PostResponse postResponse = postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
-        // Verificamos las llamadas a los repositorios
+
         Mockito.verify(modelMapper, Mockito.times(mockedPosts.size())).map(any(Post.class), eq(PostDto.class));
-        // Verificamos que la respuesta es la esperada
+
         assertEquals(pageNo, postResponse.getPageNo());
         assertEquals(pageSize, postResponse.getPageSize());
         assertEquals(mockedPosts.size(), postResponse.getTotalElements());
@@ -121,15 +120,12 @@ class PostServiceImplTest {
         Mockito.when(postRepository.save(Mockito.any(Post.class))).thenAnswer(invocation -> invocation.getArgument(0));
         Mockito.when(modelMapper.map(Mockito.any(Post.class), eq(PostDto.class))).thenReturn(postDto);
 
-        // Llamamos al método del servicio
         PostDto updatedPostDto = postService.updatePost(postDto, 1L);
 
-        // Verificamos que el repositorio fue llamado correctamente
         Mockito.verify(postRepository).findById(1L);
         Mockito.verify(categoryRepository).findById(1L);
         Mockito.verify(postRepository).save(Mockito.any());
 
-        // Verificamos que el resultado es el esperado
         assertEquals(postDto.getId(), updatedPostDto.getId());
         assertEquals(postDto.getTitle(), updatedPostDto.getTitle());
         assertEquals(postDto.getDescription(), updatedPostDto.getDescription());

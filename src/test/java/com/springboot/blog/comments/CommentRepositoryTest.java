@@ -43,9 +43,6 @@ class CommentRepositoryTest {
             .withPassword("testPassword")
             .withDatabaseName("testDB");
 
-
-    static CommentDto c = new CommentDto();
-
     @Test
     void findPostByIdTest(){
         List<Comment> result = commentRepository.findByPostId(1L);

@@ -6,12 +6,10 @@ import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.CategoryService;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,12 +18,11 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(CategoryController.class)
 @AutoConfigureMockMvc(addFilters = false)
-class CategoryControllerTest {
+class CategoryControllerWOSecurityTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -36,16 +33,12 @@ class CategoryControllerTest {
     @MockBean
     private CategoryService categoryService;
 
-    //@InjectMocks
-    //@Autowired
     @InjectMocks
     private CategoryController categoryController;
 
     @MockBean
     private JwtTokenProvider jwtTokenProvider;
 
-    CategoryControllerTest() {
-    }
 
     @Test
     void addCategory() {
@@ -55,7 +48,6 @@ class CategoryControllerTest {
     void getCategory() {
     }
 
-    //@WithMockUser(username = "Alex",roles = {"USER","ADMIN"})
     @Test
     void getCategories() throws Exception {
         CategoryDto categoryDto = new CategoryDto(1L, "Ropa", "Esto es una buena categoria");

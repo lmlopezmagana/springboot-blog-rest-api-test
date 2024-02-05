@@ -6,6 +6,7 @@ import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.impl.CommentServiceImpl;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,12 +20,18 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(CommentController.class)
@@ -55,7 +62,46 @@ class CommentControllerWSecurityTest {
     }
 
     @Test
-    void getCommentsByPostId() {
+    @WithMockUser(username = "username", roles = {"USER","ADMIN"})
+    void getCommentsByPostId() throws Exception {
+
+        Long id = 1L;
+
+        List<CommentDto> list = getCommentDtos();
+
+        Mockito.when(commentService.getCommentsByPostId(eq(id))).thenReturn(list);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{postId}/comments",id)
+                ).andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[0].name", is("Manolo")))
+                .andExpect(jsonPath("$[0].email", is("manolo@gmail.com")))
+                .andExpect(jsonPath("$[0].body", is("texto texto y muhco texto")))
+                .andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[1].name", is("Manolq")))
+                .andExpect(jsonPath("$[1].email", is("manola@gmail.com")))
+                .andExpect(jsonPath("$[1].body", is("texto texto y muhco texto")));
+
+
+
+    }
+
+    @NotNull
+    private static List<CommentDto> getCommentDtos() {
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(1L);
+        commentDto.setName("Manolo");
+        commentDto.setEmail("manolo@gmail.com");
+        commentDto.setBody("texto texto y muhco texto");
+
+        CommentDto commentDto2 = new CommentDto();
+        commentDto2.setId(2L);
+        commentDto2.setName("Manolq");
+        commentDto2.setEmail("manola@gmail.com");
+        commentDto2.setBody("texto texto y muhco texto");
+
+        List<CommentDto> list = new ArrayList<>(List.of(commentDto,commentDto2));
+        return list;
     }
 
     @Test

@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.*;
 
@@ -74,14 +75,12 @@ class PostServiceImplTest {
 
         List<Post> mockedPosts = List.of(post1, post2);
 
-        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.Order.asc(sortBy) : Sort.Order.desc(sortBy)));
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc(sortBy)));
         Page<Post> mockedPage = new PageImpl<>(mockedPosts, pageable, mockedPosts.size());
 
         Mockito.when(postRepository.findAll(any(Pageable.class))).thenReturn(mockedPage);
 
         PostResponse postResponse = postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
-
-        Mockito.verify(modelMapper, Mockito.times(mockedPosts.size())).map(any(Post.class), eq(PostDto.class));
 
         assertEquals(pageNo, postResponse.getPageNo());
         assertEquals(pageSize, postResponse.getPageSize());

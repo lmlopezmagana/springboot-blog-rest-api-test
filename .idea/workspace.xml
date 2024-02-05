@@ -168,7 +168,10 @@
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1706870424527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest.ic" NAME="CommentServiceTest Coverage Results" MODIFIED="1706984022547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest.ic" NAME="PostServiceTest Coverage Results" MODIFIED="1707062192340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706789829412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706871942372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

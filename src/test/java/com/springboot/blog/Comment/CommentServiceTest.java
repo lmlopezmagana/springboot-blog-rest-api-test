@@ -33,7 +33,8 @@ public class CommentServiceTest {
 
     @InjectMocks
     private CommentServiceImpl commentService;
-    private ModelMapper mapper = new ModelMapper();
+
+    private final ModelMapper mapper = new ModelMapper();
 
     @BeforeEach
     void setUp() {
@@ -57,7 +58,7 @@ public class CommentServiceTest {
 
         category.setPosts(List.of(posts1));
         posts1.setComments(Set.of(comments));
-
+        //when(postRepository.save(any(Post.class)))
         Mockito.when(postRepository.findById(1L)).thenReturn(Optional.of(posts1));
         Mockito.when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(comments);
 
@@ -125,22 +126,24 @@ public class CommentServiceTest {
     @Test
     void updateComment(){
         Category category = new Category(1L, "categoria", "descripcion", List.of());
-        System.out.println(category);
-        Post posts1 = new Post(1L, "titulo del post", "descripcion post", "contenido del post", Set.of(), category);
 
-        category.setPosts(List.of(posts1));
-        Comment comment = new Comment(1L, "Nombre1", "email1@example.com", "Cuerpo1", posts1);
-        System.out.println(comment);
-        Mockito.when(postRepository.save(posts1)).thenReturn(posts1);
+        post = new Post(1L, "titulo del post", "descripcion post", "contenido del post", Set.of(), category);
 
-        Mockito.when(postRepository.findById(1L)).thenReturn(Optional.of(posts1));
-        Mockito.when(commentRepository.findById(1L)).thenReturn(Optional.of(comment));
-
+        category.setPosts(List.of(post));
+        Comment comment = new Comment(1L, "Nombre1", "email1@example.com", "Cuerpo1", post);
+        post.setCategory(category);
+        comment.setPost(post);
         CommentDto commentDto = new CommentDto();
         commentDto.setId(1L);
         commentDto.setName("Nombre1");
         commentDto.setEmail("email1@example.com");
         commentDto.setBody("Cuerpo1");
+        Mockito.when(postRepository.save(post)).thenReturn(post);
+
+        Mockito.when(postRepository.findById(1L)).thenReturn(Optional.of(post));
+        Mockito.when(commentRepository.findById(1L)).thenReturn(Optional.of(comment));
+
+
 
         CommentDto resultado = commentService.updateComment(1L,1L,commentDto);
         assertEquals(commentDto,resultado);

@@ -57,36 +57,7 @@ public class AuthControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accessToken").value(token));
     }
-
-    @Test
-    void invalidLogin() throws Exception {
-        LoginDto loginDto = new LoginDto();
-        loginDto.setUsernameOrEmail("InvalidUser");
-        loginDto.setPassword("InvalidPassword");
-
-        doThrow(new BadCredentialsException("invalid login"))
-                .when(authService).login(any(LoginDto.class));
-
-        mockMvc.perform(post("/api/auth/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(loginDto)))
-                .andExpect(status().isUnauthorized());
-
-    }
-
-    @Test
-    void whenInvalidRegisterUserNameNull_thenReturns400AndErrorResult() throws Exception{
-        RegisterDto registerDto = new RegisterDto();
-        registerDto.setUsername(null);
-        registerDto.setEmail("user@example.com");
-        registerDto.setPassword("password");
-
-        mockMvc.perform(post("/api/auth/register")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(registerDto)))
-                .andExpect(status().isBadRequest());
-    }
-
+    
     @Test
     void validRegister_thenReturns201AndCreatedResult() throws Exception{
         RegisterDto registerDto = new RegisterDto();

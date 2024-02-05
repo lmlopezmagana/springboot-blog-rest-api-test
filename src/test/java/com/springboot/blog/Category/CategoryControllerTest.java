@@ -1,5 +1,6 @@
 package com.springboot.blog.Category;
 
+import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.service.impl.CategoryServiceImpl;
 import org.junit.jupiter.api.Test;
@@ -37,7 +38,7 @@ class CategoryControllerTest {
 
     @Test
     @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
-    void addCategory() throws Exception {
+    void addCategory_201() throws Exception {
         CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         when(service.addCategory(any(CategoryDto.class))).thenReturn(dto);
 
@@ -60,25 +61,48 @@ class CategoryControllerTest {
     }
 
     @Test
-    void getCategory() throws Exception {
+    @WithMockUser(username = "Alvaro")
+    void addCategory_401() throws Exception {
+        CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
+
+
+        mockMvc.perform(post("/api/v1/categories")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andExpect(status().isUnauthorized());
+
+    }
+
+    @Test
+    void getCategory_200() throws Exception {
         CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         when(service.getCategory(dto.getId())).thenReturn(dto);
 
-        mockMvc.perform(get("/api/v1/categories/{id}",dto.getId()))
+        mockMvc.perform(get("/api/v1/categories/{id}",dto.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id",is(1)))
                 .andExpect(jsonPath("$.name",is(dto.getName())));
     }
 
     @Test
-    void getCategories() throws Exception {
+    void getCategory_404() throws Exception {
+        when(service.getCategory(anyLong())).thenThrow(new ResourceNotFoundException("Category","id",1));
+
+        mockMvc.perform(get("/api/v1/categories/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void getCategories_200() throws Exception {
         CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         CategoryDto dto2 = new CategoryDto(2L,"Name 2","Description 2");
         List<CategoryDto> data = List.of(dto,dto2);
 
         when(service.getAllCategories()).thenReturn(data);
 
-        mockMvc.perform(get("/api/v1/categories"))
+        mockMvc.perform(get("/api/v1/categories").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[1].id",is(2)))
                 .andExpect(jsonPath("$[1].name",is(dto2.getName())));
@@ -86,8 +110,16 @@ class CategoryControllerTest {
     }
 
     @Test
+    void getCategories_404() throws Exception {
+
+        mockMvc.perform(get("/api/v1/categorie").contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
     @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
-    void updateCategory() throws Exception {
+    void updateCategory_200() throws Exception {
         CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         CategoryDto dtoUpdated = new CategoryDto(1L,"Category test UPDATED","Description UPDATED");
 
@@ -110,13 +142,45 @@ class CategoryControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Alvaro")
+    void updateCategory_401() throws Exception {
+        CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
+        CategoryDto dtoUpdated = new CategoryDto(1L,"Category test UPDATED","Description UPDATED");
+
+
+        mockMvc.perform(put("/api/v1/categories/{id}",dto.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dtoUpdated)))
+                .andExpect(status().isUnauthorized());
+
+
+    }
+
+    @Test
     @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
-    void deleteCategory() throws Exception {
+    void deleteCategory_200() throws Exception {
         CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         mockMvc.perform(delete("/api/v1/categories/{id}",dto.getId()))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Category deleted successfully!."));
 
         verify(service, times(1)).deleteCategory(dto.getId());
+    }
+
+    @Test
+    @WithMockUser(username = "Alvaro")
+    void deleteCategory_401() throws Exception {
+        CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
+        mockMvc.perform(delete("/api/v1/categories/{id}",dto.getId()))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(username = "Alvaro",roles = {"ADMIN"})
+    void deleteCategory_404() throws Exception {
+        CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
+        doThrow(new ResourceNotFoundException("Category", "id", 1)).when(service).deleteCategory(anyLong());
+        mockMvc.perform(delete("/api/v1/categories/{id}",dto.getId()))
+                .andExpect(status().isNotFound());
     }
 }

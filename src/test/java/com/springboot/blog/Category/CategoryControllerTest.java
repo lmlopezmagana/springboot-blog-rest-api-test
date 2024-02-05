@@ -2,9 +2,6 @@ package com.springboot.blog.Category;
 
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.service.impl.CategoryServiceImpl;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,13 +12,12 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.test.web.servlet.MvcResult;
-import org.testcontainers.shaded.org.checkerframework.checker.units.qual.C;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -43,12 +39,15 @@ class CategoryControllerTest {
     @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
     void addCategory() throws Exception {
         CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
-        when(service.addCategory(dto)).thenReturn(dto);
+        when(service.addCategory(any(CategoryDto.class))).thenReturn(dto);
 
         mockMvc.perform(post("/api/v1/categories")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.id",is(1)))
+                .andExpect(jsonPath("$.name",is("Category name")))
+                .andExpect(jsonPath("$.description",is("Description category")));
 
         MvcResult result = mockMvc.perform(post("/api/v1/categories")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -56,8 +55,7 @@ class CategoryControllerTest {
                 .andReturn();
 
         String response = result.getResponse().getContentAsString();
-
-        Assertions.assertThat(response).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(dto));
+        assertEquals(response, objectMapper.writeValueAsString(dto));
 
     }
 
@@ -93,12 +91,22 @@ class CategoryControllerTest {
         CategoryDto dto = new CategoryDto(1L,"Category name","Description category");
         CategoryDto dtoUpdated = new CategoryDto(1L,"Category test UPDATED","Description UPDATED");
 
-        when(service.updateCategory(dto,dto.getId())).thenReturn(dtoUpdated);
+        when(service.updateCategory(any(CategoryDto.class),anyLong())).thenReturn(dtoUpdated);
 
         mockMvc.perform(put("/api/v1/categories/{id}",dto.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dtoUpdated)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name",is("Category test UPDATED")))
+                .andExpect(jsonPath("$.description",is("Description UPDATED")));
+
+        MvcResult result = mockMvc.perform(put("/api/v1/categories/{id}",dto.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
+                .andReturn();
+
+        String response = result.getResponse().getContentAsString();
+        assertEquals(response, objectMapper.writeValueAsString(dtoUpdated));
     }
 
     @Test

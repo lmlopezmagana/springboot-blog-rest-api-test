@@ -1,7 +1,11 @@
 package com.springboot.blog.controller;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -12,21 +16,27 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("integration-test")
-@Sql(value = "classpath:sql/data.sql",executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class AuthControllerIntegration {
 
     @LocalServerPort
     private int port;
 
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @BeforeEach
+    @Sql("classpath:delete-data.sql")
+    public void setup() {
+    }
+
 
 
     @Test
-    public void authRegister_thenReturnCreated(){
+    public void authRegister_thenReturnCreated() throws JsonProcessingException {
 
-        port = 8080;
+        System.out.println(port);
 
         TestRestTemplate restTemplate = new TestRestTemplate();
 
@@ -34,7 +44,7 @@ public class AuthControllerIntegration {
 
         ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:"+port+"/api/auth/register",registerDto, String.class);
 
-        System.out.println("Response Body: " + response.getBody());
+        System.out.println("Response Body: " + objectMapper.writeValueAsString(response.getBody()));
 
         Assertions.assertEquals(201,response.getStatusCode().value());
 

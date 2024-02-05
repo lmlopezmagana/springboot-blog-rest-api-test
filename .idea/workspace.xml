@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/SecurityContext/WithMockCustomUserSecurityContextFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerWOSecurityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerWOSecurityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerWSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerWSecurity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/SecurityContext/WithMockCustomUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/SecurityContext/WithMockCustomUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/application-integration-test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application-integration-test.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/delete-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/delete-data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/insert-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/insert-data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,8 +135,8 @@
       <list>
         <item itemvalue="JUnit.AuthControllerIntegration" />
         <item itemvalue="JUnit.AuthControllerIntegration.authRegister_thenReturnCreated" />
-        <item itemvalue="JUnit.CategoryControllerWSecurity.updateCategory" />
         <item itemvalue="Application.SpringbootBlogRestApiApplication" />
+        <item itemvalue="JUnit.CategoryControllerWSecurity.updateCategory" />
         <item itemvalue="JUnit.CategoryServiceTest" />
       </list>
     </recent_temporary>

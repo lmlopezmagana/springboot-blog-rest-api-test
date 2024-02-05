@@ -187,7 +187,7 @@ public class PostControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(postDto))
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isUnauthorized()); // Esperamos un 403 Forbidden ya que el usuario no tiene el rol ADMIN
+                .andExpect(status().isUnauthorized());
     }
 
 

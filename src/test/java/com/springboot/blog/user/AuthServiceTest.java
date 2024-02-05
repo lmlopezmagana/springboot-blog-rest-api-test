@@ -1,4 +1,4 @@
-package com.springboot.blog.authServiceTest;
+package com.springboot.blog.user;
 
 
 import com.springboot.blog.entity.Role;

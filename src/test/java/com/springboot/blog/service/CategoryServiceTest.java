@@ -40,11 +40,15 @@ class CategoryServiceTest {
 
         Category categoryExpected = new Category(id, name, description, null);
 
-        CategoryDto categoryDtoExpected = this.modelMapper.map(categoryExpected, CategoryDto.class);
-
         Mockito.when(categoryRepository.save(Mockito.any())).thenReturn(categoryExpected);
 
-        CategoryDto categoryDto = categoryServiceImpl.addCategory(categoryDtoExpected);
+        CategoryDto  categoryDto = new CategoryDto(id, name, description);
+
+        Mockito.when(modelMapper.map(Mockito.any(), Mockito.eq(CategoryDto.class))).thenReturn(categoryDto);
+
+        Mockito.when(modelMapper.map(Mockito.any(), Mockito.eq(Category.class))).thenReturn(categoryExpected);
+
+        CategoryDto categoryDtoExpected = categoryServiceImpl.addCategory(categoryDto);
 
         assertEquals(categoryDto.getId(), categoryDtoExpected.getId());
         assertEquals(categoryDto.getName(), categoryDtoExpected.getName());

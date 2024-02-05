@@ -2,6 +2,7 @@ package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.blog.controller.SecurityContext.WithMockCustomUser;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.CategoryService;
@@ -23,6 +24,8 @@ import org.springframework.web.context.WebApplicationContext;
 import org.testcontainers.shaded.org.bouncycastle.crypto.agreement.jpake.JPAKEPrimeOrderGroup;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -54,23 +57,22 @@ public class CategoryControllerWSecurity {
     }
 
     @Test
-    @WithMockUser(username = "username", roles = {"ADMIN"})
+    @WithMockCustomUser(role = "ADMIN")
     void updateCategory() throws Exception {
 
         Long id = 1L;
 
         CategoryDto newCategory = new CategoryDto(id,"Series","Lista de series");
-        Mockito.when(categoryService.updateCategory(newCategory,id)).thenReturn(newCategory);
+        Mockito.when(categoryService.updateCategory(any(),eq(id))).thenReturn(newCategory);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/categories/{id}", id)
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/categories/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(newCategory))
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andReturn();
+                .andExpect(jsonPath("$.name",is(newCategory.getName())));
 
-        String content = result.getResponse().getContentAsString();
-        System.out.println("Returned JSON: " + content);
+
 
     }
 

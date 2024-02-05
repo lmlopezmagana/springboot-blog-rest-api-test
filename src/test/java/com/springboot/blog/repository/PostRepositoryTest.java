@@ -19,7 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles({"postgres", "spring-data-jpa"})
+@ActiveProfiles({"test"})
+//@ActiveProfiles({"postgres", "spring-data-jpa"})
 @Testcontainers
 @Sql(value = "classpath:insert-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 class PostRepositoryTest {
@@ -39,8 +40,6 @@ class PostRepositoryTest {
         List<Post> posts = postRepository.findByCategoryId(1L);
 
         assertEquals(1, posts.size());
-
-
 
     }
 }

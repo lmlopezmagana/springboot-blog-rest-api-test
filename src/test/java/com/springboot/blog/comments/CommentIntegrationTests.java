@@ -68,7 +68,7 @@ public class CommentIntegrationTests {
     }
 
     @Test
-    void getCommentsByPostIdWithValidIdTest(){
+    void getCommentsByPostId_WithValidId_Test(){
         // No es necesario usar "exchange" porque no devuelve ResponseEntity
         // y por tanto devuelve un 200 OK aunque no se haya encontrado nada
         Comment[] comments = restTemplate.getForObject("/api/v1/posts/{postId}/comments", Comment[].class, 1);
@@ -76,7 +76,13 @@ public class CommentIntegrationTests {
     }
 
     @Test
-    void createCommentValidPostIdTest(){
+    void getCommentsByPostId_WithInvalidId_Test(){
+        Comment[] comments = restTemplate.getForObject("/api/v1/posts/{postId}/comments", Comment[].class, 10);
+        Assertions.assertEquals(0, comments.length);
+    }
+
+    @Test
+    void createComment_ValidPostId_Test(){
         HttpHeaders header = new HttpHeaders();
         header.setBearerAuth(token);
         HttpEntity<CommentDto> entity = new HttpEntity<>(c,header);
@@ -85,11 +91,11 @@ public class CommentIntegrationTests {
                 HttpMethod.POST, entity, CommentDto.class, 1);
 
         Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        Assertions.assertEquals("name", response.getBody().getName());
+        Assertions.assertEquals("name", Objects.requireNonNull(response.getBody()).getName());
     }
 
     @Test
-    void createCommentInvalidPostId(){
+    void createComment_InvalidPostId_Test(){
         HttpHeaders header = new HttpHeaders();
         header.setBearerAuth(token);
         HttpEntity<CommentDto> entity = new HttpEntity<>(c,header);
@@ -115,7 +121,7 @@ public class CommentIntegrationTests {
     }
 
     @Test
-    void getCommentsByInValidIdTest(){
+    void getCommentsBy_InvalidId_Test(){
         HttpEntity<HttpHeaders> entity = new HttpEntity<>(header);
 
         ResponseEntity<CommentDto> response = restTemplate.exchange("/api/v1/posts/{postId}/comments/{id}",
@@ -128,7 +134,7 @@ public class CommentIntegrationTests {
     }
 
     @Test
-    void updateCommentValidUpdateTest(){
+    void updateComment_ValidComment_Test(){
         c.setName("updated name");
         HttpEntity<CommentDto> entity = new HttpEntity<>(c,header);
 
@@ -143,7 +149,7 @@ public class CommentIntegrationTests {
     }
 
     @Test
-    void updateCommentInValidUpdateTest(){
+    void updateComment_InvalidComment_Test(){
         c.setName(null);
         HttpEntity<CommentDto> entity = new HttpEntity<>(c,header);
 
@@ -155,5 +161,57 @@ public class CommentIntegrationTests {
 
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         Assertions.assertEquals("Name should not be null or empty", Objects.requireNonNull(response.getBody()).getName());
+    }
+
+    @Test
+    void updateComment_InvalidPostId_Test(){
+        HttpEntity<CommentDto> entity = new HttpEntity<>(c,header);
+
+        ResponseEntity<CommentDto> response = restTemplate.exchange("/api/v1/posts/{postId}/comments/{id}",
+                HttpMethod.PUT,
+                entity,
+                CommentDto.class,
+                10,1);
+
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void deleteComment_Valid_Test(){
+        HttpEntity<HttpHeaders> entity = new HttpEntity<>(header);
+
+        ResponseEntity<String> response = restTemplate.exchange("/api/v1/posts/{postId}/comments/{id}",
+                HttpMethod.DELETE,
+                entity,
+                String.class,
+                1,1);
+
+        Assertions.assertEquals(HttpStatus.OK,response.getStatusCode());
+    }
+
+    @Test
+    void deleteComment_InvalidCommentId_Test(){
+        HttpEntity<HttpHeaders> entity = new HttpEntity<>(header);
+
+        ResponseEntity<String> response = restTemplate.exchange("/api/v1/posts/{postId}/comments/{id}",
+                HttpMethod.DELETE,
+                entity,
+                String.class,
+                1,10);
+
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void deleteComment_InvalidPostId_Test(){
+        HttpEntity<HttpHeaders> entity = new HttpEntity<>(header);
+
+        ResponseEntity<String> response = restTemplate.exchange("/api/v1/posts/{postId}/comments/{id}",
+                HttpMethod.DELETE,
+                entity,
+                String.class,
+                10,1);
+
+        Assertions.assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 }

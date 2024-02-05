@@ -1,9 +1,11 @@
 package com.springboot.blog.service;
 
 import com.springboot.blog.entity.Category;
+import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.service.impl.CategoryServiceImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -12,7 +14,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,8 +59,36 @@ class CategoryServiceTest {
     }
 
     @Test
-    void updateCategory() {
+    void updateCategory_ReturnsCategoryDto() {
+
+        Long id = 1L;
+
+        Category oldCategory = new Category(id,"Pelis","Lista de peliculas",new ArrayList<>());
+        CategoryDto newCategory = new CategoryDto(id,"Series","Lista de series");
+        Category updateCategory = new Category(id,"Series","Lista de series",new ArrayList<>());
+
+
+        Mockito.when(categoryRepository.findById(id)).thenReturn(Optional.of(oldCategory));
+        Mockito.when(categoryRepository.save(Mockito.any(Category.class))).thenReturn(updateCategory);
+        Mockito.when(modelMapper.map(Mockito.any(), Mockito.eq(CategoryDto.class)))
+                .thenReturn(newCategory);
+
+        Assertions.assertEquals(newCategory, categoryService.updateCategory(newCategory,id));
+
     }
+
+    @Test
+    void updateCategory_ResourceNotFoundException() {
+
+        Long id = 1L;
+
+        CategoryDto newCategory = new CategoryDto(id,"Series","Lista de series");
+        Mockito.when(categoryRepository.findById(id)).thenThrow(new ResourceNotFoundException("Category","id",id));
+
+        Assertions.assertThrows(ResourceNotFoundException.class,() -> categoryService.updateCategory(newCategory,id));
+
+    }
+
 
     @Test
     void deleteCategory() {

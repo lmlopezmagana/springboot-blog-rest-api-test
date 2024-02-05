@@ -26,6 +26,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CommentServiceTest {
@@ -65,7 +66,7 @@ class CommentServiceTest {
         );
 
 
-        Mockito.when(commentRepository.findByPostId(postId)).thenReturn(listComment);
+        when(commentRepository.findByPostId(postId)).thenReturn(listComment);
 
         Assertions.assertEquals(commentService.getCommentsByPostId(postId).size(),4);
 
@@ -82,7 +83,7 @@ class CommentServiceTest {
         long commentId = 2L;
         CommentDto commentRequest = new CommentDto();
 
-        Mockito.when(postRepository.findById(Mockito.any())).thenReturn(Optional.empty());
+        when(postRepository.findById(Mockito.any())).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class,
                 () -> commentService.updateComment(postId, commentId, commentRequest));
@@ -95,8 +96,8 @@ class CommentServiceTest {
         long commentId = 2L;
         CommentDto commentRequest = new CommentDto();
 
-        Mockito.when(postRepository.findById(Mockito.any())).thenReturn(Optional.of(post));
-        Mockito.when(commentRepository.findById(Mockito.any())).thenReturn(Optional.empty());
+        when(postRepository.findById(Mockito.any())).thenReturn(Optional.of(post));
+        when(commentRepository.findById(Mockito.any())).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class, () -> commentService.updateComment(post.getId(), commentId, commentRequest));
     }
@@ -112,8 +113,8 @@ class CommentServiceTest {
         comment.setPost(post);
         CommentDto commentRequest = new CommentDto();
 
-        Mockito.when(postRepository.findById(Mockito.any())).thenReturn(Optional.of(post2));
-        Mockito.when(commentRepository.findById(Mockito.any())).thenReturn(Optional.of(comment));
+        when(postRepository.findById(Mockito.any())).thenReturn(Optional.of(post2));
+        when(commentRepository.findById(Mockito.any())).thenReturn(Optional.of(comment));
 
         assertThrows(BlogAPIException.class, () -> commentService.updateComment(post2.getId(), comment.getId(), commentRequest));
     }
@@ -132,10 +133,10 @@ class CommentServiceTest {
         commentRequest.setName("Comentario 1");
         commentRequest.setEmail("alex@gmail.com");
 
-        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.of(post));
-        Mockito.when(commentRepository.findById(commentId)).thenReturn(Optional.of(comment));
-        Mockito.when(commentRepository.save(Mockito.any())).thenAnswer(invocation -> invocation.getArgument(0));
-        Mockito.when(modelMapper.map(Mockito.any(), Mockito.eq(CommentDto.class))).thenReturn(commentRequest);
+        when(postRepository.findById(postId)).thenReturn(Optional.of(post));
+        when(commentRepository.findById(commentId)).thenReturn(Optional.of(comment));
+        when(commentRepository.save(Mockito.any())).thenAnswer(invocation -> invocation.getArgument(0));
+        when(modelMapper.map(Mockito.any(), Mockito.eq(CommentDto.class))).thenReturn(commentRequest);
 
         CommentDto updatedComment = commentService.updateComment(postId, commentId, commentRequest);
 
@@ -146,6 +147,61 @@ class CommentServiceTest {
     }
 
     @Test
-    void deleteComment() {
+    void deleteComment_PostNotFound() {
+
+        Long postId = 1L;
+
+        when(postRepository.findById(postId)).thenThrow(new ResourceNotFoundException("Post", "id", postId));
+
+        assertThrows(ResourceNotFoundException.class, ()-> commentService.deleteComment(postId,postId));
+        verify(commentRepository, never()).delete(any(Comment.class));
+
+    }
+
+    @Test
+    void deleteComment_CommentNotFound() {
+        Long commentId = 1L;
+
+        lenient().when(commentRepository.findById(commentId))
+                .thenThrow(new ResourceNotFoundException("Comment", "id", commentId));
+
+        assertThrows(ResourceNotFoundException.class,
+                () -> commentService.deleteComment(commentId, commentId));
+        verify(commentRepository, never()).delete(any(Comment.class));
+
+    }
+
+    @Test
+    public void deleteComment_CommentDoesNotBelongToPost_ThrowException() {
+
+
+        Post post1 = new Post(1L, "post1", "post1desc","post1content",new HashSet<>(),new Category());
+        Post post2 = new Post(2L, "post2", "post2desc","post2content",new HashSet<>(),new Category());
+
+        Comment comment1 = new Comment(1L,"comment1","comment1@comment1","comment1body",post1);
+
+        when(postRepository.findById(post2.getId())).thenReturn(Optional.of(post2));
+
+
+        when(commentRepository.findById(comment1.getId())).thenReturn(Optional.of(comment1));
+
+        assertThrows(BlogAPIException.class, () -> commentService.deleteComment(post2.getId(), comment1.getId()));
+
+        verify(commentRepository, never()).delete(any(Comment.class));
+    }
+
+    @Test
+    public void deleteComment_ValidComment_DeletesComment() {
+
+        Post post1 = new Post(1L, "post1", "post1desc","post1content",new HashSet<>(),new Category());
+
+        Comment comment1 = new Comment(1L,"comment1","comment1@comment1","comment1body",post1);
+
+        when(postRepository.findById(post1.getId())).thenReturn(Optional.of(post1));
+
+        when(commentRepository.findById(comment1.getId())).thenReturn(Optional.of(comment1));
+        commentService.deleteComment(post1.getId(), comment1.getId());
+
+        verify(commentRepository, times(1)).delete(comment1);
     }
 }

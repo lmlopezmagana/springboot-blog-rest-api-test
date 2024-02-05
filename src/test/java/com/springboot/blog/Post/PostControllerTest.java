@@ -1,14 +1,13 @@
 package com.springboot.blog.Post;
 
+import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.service.PostService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -18,16 +17,19 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import static net.bytebuddy.matcher.ElementMatchers.is;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -63,8 +65,9 @@ public class PostControllerTest {
                 .content(objectMapper.writeValueAsString(postDto)).accept(MediaType.APPLICATION_JSON)
         ).andReturn();
         String actualResponse = mvcResult.getResponse().getContentAsString();
-        Assertions.assertThat(actualResponse).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(postDto));
+        assertThat(actualResponse).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(postDto));
     }
+
     @Test
     @WithMockUser(username = "Javi")
     void createPostTest_401() throws Exception {
@@ -121,7 +124,7 @@ public class PostControllerTest {
         MvcResult mvcResult = mockMvc.perform(get("/api/posts")
                 .contentType("application/json")).andReturn();
         String actualResponse = mvcResult.getResponse().getContentAsString();
-        Assertions.assertThat(actualResponse).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(postResponse));
+        assertThat(actualResponse).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(postResponse));
     }
 
     @Test
@@ -139,15 +142,65 @@ public class PostControllerTest {
         MvcResult mvcResult = mockMvc.perform(get("/api/posts/1")
                 .contentType("application/json")).andReturn();
         String actualResponse = mvcResult.getResponse().getContentAsString();
-        Assertions.assertThat(actualResponse).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(postDto));
+        assertThat(actualResponse).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(postDto));
     }
 
     @Test
     void getPostById_404() throws Exception {
-        PostDto postDto = null;
-        when(postService.getPostById(any(Long.class))).thenReturn(postDto);
+        when(postService.getPostById(any(Long.class))).thenThrow(new ResourceNotFoundException("Post", "id", 1));
         mockMvc.perform(get("/api/posts/1")
                 .contentType("application/json")).andExpect(status().isNotFound());
+    }
+
+    @Test
+    @WithMockUser(username = "Javi", roles = {"ADMIN"})
+    void whenDeletePost_then200() throws Exception{
+        mockMvc.perform(delete("/api/posts/1")
+                .contentType("application/json")).andExpect(status().isOk());
+        verify(postService, atLeastOnce()).deletePostById(any(Long.class));
+    }
+    @Test
+    @WithMockUser()
+    void whenDeletePost_then401() throws Exception{
+        mockMvc.perform(delete("/api/posts/1")
+                .contentType("application/json")).andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(username = "Javi", roles = {"ADMIN"})
+    void whenDeletePost_then404() throws Exception{
+        doThrow(new ResourceNotFoundException("Post", "id", 1)).when(postService).deletePostById(any(Long.class));
+        mockMvc.perform(delete("/api/posts/1")
+                .contentType("application/json")).andExpect(status().isNotFound());
+    }
+
+    @Test
+    void whenGetPostsByCategory_then200() throws Exception{
+        PostDto postDto = new PostDto();
+        postDto.setCategoryId(1L);
+        postDto.setContent("h");
+        postDto.setId(1L);
+        postDto.setComments(Set.of());
+        postDto.setDescription("fe");
+        postDto.setTitle("fdsfes");
+        when(postService.getPostsByCategory(any(Long.class))).thenReturn(List.of(postDto));
+        mockMvc.perform(get("/api/posts/category/1")
+                .contentType("application/json")).andExpect(status().isOk());
+        MvcResult mvcResult = mockMvc.perform(get("/api/posts/category/1")
+                .contentType("application/json")).andReturn();
+
+        String actualResponse = mvcResult.getResponse().getContentAsString();
+        assertThat(actualResponse).isEqualToIgnoringWhitespace(objectMapper.writeValueAsString(List.of(postDto)));
+    }
+
+    @Test
+    void whenGetPostsByCategory_then404() throws Exception{
+        ResourceNotFoundException exception = new ResourceNotFoundException("Category", "id", 1);
+        when(postService.getPostsByCategory(any(Long.class))).thenThrow(exception);
+        mockMvc.perform(get("/api/posts/category/1")
+                .contentType("application/json"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value(exception.getMessage()));
     }
 
 

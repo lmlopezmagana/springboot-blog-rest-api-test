@@ -1,14 +1,16 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.blog.entity.Category;
 import com.springboot.blog.entity.Post;
+import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.PostService;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -94,6 +95,68 @@ class PostControllerWOSecurityTest {
     }
 
     @Test
-    void getPostsByCategory() {
+    void getPostsByCategory_Response200() throws Exception {
+        Category category = new Category();
+        category.setId(1L);
+
+        Post post1 = new Post();
+        post1.setId(1L);
+        post1.setCategory(category);
+
+        Post post2 = new Post();
+        post2.setId(2L);
+        post2.setCategory(category);
+
+        List <Post> posts = List.of(post1, post2);
+
+        PostDto postDto1 = new PostDto();
+        postDto1.setId(post1.getId());
+        postDto1.setCategoryId(post1.getCategory().getId());
+
+        PostDto postDto2 = new PostDto();
+        postDto2.setId(post2.getId());
+        postDto2.setCategoryId(post2.getCategory().getId());
+
+        ModelMapper modelMapper = new ModelMapper();
+        List<PostDto> postDtoList = posts.stream()
+                .map(post -> modelMapper.map(post, PostDto.class))
+                .toList();
+
+        Mockito.when(postService.getPostsByCategory(category.getId())).thenReturn(postDtoList);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/category/{id}", category.getId())
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$",notNullValue()))
+                .andExpect(jsonPath("$[0].id", is(1)));
+    }
+
+    @Test
+    void getPostsByCategory_CategoryNotFound() throws Exception {
+        Post post1 = new Post();
+        post1.setId(1L);
+
+        Post post2 = new Post();
+        post2.setId(2L);
+
+        List <Post> posts = List.of(post1, post2);
+
+        PostDto postDto1 = new PostDto();
+        postDto1.setId(post1.getId());
+
+        PostDto postDto2 = new PostDto();
+        postDto2.setId(post2.getId());
+
+        ModelMapper modelMapper = new ModelMapper();
+        List<PostDto> postDtoList = posts.stream()
+                .map(post -> modelMapper.map(post, PostDto.class))
+                .toList();
+
+        Mockito.when(postService.getPostsByCategory(1L)).thenThrow(ResourceNotFoundException.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/category/{id}", 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }

@@ -5,36 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_02_2024_12_26__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_02_2024_12_26__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_02_2024_12_33__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_02_2024_12_33__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/springboot-blog-rest-api.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerWOSecurityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerWOSecurityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CategoryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/PostControllerWOSecurityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/PostControllerWOSecurityTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CategoryControllerTest.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CommentControllerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/CategoryServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/CategoryServiceTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="register" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
@@ -43,11 +26,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 0
-}]]></component>
-  <component name="ProjectId" id="2bwRmnWUvZaYUec7OqQHVYKOdZg" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2bduEOR5bjrXnRUWIqvwMbjTMUO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -57,17 +39,29 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "hu12-getcategory",
     "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="com.springboot.blog.controller" />
-    </key>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+    </option>
   </component>
-  <component name="RunManager" selected="JUnit.CategoryControllerWOSecurityTest.getCategory">
-    <configuration name="CategoryControllerWOSecurityTest.getCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.PostControllerWOSecurityTest.getPostsByCategory_CategoryNotFound">
+    <configuration name="SpringbootBlogRestApiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.SpringbootBlogRestApiApplication" />
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategoryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -76,14 +70,29 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerWOSecurityTest" />
-      <option name="METHOD_NAME" value="getCategory" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategoryControllerTest.getCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerTest" />
+      <option name="METHOD_NAME" value="getCategories" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CategoryServiceTest.getCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CategoryServiceTest.getAllCategories_ReturnsAllCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -93,13 +102,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.CategoryServiceTest" />
-      <option name="METHOD_NAME" value="getCategory" />
+      <option name="METHOD_NAME" value="getAllCategories_ReturnsAllCategories" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PostControllerWOSecurityTest.getAllPosts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PostControllerWOSecurityTest.getPostsByCategory_CategoryNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -109,38 +118,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.PostControllerWOSecurityTest" />
-      <option name="METHOD_NAME" value="getAllPosts" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PostServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.PostServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PostServiceTest.getAllPosts_OrderDesc" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.PostServiceTest" />
-      <option name="METHOD_NAME" value="getAllPosts_OrderDesc" />
+      <option name="METHOD_NAME" value="getPostsByCategory_CategoryNotFound" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -148,11 +126,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CategoryControllerWOSecurityTest.getCategory" />
-        <item itemvalue="JUnit.CategoryServiceTest.getCategory" />
-        <item itemvalue="JUnit.PostControllerWOSecurityTest.getAllPosts" />
-        <item itemvalue="JUnit.PostServiceTest" />
-        <item itemvalue="JUnit.PostServiceTest.getAllPosts_OrderDesc" />
+        <item itemvalue="JUnit.PostControllerWOSecurityTest.getPostsByCategory_CategoryNotFound" />
+        <item itemvalue="Application.SpringbootBlogRestApiApplication" />
+        <item itemvalue="JUnit.CategoryControllerTest.getCategories" />
+        <item itemvalue="JUnit.CategoryControllerTest" />
+        <item itemvalue="JUnit.CategoryServiceTest.getAllCategories_ReturnsAllCategories" />
       </list>
     </recent_temporary>
   </component>
@@ -160,46 +138,24 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="" />
-      <created>1707124320896</created>
+      <created>1706557165810</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1707124320896</updated>
+      <updated>1706557165810</updated>
     </task>
     <servers />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>
-          <line>42</line>
-          <properties class="com.springboot.blog.controller.AuthControllerTest">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java</url>
+          <line>53</line>
+          <properties class="com.springboot.blog.repository.UserRepositoryTest">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/service/PostServiceTest.java</url>
-          <line>38</line>
-          <properties class="com.springboot.blog.service.PostServiceTest" method="getAllPosts_OrderAsc">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/service/AuthServiceTest.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CommentServiceTest.java</url>
-          <line>94</line>
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

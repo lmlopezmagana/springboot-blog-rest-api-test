@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ActiveProfiles({"test"})
 //@ActiveProfiles({"postgres", "spring-data-jpa"})
 @Testcontainers
-@Sql(value = "classpath:insert-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = "classpath:insert-posts.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 class PostRepositoryTest {
 
     @Autowired

@@ -35,9 +35,11 @@ class AuthControllerTest {
     @InjectMocks
     private AuthController authController;
     private LoginDto loginDto;
+    private LoginDto loginDtoEmpty;
     @BeforeEach
     void setUp(){
          loginDto = new LoginDto("username", "password");
+         loginDtoEmpty = new LoginDto("","");
     }
     @Test
     void whenLoginIsValid_thenReturnHttp200() throws Exception {
@@ -54,8 +56,16 @@ class AuthControllerTest {
                 .andExpect(jsonPath("$.accessToken").value("token"));
     }
     @Test
-    @Disabled
-    void whenLoginIsInValid_thenReturnHttp404() {
+    void whenLoginIsNull_thenReturnHttp400()  throws Exception{
+        String token = "token";
+
+        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn(token);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
+                        .content(objectMapper.writeValueAsString(null))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
 
     }
 

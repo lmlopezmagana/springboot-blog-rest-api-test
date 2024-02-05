@@ -1,5 +1,6 @@
 package com.springboot.blog.Post;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.controller.PostController;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.service.PostService;
@@ -12,17 +13,21 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Set;
 
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -64,31 +69,257 @@ public class PostControllerTest {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     @Test
     @WithMockUser(username = "Pedro", roles = {"ADMIN"})
     void updatePost_201() throws Exception{
         PostDto postDto = new PostDto();
         postDto.setId(1L);
         postDto.setTitle("title");
-        postDto.setContent("si editar");
+        postDto.setContent("sin editar");
         postDto.setDescription("description");
         postDto.setComments(Set.of());
         postDto.setCategoryId(1L);
 
         PostDto porDtoEdicion = new PostDto();
+        porDtoEdicion.setId(1L);
+        porDtoEdicion.setTitle("title");
+        porDtoEdicion.setContent("editado");
+        porDtoEdicion.setDescription("description");
+        porDtoEdicion.setComments(Set.of());
+        porDtoEdicion.setCategoryId(1L);
+
+        when(postService.updatePost(Mockito.any(PostDto.class), eq(postDto.getId()))).thenReturn(porDtoEdicion);
+        mockMvc.perform(put("/api/posts/{id}", postDto.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(postDto)).accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk())
+                .andExpect(jsonPath("$.content", is("editado")));
+
+    }
+
+    @Test
+    @WithMockUser(username = "Pedro", roles = {"ADMIN"})
+    void updatePost_400_tileEmpty() throws Exception{
+        PostDto postDto = new PostDto();
         postDto.setId(1L);
-        postDto.setTitle("title");
-        postDto.setContent("editado");
+        postDto.setContent("sin editar");
         postDto.setDescription("description");
         postDto.setComments(Set.of());
         postDto.setCategoryId(1L);
 
-        when(postService.updatePost(postDto, postDto.getId())).thenReturn(porDtoEdicion);
+        PostDto porDtoEdicion = new PostDto();
+        porDtoEdicion.setId(1L);
+        porDtoEdicion.setTitle("title");
+        porDtoEdicion.setContent("editado");
+        porDtoEdicion.setDescription("description");
+        porDtoEdicion.setComments(Set.of());
+        porDtoEdicion.setCategoryId(1L);
 
-        mockMvc.perform(put("/api/posts/{id}",postDto.getId())
+        when(postService.updatePost(Mockito.any(PostDto.class), eq(postDto.getId()))).thenReturn(porDtoEdicion);
+        mockMvc.perform(put("/api/posts/{id}", postDto.getId())
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(porDtoEdicion)))
-                .andExpect(status().isOk());
+                        .content(objectMapper.writeValueAsString(postDto)).accept(MediaType.APPLICATION_JSON)
+                ).andExpect(status().isBadRequest());
+    }
 
+    @Test
+    @WithMockUser(username = "Pedro", roles = {"ADMIN"})
+    void updatePost_400_postNotExists() throws Exception{
+        PostDto postDto = new PostDto();
+        postDto.setId(1L);
+        postDto.setContent("sin editar");
+        postDto.setDescription("description");
+        postDto.setComments(Set.of());
+        postDto.setCategoryId(1L);
+
+        PostDto porDtoEdicion = new PostDto();
+        porDtoEdicion.setId(0L);
+        porDtoEdicion.setTitle("title");
+        porDtoEdicion.setContent("editado");
+        porDtoEdicion.setDescription("description");
+        porDtoEdicion.setComments(Set.of());
+        porDtoEdicion.setCategoryId(1L);
+
+        when(postService.updatePost(Mockito.any(PostDto.class), eq(postDto.getId()))).thenReturn(porDtoEdicion);
+        mockMvc.perform(put("/api/posts/{id}", postDto.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(postDto)).accept(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isBadRequest());
     }
 }

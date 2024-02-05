@@ -1,5 +1,6 @@
 package com.springboot.blog.service;
 
+import com.springboot.blog.entity.Category;
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.BlogAPIException;
@@ -8,6 +9,7 @@ import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.impl.CommentServiceImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -17,7 +19,11 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -42,6 +48,28 @@ class CommentServiceTest {
 
     @Test
     void getCommentsByPostId() {
+
+        Long postId= 1L;
+
+        Category cat1 = new Category(1L,"Categoria1","description1", new ArrayList<>());
+
+        Post post1 = new Post(postId, "post1","description1","content1",new HashSet<>(),cat1);
+
+        List<Comment> listComment = new ArrayList<>(
+                List.of(
+                        new Comment(1L,"comentario1","comentario1@gmail.com","texto de comentario 1",post1),
+                        new Comment(2L,"comentario2","comentario2@gmail.com","texto de comentario 2",post1),
+                        new Comment(3L,"comentario3","comentario3@gmail.com","texto de comentario 3",post1),
+                        new Comment(4L,"comentario4","comentario4@gmail.com","texto de comentario 4",post1)
+                        )
+        );
+
+
+        Mockito.when(commentRepository.findByPostId(postId)).thenReturn(listComment);
+
+        Assertions.assertEquals(commentService.getCommentsByPostId(postId).size(),4);
+
+
     }
 
     @Test

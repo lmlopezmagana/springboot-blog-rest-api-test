@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_02_2024_12_26__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_02_02_2024_12_26__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_02_2024_12_33__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_02_2024_12_33__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application-prod.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-prod.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/application-integration-test.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application-integration-test.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/delete-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/delete-data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/insert-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/insert-data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +37,18 @@
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2bxLosZHyB7kHR33KVjkrvs6CT5" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -55,7 +63,7 @@
       <recent name="com.springboot.blog.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AuthControllerIntegration">
+  <component name="RunManager" selected="JUnit.CategoryControllerWSecurity.updateCategory">
     <configuration name="SpringbootBlogRestApiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.SpringbootBlogRestApiApplication" />
       <module name="springboot-blog-rest-api" />
@@ -133,10 +141,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CategoryControllerWSecurity.updateCategory" />
+        <item itemvalue="Application.SpringbootBlogRestApiApplication" />
         <item itemvalue="JUnit.AuthControllerIntegration" />
         <item itemvalue="JUnit.AuthControllerIntegration.authRegister_thenReturnCreated" />
-        <item itemvalue="Application.SpringbootBlogRestApiApplication" />
-        <item itemvalue="JUnit.CategoryControllerWSecurity.updateCategory" />
         <item itemvalue="JUnit.CategoryServiceTest" />
       </list>
     </recent_temporary>
@@ -199,40 +207,19 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1706870424527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryControllerWSecurity_updateCategory.ic" NAME="CategoryControllerWSecurity.updateCategory Coverage Results" MODIFIED="1707130843718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest_testLogin.ic" NAME="AuthControllerTest.testLogin Coverage Results" MODIFIED="1706871884132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest.ic" NAME="PostServiceTest Coverage Results" MODIFIED="1707062192340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$SpringbootBlogRestApiApplicationTests.ic" NAME="SpringbootBlogRestApiApplicationTests Coverage Results" MODIFIED="1706790868690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_updateComment_Successful.ic" NAME="CommentServiceTest.updateComment_Successful Coverage Results" MODIFIED="1706984009664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryControllerTest_getCategories.ic" NAME="CategoryControllerTest.getCategories Coverage Results" MODIFIED="1706870432795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706789829412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest_getAllPosts_OrderAsc.ic" NAME="PostServiceTest.getAllPosts_OrderAsc Coverage Results" MODIFIED="1707062156883" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryServiceTest.ic" NAME="CategoryServiceTest Coverage Results" MODIFIED="1707051249576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_updateComment_CommentNotFound.ic" NAME="CommentServiceTest.updateComment_CommentNotFound Coverage Results" MODIFIED="1706982727549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentControllerWSecurityTest_updateComment.ic" NAME="CommentControllerWSecurityTest.updateComment Coverage Results" MODIFIED="1706987933173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1706870424527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$SpringbootBlogRestApiApplicationTests.ic" NAME="SpringbootBlogRestApiApplicationTests Coverage Results" MODIFIED="1706790868690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest_testLogin.ic" NAME="AuthControllerTest.testLogin Coverage Results" MODIFIED="1706871884132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest.ic" NAME="CommentServiceTest Coverage Results" MODIFIED="1706984022547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -240,6 +227,27 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryServiceTest_updateCategory.ic" NAME="CategoryServiceTest.updateCategory Coverage Results" MODIFIED="1707050838490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest_getAllPosts_OrderAsc.ic" NAME="PostServiceTest.getAllPosts_OrderAsc Coverage Results" MODIFIED="1707062156883" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706789829412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentControllerWSecurityTest_updateComment.ic" NAME="CommentControllerWSecurityTest.updateComment Coverage Results" MODIFIED="1706987933173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryServiceTest.ic" NAME="CategoryServiceTest Coverage Results" MODIFIED="1707051249576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_updateComment_Successful.ic" NAME="CommentServiceTest.updateComment_Successful Coverage Results" MODIFIED="1706984009664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryControllerWSecurity_updateCategory.ic" NAME="CategoryControllerWSecurity.updateCategory Coverage Results" MODIFIED="1707130843718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryControllerTest_getCategories.ic" NAME="CategoryControllerTest.getCategories Coverage Results" MODIFIED="1706870432795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
   </component>
 </project>

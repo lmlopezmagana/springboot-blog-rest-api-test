@@ -52,12 +52,12 @@ class AuthServiceImplTest {
     }
      */
 
-    //Marco Pertega l
+    //Marco Pertegal
     @Test
     void whenCorrectCredentialsThenReturnToken() {
-        LoginDto loginDto = new LoginDto("marco@gmail.com", "$2a$04$Qbni2vSWt9fHlT1YaXDnX.Gzpv9Wf2rdTDEvfR22rn4CeeWAHHC/i");
+        LoginDto loginDto = new LoginDto("loliva0@europa.eu", "$2a$04$/Qpy.M7Xg3ksrC6MvKYHeOMbTkBEBmXYdOaERRVGLgm/0mIL1CP1.");
         String login = authService.login(loginDto);
-        assertEquals("marco@gmail.com", login);
+        assertEquals("loliva0@europa.eu", login);
     }
 
     @Test

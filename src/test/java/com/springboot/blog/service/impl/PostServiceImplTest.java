@@ -14,8 +14,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +30,8 @@ import static org.mockito.Mockito.when;
 class PostServiceImplTest {
     @InjectMocks
     PostServiceImpl postService;
-
+    @Spy
+    ModelMapper modelMapper;
     @Mock
     CategoryRepository categoryRepository;
 
@@ -56,29 +61,52 @@ class PostServiceImplTest {
     //Marco Pertegal
     @Test
     void whenPostDtoThenCreateNewPost() {
-        Long categoryId = 1L;
-        PostDto postdto = new PostDto(1L, "a", "b", "c", Set.of(), 2L);
-        Category category = new Category(categoryId, "Partituras","Partituras de la banda de música", List.of());
+        Long categoryId = 3L;
+        PostDto postDto = new PostDto();
+        postDto.setId(1L);
+        postDto.setTitle("Mi mejor verano");
+        postDto.setDescription("El año pasado fui a Marruecos a hacer turismo");
+        postDto.setContent("Mucho texto y muchas imagenes");
+        postDto.setComments(new HashSet<>());
+        postDto.setCategoryId(3L);
+        Category category = new Category(categoryId, "Vacaciones","Mis vacaciones", List.of());
+        Post post = new Post(1L, "Sample Title", "Sample Description", "Sample Content", new HashSet<>(), category);
 
         Mockito.when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
+        Mockito.when(postService.mapToDTO(post)).thenReturn(postDto);
+        Mockito.when(postService.mapToEntity(postDto)).thenReturn(post);
+        Mockito.when(postRepository.save(post)).thenReturn(post);
 
-        PostDto result = postService.createPost(postdto);
+        Optional <Category> result = categoryRepository.findById(categoryId);
         assertNotNull(result);
-        assertEquals(postdto.getTitle(), result.getTitle());
+        assertEquals("Vacaciones", result.get().getName());
 
+        PostDto createdPost = postService.createPost(postDto);
+        assertNotNull(createdPost);
+        assertEquals("Mi mejor verano", createdPost.getTitle());
+        assertEquals("Mucho texto y muchas imagenes", createdPost.getContent());
+
+        Mockito.verify(postRepository).save(post);
     }
 
     //Marco Pertegal
     @Test
     void whenCategoryIdNotFoundThenThrowException(){
         Long categoryId = 3L;
-        PostDto postdto = new PostDto(1L, "a", "b", "c", Set.of(), categoryId);
+        PostDto postDto = new PostDto();
+        postDto.setId(1L);
+        postDto.setTitle("Mi mejor verano");
+        postDto.setDescription("El año pasado fui a Marruecos a hacer turismo");
+        postDto.setContent("Mucho texto y muchas imagenes");
+        postDto.setComments(new HashSet<>());
+        postDto.setCategoryId(categoryId);
 
-        Mockito.when(postService.createPost(postdto)).thenReturn(postdto);
-        Mockito.when(postRepository.findById(categoryId)).thenReturn(Optional.empty());
+        Mockito.when(categoryRepository.findById(postDto.getCategoryId())).thenReturn(Optional.empty());
 
-        Exception exception = assertThrows(ResourceNotFoundException.class);
-
+        Exception exception = assertThrows(ResourceNotFoundException.class,()->{
+            postService.createPost(postDto);
+        });
+        assertEquals("Category not found with id : '"+ categoryId+"'", exception.getMessage());
     }
 
     @Test

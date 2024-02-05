@@ -49,7 +49,7 @@ class CommentServiceTest {
     @Test
     void getCommentsByPostId() {
 
-        Long postId= 1L;
+        long postId= 1L;
 
         Category cat1 = new Category(1L,"Categoria1","description1", new ArrayList<>());
 

@@ -173,6 +173,25 @@ public class PostControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "Pedro", roles = {"USER"})
+    void updatePost_403_forbiddenAccess() throws Exception {
+        PostDto postDto = new PostDto();
+        postDto.setId(1L);
+        postDto.setTitle("Title");
+        postDto.setContent("content");
+        postDto.setDescription("description");
+        postDto.setComments(Set.of());
+        postDto.setCategoryId(1L);
+
+        mockMvc.perform(put("/api/posts/{id}", postDto.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(postDto))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized()); // Esperamos un 403 Forbidden ya que el usuario no tiene el rol ADMIN
+    }
+
+
+    @Test
     @WithMockUser(username = "Javi")
     void createPostTest_401() throws Exception {
         PostDto postDto = new PostDto();

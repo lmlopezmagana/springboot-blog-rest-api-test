@@ -1,0 +1,218 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"80fec2b0-20e1-42ee-adc2-ba8c7e5cc474\" name=\"Changes\" comment=\"\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/CommentRepositoryTest.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/CommentRepositoryTest.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/test/resources/insert-data.sql\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/test/resources/insert-data.sql\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/UserRepositoryTest.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/UserRepositoryTest.class\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"JpbToolWindowState\">\r\n    <option name=\"isToolWindowVisible\" value=\"false\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"associatedIndex\": 5\r\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"2bduEOR5bjrXnRUWIqvwMbjTMUO\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"git-widget-placeholder\": \"findbyusernameoremail\",\r\n    \"last_opened_file_path\": \"C:/Users/alexl/Desktop/springboot-blog-rest-api-test\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RunManager\" selected=\"JUnit.CommentRepositoryTest\">\r\n    <configuration name=\"CommentRepositoryTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"springboot-blog-rest-api\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.springboot.blog.repository.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.springboot.blog.repository\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.springboot.blog.repository.CommentRepositoryTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"CommentRepositoryTest.findByPostId_CommentExists\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"springboot-blog-rest-api\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.springboot.blog.repository.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.springboot.blog.repository\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.springboot.blog.repository.CommentRepositoryTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"findByPostId_CommentExists\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"CommentRepositoryTest.findByPostId_NoComments\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"springboot-blog-rest-api\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.springboot.blog.repository.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.springboot.blog.repository\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.springboot.blog.repository.CommentRepositoryTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"findByPostId_NoComments\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"CommentRepositoryTest.findByPostId_PostIdDontExist\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"springboot-blog-rest-api\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.springboot.blog.repository.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.springboot.blog.repository\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.springboot.blog.repository.CommentRepositoryTest\" />\r\n      <option name=\"METHOD_NAME\" value=\"findByPostId_PostIdDontExist\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"UserRepositoryTest\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"springboot-blog-rest-api\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.springboot.blog.repository.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.springboot.blog.repository\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.springboot.blog.repository.UserRepositoryTest\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.CommentRepositoryTest\" />\r\n        <item itemvalue=\"JUnit.CommentRepositoryTest.findByPostId_PostIdDontExist\" />\r\n        <item itemvalue=\"JUnit.CommentRepositoryTest.findByPostId_NoComments\" />\r\n        <item itemvalue=\"JUnit.CommentRepositoryTest.findByPostId_CommentExists\" />\r\n        <item itemvalue=\"JUnit.UserRepositoryTest\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"80fec2b0-20e1-42ee-adc2-ba8c7e5cc474\" name=\"Changes\" comment=\"\" />\r\n      <created>1706557165810</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1706557165810</updated>\r\n    </task>\r\n    <servers />\r\n  </component>\r\n  <component name=\"XDebuggerManager\">\r\n    <breakpoint-manager>\r\n      <breakpoints>\r\n        <line-breakpoint enabled=\"true\" type=\"java-method\">\r\n          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java</url>\r\n          <line>53</line>\r\n          <properties class=\"com.springboot.blog.repository.UserRepositoryTest\" method=\"findByUsernameOrEmail_BothDontExist\">\r\n            <option name=\"EMULATED\" value=\"true\" />\r\n            <option name=\"WATCH_EXIT\" value=\"false\" />\r\n          </properties>\r\n          <option name=\"timeStamp\" value=\"1\" />\r\n        </line-breakpoint>\r\n      </breakpoints>\r\n    </breakpoint-manager>\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -6,11 +6,7 @@
+   <component name="ChangeListManager">
+     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/CommentRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/CommentRepositoryTest.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/test/resources/insert-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/insert-data.sql" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/CommentRepositoryTest.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/UserRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/repository/UserRepositoryTest.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -18,118 +14,115 @@
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
+   <component name="Git.Settings">
++    <option name="RECENT_BRANCH_BY_REPOSITORY">
++      <map>
++        <entry key="$PROJECT_DIR$" value="getAllCategories" />
++      </map>
++    </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+-  </component>
+-  <component name="JpbToolWindowState">
+-    <option name="isToolWindowVisible" value="false" />
+   </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+   <component name="ProjectColorInfo"><![CDATA[{
+-  "associatedIndex": 5
++  "associatedIndex": 8
+ }]]></component>
+-  <component name="ProjectId" id="2bduEOR5bjrXnRUWIqvwMbjTMUO" />
++  <component name="ProjectId" id="2bo08r19bD2zZ1kfIA3WmU0Up1I" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+   <component name="PropertiesComponent"><![CDATA[{
+   "keyToString": {
+-    "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.OpenProjectViewOnStart": "true",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "git-widget-placeholder": "findbyusernameoremail",
+-    "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
++    "git-widget-placeholder": "register"
+   }
+ }]]></component>
+-  <component name="RunManager" selected="JUnit.CommentRepositoryTest">
+-    <configuration name="CommentRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++  <component name="RunManager" selected="Application.SpringbootBlogRestApiApplication">
++    <configuration name="SpringbootBlogRestApiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.SpringbootBlogRestApiApplication" />
+       <module name="springboot-blog-rest-api" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
++          <option name="PATTERN" value="com.springboot.blog.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
+-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.CommentRepositoryTest" />
+-      <option name="TEST_OBJECT" value="class" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="CommentRepositoryTest.findByPostId_CommentExists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="AuthControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="springboot-blog-rest-api" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
++          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
+-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.CommentRepositoryTest" />
+-      <option name="METHOD_NAME" value="findByPostId_CommentExists" />
+-      <option name="TEST_OBJECT" value="method" />
++      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
++      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerTest" />
++      <option name="TEST_OBJECT" value="class" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="CommentRepositoryTest.findByPostId_NoComments" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="AuthControllerTest.login" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="springboot-blog-rest-api" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
++          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
+-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.CommentRepositoryTest" />
+-      <option name="METHOD_NAME" value="findByPostId_NoComments" />
++      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
++      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerTest" />
++      <option name="METHOD_NAME" value="login" />
+       <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="CommentRepositoryTest.findByPostId_PostIdDontExist" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="AuthControllerTest.register_whenInvalidInput_" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="springboot-blog-rest-api" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
++          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
+-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.CommentRepositoryTest" />
+-      <option name="METHOD_NAME" value="findByPostId_PostIdDontExist" />
++      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
++      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerTest" />
++      <option name="METHOD_NAME" value="register_whenInvalidInput_" />
+       <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="UserRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++    <configuration name="AuthControllerTest.register_whenValidInput_thenReturns201" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="springboot-blog-rest-api" />
+       <extension name="coverage">
+         <pattern>
+-          <option name="PATTERN" value="com.springboot.blog.repository.*" />
++          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+           <option name="ENABLED" value="true" />
+         </pattern>
+       </extension>
+-      <option name="PACKAGE_NAME" value="com.springboot.blog.repository" />
+-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.repository.UserRepositoryTest" />
+-      <option name="TEST_OBJECT" value="class" />
++      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
++      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerTest" />
++      <option name="METHOD_NAME" value="register_whenValidInput_thenReturns201" />
++      <option name="TEST_OBJECT" value="method" />
+       <method v="2">
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="JUnit.CommentRepositoryTest" />
+-        <item itemvalue="JUnit.CommentRepositoryTest.findByPostId_PostIdDontExist" />
+-        <item itemvalue="JUnit.CommentRepositoryTest.findByPostId_NoComments" />
+-        <item itemvalue="JUnit.CommentRepositoryTest.findByPostId_CommentExists" />
+-        <item itemvalue="JUnit.UserRepositoryTest" />
++        <item itemvalue="Application.SpringbootBlogRestApiApplication" />
++        <item itemvalue="JUnit.AuthControllerTest" />
++        <item itemvalue="JUnit.AuthControllerTest.register_whenValidInput_thenReturns201" />
++        <item itemvalue="JUnit.AuthControllerTest.login" />
++        <item itemvalue="JUnit.AuthControllerTest.register_whenInvalidInput_" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -137,26 +130,22 @@
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+       <changelist id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="" />
+-      <created>1706557165810</created>
++      <created>1706865967886</created>
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+-      <updated>1706557165810</updated>
++      <updated>1706865967886</updated>
+     </task>
+     <servers />
+   </component>
+-  <component name="XDebuggerManager">
+-    <breakpoint-manager>
+-      <breakpoints>
+-        <line-breakpoint enabled="true" type="java-method">
+-          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java</url>
+-          <line>53</line>
+-          <properties class="com.springboot.blog.repository.UserRepositoryTest" method="findByUsernameOrEmail_BothDontExist">
+-            <option name="EMULATED" value="true" />
+-            <option name="WATCH_EXIT" value="false" />
+-          </properties>
+-          <option name="timeStamp" value="1" />
+-        </line-breakpoint>
+-      </breakpoints>
+-    </breakpoint-manager>
++  <component name="com.intellij.coverage.CoverageDataManagerImpl">
++    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1706870424527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>com.springboot.blog.controller.*</FILTER>
++    </SUITE>
++    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706789829412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>com.springboot.blog.service.*</FILTER>
++    </SUITE>
++    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$SpringbootBlogRestApiApplicationTests.ic" NAME="SpringbootBlogRestApiApplicationTests Coverage Results" MODIFIED="1706790868690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
++      <FILTER>com.springboot.blog.*</FILTER>
++    </SUITE>
+   </component>
+ </project>
+\ No newline at end of file

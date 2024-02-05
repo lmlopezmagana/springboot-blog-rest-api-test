@@ -4,8 +4,6 @@ import com.springboot.blog.entity.Category;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.service.impl.CategoryServiceImpl;
-import jakarta.inject.Inject;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,15 +11,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 class CategoryServiceTest {
-
-    @Autowired
-    private CategoryService categoryService;
 
     @InjectMocks
     private CategoryServiceImpl categoryServiceImpl;
@@ -32,6 +28,9 @@ class CategoryServiceTest {
     @Mock
     private ModelMapper modelMapper;
 
+    @InjectMocks
+    private CategoryServiceImpl categoryService;
+
     @Test
     void addCategory() {
 
@@ -41,18 +40,15 @@ class CategoryServiceTest {
 
         Category categoryExpected = new Category(id, name, description, null);
 
-        CategoryDto categoryDtoExpected
-                = this.modelMapper.map(categoryExpected, CategoryDto.class);
+        CategoryDto categoryDtoExpected = this.modelMapper.map(categoryExpected, CategoryDto.class);
 
         Mockito.when(categoryRepository.save(Mockito.any())).thenReturn(categoryExpected);
 
-        CategoryDto categoryDto  = categoryServiceImpl.addCategory(categoryDtoExpected);
+        CategoryDto categoryDto = categoryServiceImpl.addCategory(categoryDtoExpected);
 
         assertEquals(categoryDto.getId(), categoryDtoExpected.getId());
         assertEquals(categoryDto.getName(), categoryDtoExpected.getName());
         assertEquals(categoryDto.getDescription(), categoryDtoExpected.getDescription());
-
-
 
     }
 
@@ -61,7 +57,20 @@ class CategoryServiceTest {
     }
 
     @Test
-    void getAllCategories() {
+    void getAllCategories_ReturnsAllCategories() {
+        List<Category> categories = List.of(new Category(), new Category());
+        Mockito.when(categoryRepository.findAll()).thenReturn(categories);
+
+        List<CategoryDto> dtoList = List.of(new CategoryDto(), new CategoryDto());
+        Mockito.when(modelMapper.map(Mockito.any(), Mockito.eq(CategoryDto.class)))
+                .thenReturn(dtoList.get(0))
+                .thenReturn(dtoList.get(1));
+
+        List<CategoryDto> result = categoryService.getAllCategories();
+
+        assertEquals(dtoList, result);
+        assertNotNull(result);
+        assertEquals(2, result.size());
     }
 
     @Test

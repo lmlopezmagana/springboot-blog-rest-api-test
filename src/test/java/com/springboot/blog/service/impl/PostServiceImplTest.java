@@ -38,26 +38,6 @@ class PostServiceImplTest {
     @Mock
     PostRepository postRepository;
 
-
-    /*
-    @Override
-    public PostDto createPost(PostDto postDto) {
-
-        Category category = categoryRepository.findById(postDto.getCategoryId())
-                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", postDto.getCategoryId()));
-
-        // convert DTO to entity
-        Post post = mapToEntity(postDto);
-        post.setCategory(category);
-        Post newPost = postRepository.save(post);
-
-        // convert entity to DTO
-        PostDto postResponse = mapToDTO(newPost);
-        return postResponse;
-    }
-    este metodo recibe un postdto que solo tiene el dide la categoria la busca transfdorma el dto a post y si encuentra esa categria se la setea
-    para guardarla en la base de datos  depues vuelve a transdormar la entidad a dto y la devielve
-     */
     //Marco Pertegal
     @Test
     void whenPostDtoThenCreateNewPost() {

@@ -8,12 +8,18 @@ import com.springboot.blog.payload.LoginDto;
 import com.springboot.blog.payload.RegisterDto;
 import com.springboot.blog.repository.RoleRepository;
 import com.springboot.blog.repository.UserRepository;
+import com.springboot.blog.security.JwtTokenProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
@@ -37,27 +43,26 @@ class AuthServiceImplTest {
 
     @Mock
     PasswordEncoder passwordEncoder;
-    /*
-     @Override
-    public String login(LoginDto loginDto) {
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+    @Mock
+    AuthenticationManager authenticationManager;
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String token = jwtTokenProvider.generateToken(authentication);
-
-        return token;
-    }
-     */
+    @Mock
+    JwtTokenProvider jwtTokenProvider;
 
     //Marco Pertegal
     @Test
     void whenCorrectCredentialsThenReturnToken() {
+
         LoginDto loginDto = new LoginDto("loliva0@europa.eu", "$2a$04$/Qpy.M7Xg3ksrC6MvKYHeOMbTkBEBmXYdOaERRVGLgm/0mIL1CP1.");
-        String login = authService.login(loginDto);
-        assertEquals("loliva0@europa.eu", login);
+        String token = "18c6dd9c77bfcc97e862001655abfba9";
+        Authentication authentication = new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(), loginDto.getPassword());
+
+        Mockito.when(authenticationManager.authenticate(Mockito.any())).thenReturn(authentication);
+        Mockito.when(jwtTokenProvider.generateToken(authentication)).thenReturn(token);
+
+        String newToken = authService.login(loginDto);
+        assertEquals(token, newToken);
     }
 
     @Test

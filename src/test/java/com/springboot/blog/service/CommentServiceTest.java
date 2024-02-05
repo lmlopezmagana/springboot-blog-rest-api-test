@@ -38,6 +38,29 @@ class CommentServiceTest {
 
     @Test
     void createComment() {
+        long postId = 1L;
+        long commentId = 1L;
+        Post post = new Post();
+        post.setId(1L);
+        Comment comment = new Comment();
+        comment.setId(1L);
+        comment.setPost(post);
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(commentId);
+        commentDto.setName("Paco");
+        commentDto.setEmail("paco@gmail.com");
+        commentDto.setBody("Lorem ipsum dolor sit amet");
+
+        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.of(post));
+        Mockito.when(commentRepository.findById(commentId)).thenReturn(Optional.of(comment));
+        Mockito.when(commentRepository.save(Mockito.any())).thenAnswer(invocation -> invocation.getArgument(0));
+        Mockito.when(modelMapper.map(commentDto, Comment.class)).thenReturn(comment);
+
+        CommentDto result = commentService.createComment(postId, commentDto);
+
+        assertEquals(commentDto.getName(), result.getName());
+        assertEquals(commentDto.getEmail(), result.getEmail());
+        assertEquals(commentDto.getBody(), result.getBody());
     }
 
     @Test

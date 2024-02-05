@@ -24,7 +24,7 @@ public class AuthControllerIntegration {
     private int port;
 
     @BeforeEach
-    @Sql("classpath:sql/data.sql")
+    @Sql("classpath:delete-data.sql")
     public void setup() {
 
     }

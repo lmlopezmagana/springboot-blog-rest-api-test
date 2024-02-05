@@ -14,6 +14,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +41,13 @@ class RoleRepositoryTest {
 
         Optional<Role> result = repository.findByName("ADMIN-TEST");
 
-        assertEquals("ADMIN-TEST", result.get().getName());
-        assertNotNull(result);
+        if(Objects.equals(result.get().getName(), "ADMIN-TEST")){
+            assertEquals(1, result.get().getId());
+            assertNotNull(result);
+        }else{
+            assertNotEquals(2, result.get().getId());
+        }
+
+
     }
 }

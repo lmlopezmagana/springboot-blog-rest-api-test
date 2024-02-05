@@ -17,7 +17,19 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="login-service-controller" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JpbToolWindowState">
@@ -34,21 +46,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "getPostByCategory",
-    "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;getPostByCategory&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexl/Desktop/springboot-blog-rest-api-test&quot;
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
+      <command value="mvn compile" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PostControllerWOSecurityTest.getPostsByCategory_CategoryNotFound">
+  <component name="RunManager" selected="JUnit.AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk">
     <configuration name="SpringbootBlogRestApiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.SpringbootBlogRestApiApplication" />
       <module name="springboot-blog-rest-api" />
@@ -62,7 +75,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CategoryControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthControllerIntegrationTest.authRegister_thenReturnCreated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -71,55 +84,55 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerTest" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerIntegrationTest" />
+      <option name="METHOD_NAME" value="authRegister_thenReturnCreated" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerIntegrationTest" />
+      <option name="METHOD_NAME" value="whenLoginRegisteredUser_thenReturnOk" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebServerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.WebServerTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CategoryControllerTest.getCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="WebServerTests.testServerPort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+          <option name="PATTERN" value="com.springboot.blog.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerTest" />
-      <option name="METHOD_NAME" value="getCategories" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CategoryServiceTest.getAllCategories_ReturnsAllCategories" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.CategoryServiceTest" />
-      <option name="METHOD_NAME" value="getAllCategories_ReturnsAllCategories" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PostControllerWOSecurityTest.getPostsByCategory_CategoryNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.PostControllerWOSecurityTest" />
-      <option name="METHOD_NAME" value="getPostsByCategory_CategoryNotFound" />
+      <option name="PACKAGE_NAME" value="com.springboot.blog" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.WebServerTests" />
+      <option name="METHOD_NAME" value="testServerPort" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -127,11 +140,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PostControllerWOSecurityTest.getPostsByCategory_CategoryNotFound" />
+        <item itemvalue="JUnit.AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk" />
+        <item itemvalue="JUnit.WebServerTests.testServerPort" />
+        <item itemvalue="JUnit.WebServerTests" />
+        <item itemvalue="JUnit.AuthControllerIntegrationTest.authRegister_thenReturnCreated" />
         <item itemvalue="Application.SpringbootBlogRestApiApplication" />
-        <item itemvalue="JUnit.CategoryControllerTest.getCategories" />
-        <item itemvalue="JUnit.CategoryControllerTest" />
-        <item itemvalue="JUnit.CategoryServiceTest.getAllCategories_ReturnsAllCategories" />
       </list>
     </recent_temporary>
   </component>
@@ -158,6 +171,16 @@
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/springboot/blog/controller/PostController.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -168,10 +191,7 @@
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1706870424527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest.ic" NAME="PostServiceTest Coverage Results" MODIFIED="1707062192340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706789829412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest.ic" NAME="CommentServiceTest Coverage Results" MODIFIED="1706984022547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706871942372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

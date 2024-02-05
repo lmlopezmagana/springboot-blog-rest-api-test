@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = AuthController.class)
@@ -45,7 +46,19 @@ class AuthControllerTest {
 
 
     @Test
-    void login() {
+    public void login_successful() throws Exception {
+
+        String token = "generated-token";
+
+        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn(token);
+
+        LoginDto loginDto = new LoginDto("username", "password");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(loginDto)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accessToken").value("generated-token"));
     }
 
     @Test

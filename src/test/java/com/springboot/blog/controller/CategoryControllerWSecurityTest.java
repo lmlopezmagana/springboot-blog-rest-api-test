@@ -1,6 +1,7 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.blog.controller.SecurityContext.WithMockCustomUser;
 import com.springboot.blog.entity.Category;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.security.JwtTokenProvider;
@@ -52,8 +53,8 @@ public class CategoryControllerWSecurityTest {
     }
 
     @Test
-    @WithMockUser(username = "username", roles = "ADMIN")
-    void addCategory() throws Exception {
+    @WithMockUser(username = "username", roles = "{ADMIN}")
+    void addCategoryWithResponse201Created() throws Exception {
         Long categoryId = 1L;
         String name = "Category 1";
         String description = "description";
@@ -68,4 +69,37 @@ public class CategoryControllerWSecurityTest {
                 .andExpect(status().isCreated());
 
     }
+
+    @Test
+    @WithMockCustomUser(role = "USER")
+    void addCategoryWithResponse401Unauthorized() throws Exception{
+        Long categoryId = 1L;
+        String name = "Category 1";
+        String description = "description";
+
+        CategoryDto categoryDto = new CategoryDto(categoryId, name, description);
+
+        Mockito.when(categoryService.addCategory(categoryDto)).thenReturn(categoryDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/categories/add", categoryDto)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(categoryDto)))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(username = "username", roles = "{ADMIN}")
+    void addCategoryWithNullContent() throws Exception{
+
+        CategoryDto categoryDto = new CategoryDto();
+
+        Mockito.when(categoryService.addCategory(categoryDto)).thenReturn(categoryDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/categories", categoryDto)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(categoryDto)))
+                .andExpect(status().isBadRequest());
+
+    }
+
 }

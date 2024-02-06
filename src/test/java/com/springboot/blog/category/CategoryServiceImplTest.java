@@ -67,6 +67,9 @@ class CategoryServiceImplTest {
     }
     @Test
     void getCategoryById_CategoryNotFound(){
+        when(categoryRepository.findById(category.getId())).thenReturn(Optional.ofNullable(category));
+
+        assertThrows(ResourceNotFoundException.class, ()-> categoryRepository.findById(category.getId()));
 
     }
 
@@ -84,6 +87,8 @@ class CategoryServiceImplTest {
 
         CategoryDto updatedCategory = categoryService.updateCategory(categoryRequest, category.getId());
 
+        verify(categoryRepository, times(1)).findById(category.getId());
+        verify(categoryRepository, times(1)).save(Mockito.any());
         assertEquals("this is a new description", updatedCategory.getDescription());
     }
     @Test
@@ -106,7 +111,9 @@ class CategoryServiceImplTest {
     }
     @Test
     void deleteCategory_CategoryNotFoundTest(){
+        when(categoryRepository.findById(category.getId())).thenReturn(Optional.ofNullable(category));
 
+        assertThrows(ResourceNotFoundException.class, ()->  categoryService.deleteCategory(category.getId()));
     }
 
 }

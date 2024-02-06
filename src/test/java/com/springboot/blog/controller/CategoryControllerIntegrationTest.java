@@ -2,6 +2,7 @@ package com.springboot.blog.controller;
 
 import com.springboot.blog.entity.Role;
 import com.springboot.blog.entity.User;
+import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.repository.UserRepository;
 import com.springboot.blog.security.JwtTokenProvider;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -73,18 +75,34 @@ class CategoryControllerIntegrationTest {
     void addCategory() {
     }
 
+    // Cristian Pulido
     @Test
-    void getCategory() {
-    }
+    void whenCategoryIsFound_thenReturnHttp200() {
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/categories/" + idCategory,
+                HttpMethod.GET,
+                new HttpEntity<>(adminHeaders),
+                CategoryDto.class);
 
-    @Test
-    void getCategories() {
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
     }
 
     @Test
     void updateCategory() {
     }
 
+    //Cristian Pulido
+    @Test
+    void whenCategoriesIsFound_thenReturnHttp200(){
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/categories",
+                HttpMethod.GET,
+                new HttpEntity<>(adminHeaders),
+                String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertFalse(response.getBody().isEmpty());
+    }
     //Sebastián Millán
     @Test
     void whenCategoryIdIsOkAndAdminRole_thenReturnHttp200() {

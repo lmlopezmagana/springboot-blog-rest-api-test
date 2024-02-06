@@ -3,6 +3,8 @@ delete from posts cascade;
 delete from users_roles cascade;
 delete from users cascade;
 delete from roles cascade;
+delete from categories cascade;
+
 
 insert into categories (id, name, description) values (1, 'Yadel', 'Blister (nonthermal), unspecified hip, initial encounter');
 insert into categories (id, name, description) values (2, 'Skilith', 'Villonodular synovitis (pigmented), right knee');

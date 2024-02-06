@@ -126,7 +126,7 @@ public class CommentServiceTest {
     @Test
     void updateComment(){
         Category category = new Category(1L, "categoria", "descripcion", List.of());
-
+    Post post;
         post = new Post(1L, "titulo del post", "descripcion post", "contenido del post", Set.of(), category);
 
         category.setPosts(List.of(post));

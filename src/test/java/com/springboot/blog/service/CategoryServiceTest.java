@@ -23,6 +23,9 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class CategoryServiceTest {
 
+    @InjectMocks
+    private CategoryServiceImpl categoryServiceImpl;
+
     @Mock
     private CategoryRepository categoryRepository;
 
@@ -34,7 +37,28 @@ class CategoryServiceTest {
 
 
     @Test
-    void addCategory() {
+    void addCategoryWithAllOk() {
+
+        Long id = 7L;
+        String name = "testName";
+        String description = "testDescription";
+
+        Category categoryExpected = new Category(id, name, description, null);
+
+        Mockito.when(categoryRepository.save(Mockito.any())).thenReturn(categoryExpected);
+
+        CategoryDto  categoryDto = new CategoryDto(id, name, description);
+
+        Mockito.when(modelMapper.map(Mockito.any(), Mockito.eq(CategoryDto.class))).thenReturn(categoryDto);
+
+        Mockito.when(modelMapper.map(Mockito.any(), Mockito.eq(Category.class))).thenReturn(categoryExpected);
+
+        CategoryDto categoryDtoExpected = categoryServiceImpl.addCategory(categoryDto);
+
+        assertEquals(categoryDto.getId(), categoryDtoExpected.getId());
+        assertEquals(categoryDto.getName(), categoryDtoExpected.getName());
+        assertEquals(categoryDto.getDescription(), categoryDtoExpected.getDescription());
+
     }
 
     @Test
@@ -89,8 +113,34 @@ class CategoryServiceTest {
 
     }
 
+    @Test
+    void deleteCategoryWith200_OK() {
+
+        Long id = 1L;
+        String name = "testName";
+        String description = "testDescription";
+
+        Category categoryExpected = new Category(id, name, description, null);
+
+        Mockito.when(categoryRepository.findById(categoryExpected.getId())).thenReturn(Optional.of(categoryExpected));
+
+        categoryServiceImpl.deleteCategory(categoryExpected.getId());
+
+        Mockito.verify(categoryRepository, Mockito.times(1)).delete(categoryExpected);
+
+    }
 
     @Test
-    void deleteCategory() {
+    void deleteCategoryWith404NotFound(){
+
+        Long id = 1L;
+        String name = "testName";
+        String description = "testDescription";
+
+        Category categoryExpected = new Category(id, name, description, null);
+
+        Mockito.when(categoryRepository.findById(categoryExpected.getId())).thenReturn(Optional.empty());
+
+        assertThrows(Exception.class, () -> categoryServiceImpl.deleteCategory(categoryExpected.getId()));
     }
 }

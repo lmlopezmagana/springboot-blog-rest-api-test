@@ -61,11 +61,16 @@ public class UserRepositoryTest {
     public void findUserByUsernameTest (){
         User u = new User(1L, "Pepe", "pepeillo", "pepeillo@gmail.com", "123456789", null);
         Assertions.assertTrue(userRepository.findByUsername("pepeillo").isPresent());
-        Assertions.assertTrue(userRepository.findByUsernameOrEmail("pepeillo", "user@gmail.com").isPresent());
-        Assertions.assertEquals(u.getId(), userRepository.findByUsernameOrEmail("pepeillo", "pepeillo@gmail.com").get().getId());
-        Assertions.assertTrue(userRepository.findByUsernameOrEmail("user", "pepeillo@gmail.com").isPresent());
-        Assertions.assertFalse(userRepository.findByUsernameOrEmail("user", "user@gmail.com").isPresent());
-        Exception exception = assertThrows(IncorrectResultSizeDataAccessException.class, () ->
-                userRepository.findByUsernameOrEmail("pepeillo", "rmacmichael0@theglobeandmail.com"));
+        Assertions.assertFalse(userRepository.findByUsername("Pepeillo").isPresent());
+        Assertions.assertEquals(u.getId(), userRepository.findByUsername("pepeillo").get().getId());
+        Assertions.assertFalse(userRepository.findByUsername("pepeillo@gmail.com").isPresent());
+    }
+
+    @Test
+    public void existUserByEmail (){
+        Assertions.assertTrue(userRepository.existsByEmail("ndivers1@reuters.com"));
+        Assertions.assertTrue(userRepository.existsByEmail("pepeillo@gmail.com"));
+        Assertions.assertFalse(userRepository.existsByEmail("pepeillo@gail.com"));
+        Assertions.assertFalse(userRepository.existsByEmail("usuario@gmail.com"));
     }
 }

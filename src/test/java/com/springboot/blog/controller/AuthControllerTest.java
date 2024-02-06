@@ -22,10 +22,14 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.context.request.WebRequest;
 import org.testcontainers.shaded.org.hamcrest.core.IsNull;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -57,11 +61,11 @@ class AuthControllerTest {
 
         String token = "generated-token";
 
-        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn(token);
+        when(authService.login(any(LoginDto.class))).thenReturn(token);
 
         LoginDto loginDto = new LoginDto("username", "password");
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
+        mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginDto)))
                 .andExpect(status().isOk())
@@ -71,9 +75,9 @@ class AuthControllerTest {
     @Test
     public void login_badRequest() throws Exception {
 
-        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn(null);
+        when(authService.login(any(LoginDto.class))).thenReturn(null);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
+        mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(null)))
                 .andExpect(status().isBadRequest());
@@ -83,16 +87,15 @@ class AuthControllerTest {
     @Test
     public void login_internalServerError() throws Exception {
 
-        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenThrow(BadCredentialsException.class);
-
         LoginDto loginDto = new LoginDto("username", "password");
+
+        Mockito.when(authService.login(loginDto)).thenThrow(new RuntimeException("Internal Server Error"));
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(loginDto)))
                 .andExpect(status().isInternalServerError())
-                .andExpect(jsonPath("$.accessToken").value(IsNull.nullValue()));
-
+                .andExpect(jsonPath("$.message").value("Credenciales erróneas"));
     }
 
     @Test
@@ -100,7 +103,7 @@ class AuthControllerTest {
 
         RegisterDto registerDto = new RegisterDto("manolo","manolo","manolo.manolo@gmail.com","manolo1234");
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/register")
+        mockMvc.perform(post("/api/auth/register")
                 .content(objectMapper.writeValueAsString(registerDto))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))

@@ -71,6 +71,11 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_1_CommentServiceTest.class" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_2_CommentServiceTest.class" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp__CommentServiceTest.class" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
@@ -78,9 +83,10 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 5
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
 }</component>
-  <component name="ProjectId" id="2bduEOR5bjrXnRUWIqvwMbjTMUO" />
+  <component name="ProjectId" id="2bxLosZHyB7kHR33KVjkrvs6CT5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -106,10 +112,14 @@
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.*" />
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CommentControllerWOSecurityTest" />
+      <option name="METHOD_NAME" value="deleteComment_ValidComment_ReturnsNotFound" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -134,7 +144,7 @@
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+          <option name="PATTERN" value="com.springboot.blog.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -166,7 +176,7 @@
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+          <option name="PATTERN" value="com.springboot.blog.service.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -192,24 +202,63 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="" />
-      <created>1706557165810</created>
+      <created>1707152500485</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1706557165810</updated>
+      <updated>1707152500485</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/service/AuthServiceTest.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/service/AuthServiceTest.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/repository/UserRepositoryTest.java</url>
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java</url>
           <line>53</line>
-          <properties class="com.springboot.blog.repository.UserRepositoryTest">
+          <properties class="com.springboot.blog.controller.AuthControllerIntegrationTest" method="whenLoginWODto_thenReturn400">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/springboot/blog/controller/PostController.java</url>
+          <line>23</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>
+          <line>96</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java</url>

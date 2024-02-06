@@ -1,10 +1,15 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.blog.entity.Comment;
+import com.springboot.blog.exception.ResourceNotFoundException;
+import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.impl.CommentServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -31,6 +36,10 @@ public class CommentControllerWOSecurityTest {
     private ObjectMapper objectMapper;
     @InjectMocks
     private CommentController commentController;
+
+    @Mock
+    private CommentRepository commentRepository;
+
     @MockBean
     private CommentServiceImpl commentService;
     @MockBean
@@ -43,18 +52,33 @@ public class CommentControllerWOSecurityTest {
     public void deleteComment_ValidComment_ReturnsOk() throws Exception {
         Long postId = 1L;
         Long commentId = 2L;
+        Mockito.doNothing().when(commentRepository).delete(Mockito.any(Comment.class));
 
-        // Mockear el comportamiento del servicio
         doNothing().when(commentService).deleteComment(postId, commentId);
 
-        // Realizar la petición DELETE al endpoint del controlador
-        mockMvc.perform(delete("/api/comments/{postId}/comments/{commentId}", postId, commentId)
+
+
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Comment deleted successfully"));
 
-        // Verificar que el método deleteComment del servicio fue llamado
         verify(commentService, times(1)).deleteComment(postId, commentId);
+    }
+
+    @Test
+    public void deleteComment_ValidComment_ReturnsNotFound() throws Exception {
+        Long postId = 1L;
+        Long commentId = 2L;
+        Mockito.doNothing().when(commentRepository).delete(Mockito.any(Comment.class));
+
+        Mockito.doThrow(new ResourceNotFoundException("Post", "id", postId)).when(commentService).deleteComment(postId, commentId);
+
+
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+
     }
 
 }

@@ -51,6 +51,7 @@ class AuthServiceImplTest {
 
     private User user;
     private LoginDto loginDto;
+    private LoginDto loginDto2;
     private RegisterDto registerDto;
     private Authentication authentication;
 
@@ -58,13 +59,10 @@ class AuthServiceImplTest {
     void setUp() {
         user = new User(1L, "Pepe", "pepeillo", "pepeillo@gmail.com", "123456789", null);
         loginDto = new LoginDto("pepeillo", "123456789");
+        loginDto2 = new LoginDto("nonexist", "3213123132");
         registerDto = new RegisterDto("Ale", "jimenez", "jimenezale@gmail.com", "123456789");
         authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsernameOrEmail(), loginDto.getPassword()));
-    }
-
-    @AfterEach
-    void tearDown() {
     }
 
     @Test
@@ -72,7 +70,7 @@ class AuthServiceImplTest {
         Mockito.when(authenticationManager.authenticate(Mockito.any())).thenReturn(authentication);
         Mockito.when(jwtTokenProvider.generateToken(Mockito.any())).thenReturn("wasd");
 
-        assertEquals("wasd", authService.login(loginDto));
+        assertEquals("wasd", authService.login(loginDto2));
     }
 
     @Test

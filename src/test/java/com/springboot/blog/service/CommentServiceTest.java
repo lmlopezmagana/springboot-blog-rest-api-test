@@ -9,6 +9,7 @@ import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.impl.CommentServiceImpl;
+import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -74,7 +75,53 @@ class CommentServiceTest {
     }
 
     @Test
-    void getCommentById() {
+    void getCommentByIdWithSuccess() {
+
+        Long postId = 1L;
+        Long commentId = 1L;
+
+        Post post = new Post(postId, null, null, null, null, null);
+        Comment comment = new Comment(commentId, null, null, null, post);
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(comment.getId());
+        commentDto.setBody("Comment");
+
+        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.of(post));
+        Mockito.when(commentRepository.findById(commentId)).thenReturn(Optional.of(comment));
+        Mockito.when(modelMapper.map(comment, CommentDto.class)).thenReturn(commentDto);
+
+        CommentDto expectedResult = commentService.getCommentById(postId, commentId);
+
+        assertEquals(commentDto.getId(), expectedResult.getId());
+        assertEquals(commentDto.getBody(), expectedResult.getBody());
+    }
+
+    @Test
+    void getCommentByIdWithEmptyContentThrowException(){
+        Long postId = null;
+        Long commentId = null;
+        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.empty());
+
+        assertThrows(Exception.class, () -> commentService.getCommentById(postId, commentId));
+    }
+
+    @Test
+    void getCommentByIdWithAnInvalidCommentIdThrowException(){
+        Long postId = 1L;
+        Long commentId = null;
+
+        assertThrows(Exception.class, () -> commentService.getCommentById(postId, commentId));
+    }
+
+    @Test
+    void getCommentByIdWithAValidCommentIdButInvalidPostIdThrowException(){
+        Long postId = null;
+        Long commentId = 1L;
+
+        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.of(new Post()));
+        Mockito.when(commentRepository.findById(commentId)).thenReturn(Optional.of(new Comment()));
+
+        assertThrows(Exception.class, () -> commentService.getCommentById(postId, commentId));
     }
 
     @Test

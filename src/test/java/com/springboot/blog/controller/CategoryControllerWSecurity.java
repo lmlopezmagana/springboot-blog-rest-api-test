@@ -72,8 +72,6 @@ public class CategoryControllerWSecurity {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name",is(newCategory.getName())));
 
-
-
     }
 
 

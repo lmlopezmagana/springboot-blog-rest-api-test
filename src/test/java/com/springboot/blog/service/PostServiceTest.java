@@ -8,6 +8,8 @@ import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.impl.PostServiceImpl;
+import org.checkerframework.checker.units.qual.C;
+import org.checkerframework.checker.units.qual.N;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.*;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -129,7 +132,33 @@ class PostServiceTest {
     }
 
     @Test
-    void getPostById() {
+    void getPostByIdWithSuccess() {
+
+        Category category = new Category(1L, "Category 1", null, null);
+
+        Post post = new Post(1L, "Post1", "Description", null, null, null);
+
+        PostDto postDto = new PostDto();
+
+        postDto.setId(post.getId());
+        postDto.setTitle(post.getTitle());
+
+        Mockito.when(postRepository.findById(post.getId())).thenReturn(Optional.of(post));
+        Mockito.when(modelMapper.map(post, PostDto.class)).thenReturn(postDto);
+
+        PostDto expectedResult = postService.getPostById(post.getId());
+
+        assertEquals(postDto.getId(), expectedResult.getId());
+        assertEquals(postDto.getTitle(), expectedResult.getTitle());
+    }
+
+    @Test
+    void getPostByIdWithIdNullOrNotExistsThrowException(){
+
+        Post post = new Post();
+        post.setId(1L);
+
+        assertThrows(Exception.class, () -> postService.getPostById(2L));
     }
 
     @Test

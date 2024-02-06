@@ -70,8 +70,6 @@ class CommentServiceTest {
         when(commentRepository.findByPostId(postId)).thenReturn(listComment);
 
         Assertions.assertEquals(commentService.getCommentsByPostId(postId).size(),4);
-
-
     }
 
     @Test

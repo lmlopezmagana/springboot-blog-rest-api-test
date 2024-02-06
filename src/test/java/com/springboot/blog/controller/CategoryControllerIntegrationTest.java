@@ -59,9 +59,9 @@ class CategoryControllerIntegrationTest {
         User admin = new User(1L,"Micah Eakle","meakle0","meakle0@newsvine.com", "kJ3(1SY6uMM", Set.of(new Role((short)1,"ADMIN")));
         User user = new User(51L, "Danny Girkins", "dgirkins1e", "dgirkins1e@bing.com", "lE2,%W?IAA", Set.of(new Role((short)2,"USER")));
         userToken=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
-                user.getUsername(),user.getRoles(),Collections.of(new SimpleGrantedAuthority("USER"))));
+                user.getUsername(),user.getRoles(),Collections.of(new SimpleGrantedAuthority("ROLE_USER"))));
         adminToken=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
-                admin.getUsername(),admin.getRoles(), Collections.of(new SimpleGrantedAuthority("ADMIN"))));
+                admin.getUsername(),admin.getRoles(), Collections.of(new SimpleGrantedAuthority("ROLE_ADMIN"))));
         userHeaders=new HttpHeaders();
         userHeaders.setContentType(MediaType.APPLICATION_JSON);
         userHeaders.setBearerAuth(userToken);
@@ -93,25 +93,28 @@ class CategoryControllerIntegrationTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Category deleted successfully!.", response.getBody());
     }
-
+    //Sebastián Millán
     @Test
     void whenCategoryIdIsOkAndUserRole_thenReturnHttp401() {
         ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/categories/"+idCategory,
                 HttpMethod.DELETE,new HttpEntity<>(userHeaders), String.class);
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }
+    //Sebastián Millán
     @Test
     void whenCategoryIdIsZeroAndAdminRole_thenReturnHttp404() {
         ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/categories/"+zeroIdCategory,
                 HttpMethod.DELETE,new HttpEntity<>(userHeaders), String.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
+    //Sebastián Millán
     @Test
     void whenCategoryIdIsNearFinalAndAdminRole_thenReturnHttp404() {
         ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/categories/"+finalIdCategory,
                 HttpMethod.DELETE,new HttpEntity<>(userHeaders), String.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+    //Sebastián Millán
     @Test
     void whenCategoryIdIsOutFinalAndAdminRole_thenReturnHttp404() {
         ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/categories/"+outIdCategory,

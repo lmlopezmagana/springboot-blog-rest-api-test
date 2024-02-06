@@ -10,6 +10,7 @@ import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.PostService;
 import com.springboot.blog.service.impl.PostServiceImpl;
+import io.jsonwebtoken.lang.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,25 +20,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.client.RestTemplate;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -57,8 +50,8 @@ class PostControllerIntegrationTest {
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    private MultiValueMap<String, String> userHeaders;
-    private MultiValueMap<String, String> adminHeaders;
+    private HttpHeaders userHeaders;
+    private HttpHeaders adminHeaders;
     private String userToken;
     private String adminToken;
     private Long idPost;
@@ -66,6 +59,7 @@ class PostControllerIntegrationTest {
     private Long outIdPost;
     private Long finalIdPost;
     private PostDto updatePostDto;
+    private PostDto invalidPostDto;
     @BeforeEach
     void setUp(){
         testRestTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory());
@@ -73,27 +67,29 @@ class PostControllerIntegrationTest {
         notExistIdPost=0L;
         outIdPost=101L;
         finalIdPost=100L;
+        invalidPostDto= new PostDto();
         updatePostDto= new PostDto();
         updatePostDto.setTitle("Titulo test");
         updatePostDto.setDescription("El post está redactado regular");
         updatePostDto.setContent("El contenido del post");
         updatePostDto.setCategoryId(1L);
-        User admin = new User(1L,"Micah Eakle","meakle0","meakle0@newsvine.com", passwordEncoder.encode("kJ3(1SY6uMM"), Set.of(new Role((short)1,"ADMIN")));
-        User user = new User(51L, "Danny Girkins", "dgirkins1e", "dgirkins1e@bing.com", passwordEncoder.encode("lE2,%W?IAA"), Set.of(new Role((short)2,"USER")));
+        User admin = new User(1L,"Micah Eakle","meakle0","meakle0@newsvine.com", "kJ3(1SY6uMM", Set.of(new Role((short)1,"ADMIN")));
+        User user = new User(51L, "Danny Girkins", "dgirkins1e", "dgirkins1e@bing.com", "lE2,%W?IAA", Set.of(new Role((short)2,"USER")));
         System.out.println(admin.getPassword());
 
         userToken=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
-                user.getUsername(),user.getRoles()));
+                user.getUsername(),user.getRoles(), Collections.of(new SimpleGrantedAuthority("ROLE_USER"))));
         adminToken=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
-                admin.getUsername(),admin.getRoles()));
+                admin.getUsername(),admin.getRoles(), Collections.of(new SimpleGrantedAuthority("ROLE_ADMIN"))));
         System.out.println(userToken);
-        userHeaders=new LinkedMultiValueMap<>();
-        userHeaders.add("content-type","application/json");
-        userHeaders.add("Authorization","Bearer "+userToken);
-        adminHeaders= new LinkedMultiValueMap<>();
-        adminHeaders.add("content-type","application/json");
-        adminHeaders.add("Authorization","Bearer "+adminToken);
+        userHeaders=new HttpHeaders();
+        userHeaders.setContentType(MediaType.APPLICATION_JSON);
+        userHeaders.setBearerAuth(userToken);
+        adminHeaders=new HttpHeaders();
+        adminHeaders.setContentType(MediaType.APPLICATION_JSON);
+        adminHeaders.setBearerAuth(adminToken);
     }
+
 
     @Test
     void createPost() {
@@ -159,15 +155,36 @@ class PostControllerIntegrationTest {
         assertEquals(0,response.getBody().getId());
     }
 
+    //Sebastián Millán
     @Test
-    void updatePost() {
+    void whenIdPostAndUpdatePostDtoIsOk_thenReturnHttp200() {
         ResponseEntity<PostDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+idPost,
-                HttpMethod.PUT,new HttpEntity<>(adminHeaders), PostDto.class, updatePostDto);
+                HttpMethod.PUT,new HttpEntity<>(updatePostDto,adminHeaders), PostDto.class);
         System.out.println(updatePostDto);
         System.out.println(idPost);
         System.out.println(adminHeaders);
         System.out.println(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(idPost, response.getBody().getId());
+        assertEquals(updatePostDto.getTitle(), response.getBody().getTitle());
+    }
+    //Sebastián Millán
+    @Test
+    void whenIdPostIsNotValid_thenReturnHttp404() {
+        ResponseEntity<PostDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+notExistIdPost,
+                HttpMethod.PUT,new HttpEntity<>(updatePostDto,adminHeaders), PostDto.class);
+        System.out.println(response);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    //Sebastián Millán
+    @Test
+    void whenInvalidPostDto_thenReturnHttp400() {
+        ResponseEntity<PostDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+idPost,
+                HttpMethod.PUT,new HttpEntity<>(invalidPostDto,adminHeaders), PostDto.class);
+        System.out.println(response);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     @Test

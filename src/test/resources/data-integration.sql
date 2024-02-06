@@ -220,7 +220,7 @@ insert into comments (id, post_id, name, email, body) values (9, 81, 'Roy McReyn
 insert into comments (id, post_id, name, email, body) values (10, 68, 'Berenice Gallardo', 'bgallardo9@cnbc.com', 'Puncture of spleen');
 insert into comments (id, post_id, name, email, body) values (11, 24, 'Beau Stubbin', 'bstubbina@ed.gov', 'Injection of destructive agent into spinal canal');
 insert into comments (id, post_id, name, email, body) values (12, 37, 'Elvyn McGerr', 'emcgerrb@narod.ru', 'Aspiration of fallopian tube');
-insert into comments (id, post_id, name, email, body) values (13, 79, 'Sandor Townes', 'stownesc@pinterest.com', 'Removal of artificial anal sphincter');
+insert into comments (id, post_id, name, email, body) values (13, 100, 'Sandor Townes', 'stownesc@pinterest.com', 'Removal of artificial anal sphincter');
 insert into comments (id, post_id, name, email, body) values (14, 91, 'Addi Pipe', 'apiped@51.la', 'Other surgical extraction of tooth');
 insert into comments (id, post_id, name, email, body) values (15, 50, 'Odessa Budding', 'obuddinge@sina.com.cn', 'Microscopic examination of specimen from operative wound, culture and sensitivity');
 insert into comments (id, post_id, name, email, body) values (16, 42, 'Dag Lanfare', 'dlanfaref@constantcontact.com', 'Implantation or replacement of cochlear prosthetic device, not otherwise specified');
@@ -412,7 +412,7 @@ insert into users (id, username, email, password, name) values (96, 'khechlin2n'
 insert into users (id, username, email, password, name) values (97, 'malessandretti2o', 'malessandretti2o@omniture.com', 'vQ6)I},q', 'Marcy Alessandretti');
 insert into users (id, username, email, password, name) values (98, 'dweal2p', 'dweal2p@youku.com', 'qX0+UhBw&n', 'Derry Weal');
 insert into users (id, username, email, password, name) values (99, 'ywaddy2q', 'ywaddy2q@accuweather.com', 'kS2>3$m@V%Jqq+c', 'Yoshiko Waddy');
-insert into users (id, username, email, password, name) values (100, 'wbahls2r', 'wbahls2r@mac.com', 'sQ0|KHKUN$I|/*', 'Wanids Bahls');
+insert into users (id, username, email, password, name) values (100, 'wbahls2r', 'wbahls2r@mac.com', '$2a$12$3mCdFtxnU1jX/EdZuf9Mm.2Y0XQD5lLnjSRpdgTHBK860SRdWRrwq', 'Wanids Bahls');
 
 insert into users_roles (role_id, user_id) values (1, 1);
 insert into users_roles (role_id, user_id) values (1, 2);

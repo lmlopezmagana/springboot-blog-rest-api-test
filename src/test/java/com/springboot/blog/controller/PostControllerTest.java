@@ -57,9 +57,9 @@ class PostControllerTest {
     void whenUpdatePostWithValidData_thenReturnHttp200() throws Exception {
         PostDto updatedPostDto = new PostDto();
         updatedPostDto.setId(1L);
-        updatedPostDto.setTitle("Sample Title");
-        updatedPostDto.setDescription("Sample Description with more than 10 characters");
-        updatedPostDto.setContent("Sample Content");
+        updatedPostDto.setTitle("Title");
+        updatedPostDto.setDescription("Description");
+        updatedPostDto.setContent("Content");
 
         long postId = 1L;
         when(categoryService.updatePost(updatedPostDto, postId)).thenReturn(updatedPostDto);
@@ -78,9 +78,10 @@ class PostControllerTest {
         // Arrange
         PostDto updatedPostDto = new PostDto();
         updatedPostDto.setId(1L);
-        updatedPostDto.setTitle("Sample Title");
-        updatedPostDto.setDescription("Sample Description with more than 10 characters");
-        updatedPostDto.setContent("Sample Content");
+        updatedPostDto.setTitle("Title");
+        updatedPostDto.setDescription("Description");
+        updatedPostDto.setContent("Content");
+
         long postId = 1L;
         mockMvc.perform(MockMvcRequestBuilders.put("/api/posts/{id}", postId)
                         .content(objectMapper.writeValueAsString(updatedPostDto))

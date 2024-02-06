@@ -86,9 +86,13 @@ class CategoryControllerTest {
 
     }
 
-
+    //Marco Pertegal
     @Test
-    void getCategory() {
+    void whenCategoryIdExistThenReturnHttp200() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/categories/{id}",categoryDto.getId())
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+        verify(categoryService, times(1)).getCategory(categoryDto.getId());
     }
 
     @Test

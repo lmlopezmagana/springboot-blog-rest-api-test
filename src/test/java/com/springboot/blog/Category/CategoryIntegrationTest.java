@@ -43,6 +43,7 @@ public class CategoryIntegrationTest {
     int port;
     HttpHeaders header = new HttpHeaders();
     CategoryDto dto = new CategoryDto();
+    String adminToken;
     String userToken;
     @Container
     @ServiceConnection
@@ -56,7 +57,11 @@ public class CategoryIntegrationTest {
 
         Collection<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
         Authentication auth = new UsernamePasswordAuthenticationToken("AdminUsername","admin",authorities);
-        userToken = jwtProvider.generateToken(auth);
+        adminToken = jwtProvider.generateToken(auth);
+
+        Collection<GrantedAuthority> authorities2 = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        Authentication auth2 = new UsernamePasswordAuthenticationToken("UserUsername","1234", authorities2);
+        userToken = jwtProvider.generateToken(auth2);
 
         dto.setId(3L);
         dto.setName("Category name");
@@ -94,7 +99,7 @@ public class CategoryIntegrationTest {
     @Test
     void addCategory_201(){
         header.setContentType(MediaType.APPLICATION_JSON);
-        header.setBearerAuth(userToken);
+        header.setBearerAuth(adminToken);
 
         HttpEntity<CategoryDto> objectRequest = new HttpEntity<>(dto,header);
 
@@ -103,6 +108,109 @@ public class CategoryIntegrationTest {
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
+
+    @Test
+    void addCategory_401(){
+        header.setContentType(MediaType.APPLICATION_JSON);
+        header.setBearerAuth(userToken);
+
+        HttpEntity<CategoryDto> objectRequest = new HttpEntity<>(dto,header);
+
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange("/api/v1/categories",
+                HttpMethod.POST, objectRequest, CategoryDto.class);
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+    }
+
+    @Test
+    void updateCategory_200(){
+        header.setContentType(MediaType.APPLICATION_JSON);
+        header.setBearerAuth(adminToken);
+        dto.setName("Name category edited");
+        dto.setDescription("Description edited");
+
+        HttpEntity<CategoryDto> objectRequest = new HttpEntity<>(dto,header);
+
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange("/api/v1/categories/{id}",
+                HttpMethod.PUT,objectRequest, CategoryDto.class, 1000);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Name category edited", response.getBody().getName());
+        assertEquals("Description edited", response.getBody().getDescription());
+    }
+
+    @Test
+    void updateCategory_401(){
+        header.setContentType(MediaType.APPLICATION_JSON);
+        header.setBearerAuth(userToken);
+        dto.setName("Name category edited");
+        dto.setDescription("Description edited");
+
+        HttpEntity<CategoryDto> objectRequest = new HttpEntity<>(dto,header);
+
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange("/api/v1/categories/{id}",
+                HttpMethod.PUT,objectRequest, CategoryDto.class, 1000);
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+
+    }
+
+    @Test
+    void updateCategory_404(){
+        header.setContentType(MediaType.APPLICATION_JSON);
+        header.setBearerAuth(adminToken);
+        dto.setName("Name category edited");
+        dto.setDescription("Description edited");
+
+        HttpEntity<CategoryDto> objectRequest = new HttpEntity<>(dto,header);
+
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange("/api/v1/categories/{id}",
+                HttpMethod.PUT,objectRequest, CategoryDto.class, 54);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+
+    }
+
+    @Test
+    void deleteCategory_200(){
+        header.setBearerAuth(adminToken);
+        header.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<HttpHeaders> objectRequest = new HttpEntity<>(header);
+
+        ResponseEntity<String> response = testRestTemplate.exchange("/api/v1/categories/{id}",
+                HttpMethod.DELETE, objectRequest, String.class, 1000);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Category deleted successfully!.",response.getBody());
+    }
+
+    @Test
+    void deleteCategory_401(){
+        header.setBearerAuth(userToken);
+        header.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<HttpHeaders> objectRequest = new HttpEntity<>(header);
+
+        ResponseEntity<String> response = testRestTemplate.exchange("/api/v1/categories/{id}",
+                HttpMethod.DELETE, objectRequest, String.class, 1000);
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+    }
+
+    @Test
+    void deleteCategory_404(){
+        header.setBearerAuth(adminToken);
+        header.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<HttpHeaders> objectRequest = new HttpEntity<>(header);
+
+        ResponseEntity<String> response = testRestTemplate.exchange("/api/v1/categories/{id}",
+                HttpMethod.DELETE, objectRequest, String.class, 168);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
 
 
 

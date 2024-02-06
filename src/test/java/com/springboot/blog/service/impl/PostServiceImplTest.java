@@ -45,6 +45,9 @@ class PostServiceImplTest {
     PostRepository postRepository;
 
     //Marco Pertegal
+    //si pongo los metodos private no me deja llamrlos a la gente que le he preguntado no
+    //llama a esos metodos en el test
+    //he probado con PowerMokito y con spy pero sigue sin dejarme acceder a los metodos
     @Test
     void whenPostDtoThenCreateNewPost() {
         Long categoryId = 3L;

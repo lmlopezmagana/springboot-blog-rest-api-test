@@ -1,6 +1,7 @@
 package com.springboot.blog.category;
 
 import com.springboot.blog.entity.Category;
+import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.service.CategoryService;
@@ -14,7 +15,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,10 +55,20 @@ class CategoryServiceImplTest {
 
     }
 
-//    @Test
-//    void getCategoryByIdTest() {
-//        when(categoryRepository.findById(category.getId())).thenReturn(c);
-//    }
+    @Test
+    void getCategoryByIdTest() {
+        when(categoryRepository.findById(category.getId())).thenReturn(Optional.ofNullable(category));
+
+        CategoryDto result= categoryService.getCategory(category.getId());
+
+        assertNotNull(result);
+        assertEquals("Category test description", result.getDescription());
+        verify(categoryRepository,times(1)).findById(category.getId());
+    }
+    @Test
+    void getCategoryById_CategoryNotFound(){
+
+    }
 
     @Test
     void getAllCategoriesTest() {
@@ -66,10 +76,37 @@ class CategoryServiceImplTest {
 
     @Test
     void updateCategoryTest() {
+        CategoryDto categoryRequest = new CategoryDto();
+        categoryRequest.setDescription("this is a new description");
+
+        when(categoryRepository.findById(category.getId())).thenReturn(Optional.ofNullable(category));
+        when(categoryRepository.save(category)).thenReturn(category);
+
+        CategoryDto updatedCategory = categoryService.updateCategory(categoryRequest, category.getId());
+
+        assertEquals("this is a new description", updatedCategory.getDescription());
+    }
+    @Test
+    void updateCategory_CategoryNotFound_Test(){
+        CategoryDto categoryRequest = new CategoryDto();
+        categoryRequest.setName("New name");
+
+        when(categoryRepository.findById(category.getId())).thenReturn(Optional.ofNullable(category));
+        assertThrows(ResourceNotFoundException.class, ()-> categoryService.updateCategory(categoryRequest, category.getId()));
+
     }
 
     @Test
     void deleteCategoryTest() {
+        when(categoryRepository.findById(category.getId())).thenReturn(Optional.ofNullable(category));
+
+        categoryService.deleteCategory(category.getId());
+
+        verify(categoryRepository,times(1)).delete(category);
+    }
+    @Test
+    void deleteCategory_CategoryNotFoundTest(){
+
     }
 
 }

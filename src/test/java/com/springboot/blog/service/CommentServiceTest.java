@@ -97,6 +97,34 @@ class CommentServiceTest {
     }
 
     @Test
+    void getCommentByIdWithEmptyContentThrowException(){
+        Long postId = null;
+        Long commentId = null;
+        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.empty());
+
+        assertThrows(Exception.class, () -> commentService.getCommentById(postId, commentId));
+    }
+
+    @Test
+    void getCommentByIdWithAnInvalidCommentIdThrowException(){
+        Long postId = 1L;
+        Long commentId = null;
+
+        assertThrows(Exception.class, () -> commentService.getCommentById(postId, commentId));
+    }
+
+    @Test
+    void getCommentByIdWithAValidCommentIdButInvalidPostIdThrowException(){
+        Long postId = null;
+        Long commentId = 1L;
+
+        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.of(new Post()));
+        Mockito.when(commentRepository.findById(commentId)).thenReturn(Optional.of(new Comment()));
+
+        assertThrows(Exception.class, () -> commentService.getCommentById(postId, commentId));
+    }
+
+    @Test
     void updateComment_PostNotFound() {
         Long postId = 1L;
         long commentId = 2L;

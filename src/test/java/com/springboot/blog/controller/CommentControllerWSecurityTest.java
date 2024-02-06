@@ -31,6 +31,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(CommentController.class)
@@ -104,8 +105,49 @@ class CommentControllerWSecurityTest {
     }
 
     @Test
-    void getCommentById() {
+    @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
+    void getCommentByIdWithStatusCode200_OK() throws Exception {
+
+        Long postId = 1L;
+        Long commentId = 1L;
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(commentId);
+        commentDto.setBody("Comment");
+
+        Mockito.when(commentService.getCommentById(postId, commentId)).thenReturn(commentDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{postId}/comments/{id}", postId, commentId))
+                        .andExpect(status().isOk());
+
     }
+
+    @Test
+    @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
+    void getCommentByIdWithValidCommentAndEmptyPostWithStatusCode404NotFound() throws Exception {
+        Long postId = null;
+        Long commentId = 1L;
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(commentId);
+        commentDto.setBody("Comment");
+
+        Mockito.when(commentService.getCommentById(postId, commentId)).thenReturn(commentDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{postId}/comments/{id}", postId, commentId))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
+    @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
+    void getCommentByIdWithAnInvalidCommentIdWithStatusCode404NotFound() throws Exception {
+        Long postId = 1L;
+        Long commentId = null;
+
+        Mockito.when(commentService.getCommentById(postId, commentId)).thenThrow(ResourceNotFoundException.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{postId}/comments/{id}", postId, commentId))
+                .andExpect(status().isNotFound());
+    }
+
 
     @Test
     @WithMockUser(username = "username",  roles = {"USER","ADMIN"})

@@ -109,13 +109,6 @@ class CategoryControllerTest {
 
     }
 
-    @Test
-    void getCategories_404() throws Exception {
-
-        mockMvc.perform(get("/api/v1/categorie").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-
-    }
 
     @Test
     @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
@@ -153,6 +146,20 @@ class CategoryControllerTest {
                         .content(objectMapper.writeValueAsString(dtoUpdated)))
                 .andExpect(status().isUnauthorized());
 
+
+    }
+
+    @Test
+    @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
+    void updateCategory_404() throws Exception {
+        ResourceNotFoundException exceptionThrowed = new ResourceNotFoundException("Category", "id", 1);
+
+        when(service.updateCategory(any(CategoryDto.class),anyLong())).thenThrow(exceptionThrowed);
+
+        mockMvc.perform(get("/api/posts/category/1")
+                        .contentType("application/json"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value(exceptionThrowed.getMessage()));
 
     }
 

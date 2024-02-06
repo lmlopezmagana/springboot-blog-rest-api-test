@@ -65,10 +65,7 @@ class AuthServiceImplTest {
         assertEquals(token, newToken);
     }
 
-    @Test
-    void whenIncorrectCredentialsThenThrowException(){
 
-    }
 
     //Sebastián Millán
     @Test

@@ -4,6 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.exception.BlogAPIException;
 import com.springboot.blog.payload.RegisterDto;
 import com.springboot.blog.service.AuthService;
+import com.github.dockerjava.api.exception.InternalServerErrorException;
+import com.springboot.blog.payload.LoginDto;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
@@ -14,15 +18,16 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@AutoConfigureMockMvc
+
 @SpringBootTest
+@AutoConfigureMockMvc
 class AuthControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -36,8 +41,48 @@ class AuthControllerTest {
     @InjectMocks
     AuthController authController;
 
+    private LoginDto loginDto;
+    @BeforeEach
+    void setUp(){
+        loginDto = new LoginDto("username", "password");
+    }
+    @Test
+    void whenLoginIsValid_thenReturnHttp200() throws Exception {
 
-    void login() {
+        String token = "token";
+
+        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn(token);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
+                        .content(objectMapper.writeValueAsString(loginDto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accessToken").value("token"));
+    }
+    @Test
+    void whenLoginIsNull_thenReturnHttp400()  throws Exception{
+        String token = "token";
+
+        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn(token);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
+                        .content(objectMapper.writeValueAsString(null))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+
+    }
+    //editar este método
+    @Test
+    void whenUserNotFound_thenReturnHttp500() throws Exception {
+        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenThrow(InternalServerErrorException.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
+                        .content(objectMapper.writeValueAsString(loginDto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
     }
 
     //Marco Pertegal

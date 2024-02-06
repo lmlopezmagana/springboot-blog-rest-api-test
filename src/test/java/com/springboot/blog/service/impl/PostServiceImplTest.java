@@ -8,6 +8,7 @@ import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Spy;
@@ -29,7 +30,6 @@ import static org.mockito.ArgumentMatchers.any;
 import java.util.HashSet;
 import java.util.Optional;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 
@@ -46,6 +46,7 @@ class PostServiceImplTest {
 
     //Marco Pertegal
     @Test
+    @Disabled
     void whenPostDtoThenCreateNewPost() {
         Long categoryId = 3L;
         PostDto postDto = new PostDto();

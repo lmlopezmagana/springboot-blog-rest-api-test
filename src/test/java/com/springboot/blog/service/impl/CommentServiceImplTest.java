@@ -8,6 +8,8 @@ import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -60,8 +62,7 @@ class CommentServiceImplTest {
 
         Mockito.when(postRepository.findById(commentDto.getId())).thenReturn(Optional.of(post));
         Mockito.when(modelMapper.map(commentDto, Comment.class)).thenReturn(comment);
-        Mockito.when(commentRepository.save(any(Comment.class))).thenReturn(comment);
-
+        Mockito.when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(comment);
 
         CommentDto createdCommentDto = commentService.createComment(post.getId(), commentDto);
 
@@ -72,6 +73,7 @@ class CommentServiceImplTest {
         assertEquals(comment.getBody(), createdCommentDto.getBody());
 
     }
+
     @Test
     void getCommentsByPostId() {
     }

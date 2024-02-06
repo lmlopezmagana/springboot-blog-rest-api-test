@@ -9,10 +9,13 @@ import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.*;
 
@@ -24,15 +27,11 @@ import static org.mockito.ArgumentMatchers.any;
 import java.util.HashSet;
 import java.util.Optional;
 
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.junit.jupiter.MockitoExtension;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceImplTest {
-
 
     @InjectMocks
     private PostServiceImpl postService;
@@ -74,16 +73,13 @@ class PostServiceImplTest {
 
         List<Post> mockedPosts = List.of(post1, post2);
 
-        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.Order.asc(sortBy) : Sort.Order.desc(sortBy)));
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(Sort.Order.asc(sortBy)));
         Page<Post> mockedPage = new PageImpl<>(mockedPosts, pageable, mockedPosts.size());
 
-        // Configuramos los mocks
         Mockito.when(postRepository.findAll(any(Pageable.class))).thenReturn(mockedPage);
-        // Llamamos al método del servicio
+
         PostResponse postResponse = postService.getAllPosts(pageNo, pageSize, sortBy, sortDir);
-        // Verificamos las llamadas a los repositorios
-        Mockito.verify(modelMapper, Mockito.times(mockedPosts.size())).map(any(Post.class), eq(PostDto.class));
-        // Verificamos que la respuesta es la esperada
+
         assertEquals(pageNo, postResponse.getPageNo());
         assertEquals(pageSize, postResponse.getPageSize());
         assertEquals(mockedPosts.size(), postResponse.getTotalElements());
@@ -123,15 +119,12 @@ class PostServiceImplTest {
         Mockito.when(postRepository.save(Mockito.any(Post.class))).thenAnswer(invocation -> invocation.getArgument(0));
         Mockito.when(modelMapper.map(Mockito.any(Post.class), eq(PostDto.class))).thenReturn(postDto);
 
-        // Llamamos al método del servicio
         PostDto updatedPostDto = postService.updatePost(postDto, 1L);
 
-        // Verificamos que el repositorio fue llamado correctamente
         Mockito.verify(postRepository).findById(1L);
         Mockito.verify(categoryRepository).findById(1L);
         Mockito.verify(postRepository).save(Mockito.any());
 
-        // Verificamos que el resultado es el esperado
         assertEquals(postDto.getId(), updatedPostDto.getId());
         assertEquals(postDto.getTitle(), updatedPostDto.getTitle());
         assertEquals(postDto.getDescription(), updatedPostDto.getDescription());

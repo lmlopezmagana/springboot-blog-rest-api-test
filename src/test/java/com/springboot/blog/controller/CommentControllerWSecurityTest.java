@@ -3,6 +3,7 @@ package com.springboot.blog.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.entity.Post;
+import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.impl.CommentServiceImpl;
@@ -110,7 +111,7 @@ class CommentControllerWSecurityTest {
 
     @Test
     @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
-    void updateComment() throws Exception {
+    void updateComment_Succesful() throws Exception {
         Long postId = 1L;
         long commentId = 1L;
         CommentDto updatedComment = new CommentDto();
@@ -127,6 +128,26 @@ class CommentControllerWSecurityTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", is(updatedComment.getName())));
     }
+
+    @Test
+    @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
+    void updateComment_PostIdOrCommentIdNotFound() throws Exception {
+        Long postId = 1L;
+        long commentId = 1L;
+        CommentDto updatedComment = new CommentDto();
+        updatedComment.setId(commentId);
+        updatedComment.setName("Comentario 1");
+        updatedComment.setEmail("alex@gmail.com");
+        updatedComment.setBody("Un comentario guapo");
+
+        Mockito.when(commentService.updateComment(postId, commentId, updatedComment)).thenThrow(ResourceNotFoundException.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updatedComment)))
+                .andExpect(status().isNotFound());
+    }
+
 
 
 }

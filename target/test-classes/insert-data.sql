@@ -49,8 +49,8 @@ insert into comments (id, body, email, name, post_id) values (28, 'In hac habita
 insert into comments (id, body, email, name, post_id) values (29, 'Suspendisse potenti.', 'mallsobrook5@pbs.org', 'Intéressant', 10);
 insert into comments (id, body, email, name, post_id) values (30, 'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.', 'mallsobrook5@pbs.org', 'Audréanne', 10);
 
-insert into roles (id,name) values (1,'USER');
-insert into roles (id,name) values (2,'ADMIN');
+insert into roles (id,name) values (1,'ROLE_USER');
+insert into roles (id,name) values (2,'ROLE_ADMIN');
 
 insert into users (id, email, name, password, username) values (1, 'tpetteford0@linkedin.com', 'Tomi', '$2a$12$V2STGXRVuoOEqKtAtKZJ3ePwcVAb/GZ7y4NTKhrlZ1MJy6AWiLyXe', 'tvenneur0'); --uN1~{O)+''}
 insert into users (id, email, name, password, username) values (2, 'sdebeneditti1@icq.com', 'Silva', '$2a$12$Jzkwh1vpWmnA905RHLbGJ.TY8TB8sCYn75XDNKStUkJKeZPSlosSS', 'sbrane1'); --aH5_V1Oar1
@@ -58,6 +58,10 @@ insert into users (id, email, name, password, username) values (3, 'jdelisle2@my
 insert into users (id, email, name, password, username) values (4, 'aspellecy3@google.nl', 'Aileen', '$2a$12$n6MCi4VWqdJ9uSRo/2FfMON1oPjvVGD2hkmOdp/WIO8czw2PUwS/W', 'amindenhall3');--bZ0sf6&d
 insert into users (id, email, name, password, username) values (5, 'amatushevich4@nifty.com', 'Arne', '$2a$12$WsKcjmxqEjaH2c6lSLaL5.zmFvy6jx63Btm1NYAcXbb5bsBnrgLji', 'ahuet4'); --zE5#8$x7"mk>
 insert into users (id, email, name, password, username) values (6, 'mallsobrook5@pbs.org', 'Marchall', '$2a$12$kfYReQVCRSH8CUP8UFX.Qeh.p56KJBqxwamOZf.Evji066665ltPq', 'mantonnikov5'); --vM1+)1e_2=
+insert into users (id, email, name, password, username) values (7, 'robertorebolledo151@gmail.com', 'Roberto', '$2a$12$owdta.5AgpfxHOR02hpNZuikw2dwypcoKCZFVjqRcpfjpLerAn4nm', 'krobert151'); --tiburonMolon123
+insert into users (id, email, name, password, username) values (8, 'robertorebolledo152@gmail.com', 'Roberto2', '$2a$12$owdta.5AgpfxHOR02hpNZuikw2dwypcoKCZFVjqRcpfjpLerAn4nm', 'krobert152');
+
+
 
 insert into users_roles (role_id, user_id) values (1,1);
 insert into users_roles (role_id, user_id) values (1,2);
@@ -65,3 +69,5 @@ insert into users_roles (role_id, user_id) values (1,3);
 insert into users_roles (role_id, user_id) values (1,4);
 insert into users_roles (role_id, user_id) values (2,5);
 insert into users_roles (role_id, user_id) values (2,6);
+insert into users_roles (role_id, user_id) values (2,7);
+insert into users_roles (role_id, user_id) values (1,8);

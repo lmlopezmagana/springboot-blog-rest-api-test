@@ -1,6 +1,5 @@
 package com.springboot.blog.controller;
 
-<<<<<<< HEAD
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.entity.Post;
@@ -10,13 +9,7 @@ import com.springboot.blog.service.CommentService;
 import com.springboot.blog.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-=======
-import com.springboot.blog.payload.CommentDto;
-import com.springboot.blog.service.CommentService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,48 +17,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-<<<<<<< HEAD
-
-import java.util.Set;
-
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-@SpringBootTest
-@AutoConfigureMockMvc
-class CommentControllerTest {
-    @Autowired
-    MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private CommentService commentService;
-
-    private Post post;
-    private Comment comment;
-    private CommentDto commentDto;
-
-
-    @BeforeEach
-    public void setUp(){
-        commentDto = new CommentDto();
-        commentDto.setId(1L);
-        commentDto.setName("nombre");
-        commentDto.setEmail("email@gmail.com");
-        commentDto.setBody("cuerpo del comentario");
-        when(commentService.getCommentById(1L, 1L)).thenReturn(commentDto);
-    }
-=======
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @AutoConfigureMockMvc
@@ -91,8 +49,7 @@ class CommentControllerTest {
         commentDto.setBody("Me ha encantado la reseña");
         commentDto.setEmail("sebas@gmail.com");
         commentDto.setName("Sebastián");
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
-
+        when(commentService.getCommentById(1L, 1L)).thenReturn(commentDto);
     }
 
     //Sebastián Millán
@@ -103,7 +60,7 @@ class CommentControllerTest {
                         content(objectMapper.writeValueAsString(commentDto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isCreated());
+                .andExpect(status().isCreated());
         verify(commentService, times(1)).createComment(postId, commentDto);
 
     }
@@ -140,7 +97,7 @@ class CommentControllerTest {
     //Sebastián Millán
     @Test
     void whenPostIdExistsAndAuth_thenReturnHttp200() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{postId}/comments",postId)
+        mockMvc.perform(get("/api/v1/posts/{postId}/comments",postId)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         verify(commentService, times(1)).getCommentsByPostId(postId);
@@ -148,7 +105,7 @@ class CommentControllerTest {
     //Sebastián Millán
     @Test
     void whenPostIdIsWrongAndAuth_thenReturnHttp401() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{postId}/comments","a")
+        mockMvc.perform(get("/api/v1/posts/{postId}/comments","a")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
         verify(commentService, never()).getCommentsByPostId(postId);

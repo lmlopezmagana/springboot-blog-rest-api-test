@@ -1,17 +1,14 @@
 package com.springboot.blog.controller;
 
-<<<<<<< HEAD
-import com.springboot.blog.payload.CategoryDto;
-import com.springboot.blog.repository.CategoryRepository;
-=======
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.payload.CategoryDto;
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
+import com.springboot.blog.payload.CategoryDto;
+import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.service.CategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-<<<<<<< HEAD
+
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
@@ -30,22 +28,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-=======
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@AutoConfigureMockMvc
-@SpringBootTest
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
 class CategoryControllerTest {
 
     @Autowired
@@ -55,33 +37,18 @@ class CategoryControllerTest {
     @MockBean
     private CategoryService categoryService;
     @InjectMocks
-<<<<<<< HEAD
     private CategoryController categoryController;
     @Mock
     private CategoryRepository repository;
 
     private CategoryDto categoryDto;
     private CategoryDto categoryDto2;
-=======
-    private CategoryController commentController;
-
-    private CategoryDto categoryDto;
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
 
     @BeforeEach
     public void setUp(){
         categoryDto= new CategoryDto(1L,"Análisis","Análisis profundo de la politica nacional");
-<<<<<<< HEAD
         categoryDto2 = new CategoryDto(2L,"categoria2","descripcion");
         when(categoryService.getCategory(categoryDto2.getId())).thenReturn(categoryDto2);
-    }
-
-    @Test
-    void addCategory() {
-    }
-
-    //Alejandro Rubens
-=======
     }
 
     //Sebastián Millán
@@ -132,8 +99,6 @@ class CategoryControllerTest {
 
     }
 
-
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
     @Test
     void getCategory_expectedResponse200() throws Exception {
         mockMvc.perform(get("/api/v1/categories/{id}",categoryDto2.getId())

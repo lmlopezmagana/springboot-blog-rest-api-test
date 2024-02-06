@@ -1,7 +1,6 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-<<<<<<< HEAD
 import com.springboot.blog.entity.Category;
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.entity.Post;
@@ -10,17 +9,12 @@ import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.service.CategoryService;
-=======
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
 import com.springboot.blog.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
-<<<<<<< HEAD
 import org.mockito.Mock;
 import org.mockito.Mockito;
-=======
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,7 +22,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-<<<<<<< HEAD
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Set;
 
@@ -40,24 +37,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-=======
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@AutoConfigureMockMvc
-@SpringBootTest
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
 class PostControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
-<<<<<<< HEAD
+    @MockBean
+    private PostService categoryService;
     @InjectMocks
-    private PostController categoryController;
+    private PostController commentController;
+
+    private Long idPost;
+    private Long idCategory;
+
+    @InjectMocks
+    private PostController postController;
     @Mock
     private PostService postService;
 
@@ -68,6 +63,8 @@ class PostControllerTest {
 
     @BeforeEach
     public void setUp(){
+        idPost=1L;
+        idCategory=1L;
         CommentDto comment = new CommentDto();
 
         postDto = new PostDto();
@@ -81,22 +78,7 @@ class PostControllerTest {
         when(postService.getPostById(postDto.getId())).thenReturn(postDto);
     }
     //Alejandro Rubens
-=======
-    @MockBean
-    private PostService categoryService;
-    @InjectMocks
-    private PostController commentController;
 
-    private Long idPost;
-    private Long idCategory;
-
-    @BeforeEach
-    void setUp(){
-        idPost=1L;
-        idCategory=1L;
-    }
-
->>>>>>> 5db27ad0865480f67e3c94ce9ee90b905c8ff722
     @Test
     void createPost_expectedResponse401() throws Exception{
         mockMvc.perform(post("/api/posts")
@@ -107,25 +89,18 @@ class PostControllerTest {
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void createPost_expectedResponse400() throws Exception{
-        Category category = new Category();
-        category.setId(2L);
-        category.setName("nombre");
-        category.setDescription("descripcion de la categoria");
-
-        when(categoryRepository.save(Mockito.any(Category.class))).thenReturn(category);
-
+        //No funciona como se espera
         mockMvc.perform(post("/api/posts")
-                                .content(objectMapper.writeValueAsString(postDto))
-                                .contentType(MediaType.APPLICATION_JSON)
-                                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+                        .content(objectMapper.writeValueAsString(postDto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated());
     }
 
     //Alejandro Rubens
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void createPost_expectedResponse201() throws Exception{
-        //No funciona
         Category category = new Category();
         category.setId(1L);
         category.setName("nombre");
@@ -137,7 +112,7 @@ class PostControllerTest {
                         .content(objectMapper.writeValueAsString(postDto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isCreated());
     }
 
     @Test

@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerIntegration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerIntegration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/insert-data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/insert-data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,23 +50,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "integracin-getallcategories",
-    "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;integracin-getallcategories&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexl/Desktop/springboot-blog-rest-api-test&quot;
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
       <command value="mvn compile" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CategoryControllerIntegration">
-    <configuration name="AuthControllerIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.CategoryControllerIntegration.updateCategory_thenReturnNotFound">
+    <configuration name="CategoryControllerIntegration.updateCategory_200" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -75,29 +75,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerIntegrationTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AuthControllerIntegrationTest.authRegister_thenReturnCreated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerIntegrationTest" />
-      <option name="METHOD_NAME" value="authRegister_thenReturnCreated" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerIntegration" />
+      <option name="METHOD_NAME" value="updateCategory_200" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CategoryControllerIntegration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CategoryControllerIntegration.updateCategory_thenReturnNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -107,28 +92,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerIntegration" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CategoryControllerIntegration.findCategoryById_thenNotFound" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerIntegration" />
-      <option name="METHOD_NAME" value="findCategoryById_thenNotFound" />
+      <option name="METHOD_NAME" value="updateCategory_thenReturnNotFound" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CategoryControllerIntegration.findCategoryById_thenReturnOk" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CategoryControllerIntegration.updateCategory_thenReturnUnaut" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -138,7 +108,39 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerIntegration" />
-      <option name="METHOD_NAME" value="findCategoryById_thenReturnOk" />
+      <option name="METHOD_NAME" value="updateCategory_thenReturnUnaut" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategoryControllerIntegration.updateCategory_thenReturnUnauthorized" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerIntegration" />
+      <option name="METHOD_NAME" value="updateCategory_thenReturnUnauthorized" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CategoryControllerIntegration.updateCategory_thenReturnUnauthorized2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerIntegration" />
+      <option name="METHOD_NAME" value="updateCategory_thenReturnUnauthorized2" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -146,11 +148,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CategoryControllerIntegration" />
-        <item itemvalue="JUnit.CategoryControllerIntegration.findCategoryById_thenNotFound" />
-        <item itemvalue="JUnit.CategoryControllerIntegration.findCategoryById_thenReturnOk" />
-        <item itemvalue="JUnit.AuthControllerIntegrationTest.authRegister_thenReturnCreated" />
-        <item itemvalue="JUnit.AuthControllerIntegrationTest" />
+        <item itemvalue="JUnit.CategoryControllerIntegration.updateCategory_thenReturnNotFound" />
+        <item itemvalue="JUnit.CategoryControllerIntegration.updateCategory_thenReturnUnauthorized2" />
+        <item itemvalue="JUnit.CategoryControllerIntegration.updateCategory_thenReturnUnauthorized" />
+        <item itemvalue="JUnit.CategoryControllerIntegration.updateCategory_thenReturnUnaut" />
+        <item itemvalue="JUnit.CategoryControllerIntegration.updateCategory_200" />
       </list>
     </recent_temporary>
   </component>
@@ -211,6 +213,11 @@
           <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>
           <line>96</line>
           <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/springboot/blog/security/CustomUserDetailsService.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

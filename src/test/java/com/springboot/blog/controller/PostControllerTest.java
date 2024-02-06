@@ -62,8 +62,8 @@ class PostControllerTest {
     void whenPostsFoundThenReturnHttp200() throws Exception{
         int pageNo = 0;
         int pageSize = 10;
-        String sortBy = "title";
-        String sortDir = "ASC";
+        String sortBy = "sortBy";
+        String sortDir = "sortDir";
         PostDto postDto1 = new PostDto();
         postDto1.setId(2l);
         postDto1.setTitle("Title1");
@@ -80,7 +80,7 @@ class PostControllerTest {
     }
     //Marco Pertegal
     @Test
-    void whenPostFoundThenReturnHttp200() throws Exception{
+    void whenPostIdFoundThenReturnHttp200() throws Exception{
         Mockito.when(postService.getPostById(idPost)).thenReturn(postDto);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/{id}", idPost)

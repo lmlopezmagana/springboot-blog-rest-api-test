@@ -6,6 +6,7 @@ import com.springboot.blog.service.CategoryService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -95,8 +98,20 @@ class CategoryControllerTest {
         verify(categoryService, times(1)).getCategory(categoryDto.getId());
     }
 
+    //Marco Pertegal
     @Test
-    void getCategories() {
+    void whenCategoriesFoundThenReturnHttp200() throws Exception{
+        CategoryDto categoryDto1 = new CategoryDto();
+        categoryDto1.setId(1l);
+        categoryDto1.setName("Category");
+        categoryDto1.setDescription("Description");
+        List<CategoryDto> categoryDtoList = List.of(categoryDto, categoryDto1);
+
+        Mockito.when(categoryService.getAllCategories()).thenReturn(categoryDtoList);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/categories")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 
     @Test

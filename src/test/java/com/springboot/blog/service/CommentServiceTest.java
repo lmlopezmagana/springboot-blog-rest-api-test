@@ -8,6 +8,7 @@ import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.impl.CommentServiceImpl;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -15,6 +16,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import static org.mockito.ArgumentMatchers.any;
 import org.modelmapper.ModelMapper;
 
 import java.util.Optional;
@@ -25,16 +27,28 @@ import static org.junit.jupiter.api.Assertions.*;
 class CommentServiceTest {
 
     @Mock
-    private PostRepository postRepository;
-
+    static CommentRepository commentRepository;
     @Mock
-    private CommentRepository commentRepository;
-
-    @Mock
-    private ModelMapper modelMapper;
+    static PostRepository postRepository;
+    static ModelMapper modelMapper = new ModelMapper();
+    static Post p = Mockito.mock(Post.class);
+    static Comment comment = new Comment();
+    static CommentDto c = new CommentDto();
 
     @InjectMocks
-    private CommentServiceImpl commentService;
+    static CommentService commentService = new CommentServiceImpl(commentRepository, postRepository, modelMapper);
+
+    @BeforeAll
+    static void init() {
+        c.setId(2L);
+        c.setName("Comment name");
+        c.setBody("Comment body");
+        c.setEmail("email@email.com");
+
+        comment = modelMapper.map(c, Comment.class);
+
+        comment.setPost(p);
+    }
 
     @Test
     void createComment() {
@@ -52,11 +66,13 @@ class CommentServiceTest {
         commentDto.setBody("Lorem ipsum dolor sit amet");
 
         Mockito.when(postRepository.findById(postId)).thenReturn(Optional.of(post));
-        Mockito.when(commentRepository.findById(commentId)).thenReturn(Optional.of(comment));
-        Mockito.when(commentRepository.save(Mockito.any())).thenAnswer(invocation -> invocation.getArgument(0));
         Mockito.when(modelMapper.map(commentDto, Comment.class)).thenReturn(comment);
+        Mockito.when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(comment);
 
-        CommentDto result = commentService.createComment(postId, commentDto);
+        CommentDto result = commentService.createComment(post.getId(), commentDto);
+
+        Mockito.verify(postRepository).findById(commentDto.getId());
+        Mockito.verify(commentRepository).save(any(Comment.class));
 
         assertEquals(commentDto.getName(), result.getName());
         assertEquals(commentDto.getEmail(), result.getEmail());
@@ -87,6 +103,7 @@ class CommentServiceTest {
     void updateComment_CommentNotFound(){
         Post post = new Post();
         post.setId(1L);
+        System.out.println(post);
         long commentId = 2L;
         CommentDto commentRequest = new CommentDto();
 
@@ -133,7 +150,7 @@ class CommentServiceTest {
         Mockito.when(modelMapper.map(Mockito.any(), Mockito.eq(CommentDto.class))).thenReturn(commentRequest);
 
         CommentDto updatedComment = commentService.updateComment(postId, commentId, commentRequest);
-
+        System.out.println(updatedComment);
         assertEquals(commentRequest.getName(), updatedComment.getName());
         assertEquals(commentRequest.getEmail(), updatedComment.getEmail());
         assertEquals(commentRequest.getBody(), updatedComment.getBody());

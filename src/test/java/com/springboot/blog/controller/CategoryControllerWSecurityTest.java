@@ -14,7 +14,9 @@ import org.junit.platform.engine.TestExecutionResult;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -24,6 +26,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import static org.mockito.Mockito.never;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -61,8 +64,6 @@ public class CategoryControllerWSecurityTest {
 
         CategoryDto categoryDto = new CategoryDto(categoryId, name, description);
 
-        Mockito.when(categoryService.addCategory(categoryDto)).thenReturn(categoryDto);
-
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/categories", categoryDto)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(categoryDto)))
@@ -71,7 +72,7 @@ public class CategoryControllerWSecurityTest {
     }
 
     @Test
-    @WithMockCustomUser(role = "USER")
+    @WithMockUser(authorities = {"USER"})
     void addCategoryWithResponse401Unauthorized() throws Exception{
         Long categoryId = 1L;
         String name = "Category 1";
@@ -79,26 +80,26 @@ public class CategoryControllerWSecurityTest {
 
         CategoryDto categoryDto = new CategoryDto(categoryId, name, description);
 
-        Mockito.when(categoryService.addCategory(categoryDto)).thenReturn(categoryDto);
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/categories/add", categoryDto)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(categoryDto)))
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/categories", categoryDto)
+                .content(objectMapper.writeValueAsString(categoryDto))
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnauthorized());
+        Mockito.verify(categoryService, never()).addCategory(categoryDto);
     }
 
     @Test
     @WithMockUser(username = "username", roles = "{ADMIN}")
-    void addCategoryWithNullContent() throws Exception{
+    void addCategoryWithResponse400BadRequest() throws Exception{
 
         CategoryDto categoryDto = new CategoryDto();
 
         Mockito.when(categoryService.addCategory(categoryDto)).thenReturn(categoryDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/categories", categoryDto)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(categoryDto)))
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/categories")
+                        .content(objectMapper.writeValueAsString(null))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+            Mockito.verify(categoryService, never()).addCategory(categoryDto);
 
     }
 

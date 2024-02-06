@@ -31,7 +31,7 @@ import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class PostServiceImplTest {
+class   PostServiceImplTest {
 
     @Mock
     PostRepository postRepository;

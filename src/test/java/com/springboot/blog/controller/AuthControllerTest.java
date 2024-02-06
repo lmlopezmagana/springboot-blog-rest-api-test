@@ -1,6 +1,7 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.dockerjava.api.exception.NotFoundException;
 import com.springboot.blog.payload.LoginDto;
 import com.springboot.blog.service.AuthService;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,11 +36,9 @@ class AuthControllerTest {
     @InjectMocks
     private AuthController authController;
     private LoginDto loginDto;
-    private LoginDto loginDtoEmpty;
     @BeforeEach
     void setUp(){
         loginDto = new LoginDto("username", "password");
-        loginDtoEmpty = new LoginDto("","");
     }
     @Test
     void whenLoginIsValid_thenReturnHttp200() throws Exception {
@@ -68,6 +67,17 @@ class AuthControllerTest {
                 .andExpect(status().isBadRequest());
 
     }
+    @Test
+    void whenUserNotFound_thenReturnHttp500() throws Exception {
+        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn(null);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
+                        .content(objectMapper.writeValueAsString(loginDto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
 
 
     @Test

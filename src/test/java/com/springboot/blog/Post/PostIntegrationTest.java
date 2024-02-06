@@ -1,7 +1,9 @@
 package com.springboot.blog.Post;
 
+import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.payload.PostResponse;
+import com.springboot.blog.repository.UserRepository;
 import com.springboot.blog.security.JwtTokenProvider;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,10 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,6 +31,7 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,14 +58,31 @@ public class PostIntegrationTest {
     int port;
 
     String userToken;
+    PostDto postDto = new PostDto();
     @BeforeEach
     void setUp(){
         testRestTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory());
 
         Collection<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        Authentication auth = new UsernamePasswordAuthenticationToken("lacabra_7","lacabra",authorities);
+        Authentication auth = new UsernamePasswordAuthenticationToken("lacabra_7","lacabra", authorities);
         userToken = jwtProvider.generateToken(auth);
 
+        postDto.setTitle("title");
+        postDto.setDescription("description");
+        postDto.setContent("contenidos guapos");
+        postDto.setComments(Set.of());
+        postDto.setCategoryId(1L);
+        postDto.setId(1);
+    }
+
+    @Test
+    void whenCreatePost_then201(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(userToken);
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(postDto, headers);
+        ResponseEntity<PostDto> response = testRestTemplate.exchange("/api/posts", HttpMethod.POST, requestBodyHeaders, PostDto.class, 300);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
     @Test

@@ -1,6 +1,7 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.dockerjava.api.exception.InternalServerErrorException;
 import com.github.dockerjava.api.exception.NotFoundException;
 import com.springboot.blog.payload.LoginDto;
 import com.springboot.blog.service.AuthService;
@@ -67,9 +68,10 @@ class AuthControllerTest {
                 .andExpect(status().isBadRequest());
 
     }
+    //editar este método
     @Test
     void whenUserNotFound_thenReturnHttp500() throws Exception {
-        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenReturn(null);
+        Mockito.when(authService.login(Mockito.any(LoginDto.class))).thenThrow(InternalServerErrorException.class);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/auth/login")
                         .content(objectMapper.writeValueAsString(loginDto))
@@ -77,7 +79,6 @@ class AuthControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isInternalServerError());
     }
-
 
 
     @Test

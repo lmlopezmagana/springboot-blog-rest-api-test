@@ -87,11 +87,10 @@ class PostServiceImplTest {
         postDto.setComments(new HashSet<>());
         postDto.setCategoryId(categoryId);
 
-        Mockito.when(categoryRepository.findById(postDto.getCategoryId())).thenReturn(Optional.empty());
-
         Exception exception = assertThrows(ResourceNotFoundException.class,()->{
             postService.createPost(postDto);
         });
+
         assertEquals("Category not found with id : '"+ categoryId+"'", exception.getMessage());
     }
 

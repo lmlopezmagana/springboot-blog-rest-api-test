@@ -16,9 +16,11 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -63,6 +65,20 @@ class AuthServiceImplTest {
 
         String newToken = authService.login(loginDto);
         assertEquals(token, newToken);
+    }
+
+    //Marco Pertegal
+    @Test
+    void whenInvalidCredentialsThenThrowsAuthenticationException(){
+        LoginDto loginDto = new LoginDto("marco@gmail.eu", "$2a$04$/Qpy.M7Xg3ksrC6MvKYHeOMbTkBEBmXYdOaERRVGLgm/0mIL1CP1.");
+
+        Mockito.when(authenticationManager.authenticate(Mockito.any())).thenThrow(new AuthenticationCredentialsNotFoundException("Credentials not found"));
+
+        Exception exception = assertThrows(AuthenticationCredentialsNotFoundException.class,()->{
+            authService.login(loginDto);
+        });
+
+        assertEquals("Credentials not found", exception.getMessage());
     }
 
 

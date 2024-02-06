@@ -76,8 +76,6 @@ public class AuthControllerIntegrationTest {
     @Test
     public void authRegister_thenReturnCreated(){
 
-        port = 8080;
-
         RegisterDto registerDto = new RegisterDto("Roberto","krobert151","robertorebolledo151@gmail.com","lagartoMolon34#");
         TestRestTemplate testRestTemplate = new TestRestTemplate();
         ResponseEntity<String> response = testRestTemplate.postForEntity("http://localhost:"+port+"/api/auth/register",registerDto, String.class);

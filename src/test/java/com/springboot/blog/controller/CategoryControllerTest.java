@@ -1,6 +1,5 @@
 package com.springboot.blog.controller;
 
-import com.springboot.blog.entity.Category;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.service.CategoryService;
@@ -13,11 +12,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import java.util.Optional;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.Mockito.*;
@@ -86,8 +83,24 @@ class CategoryControllerTest {
     void getCategories() {
     }
 
+    //Alejandro Rubens
     @Test
-    void updateCategory() {
+    @WithMockUser(roles = {"ADMIN"})
+    void updateCategory_expectedResponse200() throws Exception {
+        mockMvc.perform(get("/api/v1/categories/{id}", 1L)
+                        .content(objectMapper.writeValueAsString(categoryDto2))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+    //Alejandro Rubens
+    @Test
+    void updateCategory_expectedResponse400() throws Exception {
+        mockMvc.perform(get("/api/v1/categories/{id}", "s")
+                        .content(objectMapper.writeValueAsString(categoryDto2))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     @Test

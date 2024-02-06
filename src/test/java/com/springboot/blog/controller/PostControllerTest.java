@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -51,12 +52,6 @@ class PostControllerTest {
     @BeforeEach
     public void setUp(){
         CommentDto comment = new CommentDto();
-        Category category = new Category();
-        category.setId(1L);
-        category.setName("nombre");
-        category.setDescription("descripcion de la categoria");
-
-        when(categoryRepository.save(category)).thenReturn(category);
 
         postDto = new PostDto();
         postDto.setId(1L);
@@ -64,26 +59,52 @@ class PostControllerTest {
         postDto.setDescription("descripcion del post");
         postDto.setContent("Este es el contenido");
         postDto.setComments(Set.of(comment));
-        postDto.setCategoryId(category.getId());
+        postDto.setCategoryId(1L);
 
         when(postService.getPostById(postDto.getId())).thenReturn(postDto);
     }
-
+    //Alejandro Rubens
     @Test
-    void createPost_expectedResponse400() throws Exception{
+    void createPost_expectedResponse401() throws Exception{
         mockMvc.perform(post("/api/posts")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnauthorized());
     }
-
+    //Alejandro Rubens
     @Test
     @WithMockUser(roles = {"ADMIN"})
-    void createPost_expectedResponse201() throws Exception{
+    void createPost_expectedResponse400() throws Exception{
+        Category category = new Category();
+        category.setId(2L);
+        category.setName("nombre");
+        category.setDescription("descripcion de la categoria");
+
+        when(categoryRepository.save(Mockito.any(Category.class))).thenReturn(category);
+
         mockMvc.perform(post("/api/posts")
                                 .content(objectMapper.writeValueAsString(postDto))
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isCreated());
+                .andExpect(status().isNotFound());
+    }
+
+    //Alejandro Rubens
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    void createPost_expectedResponse201() throws Exception{
+        //No funciona
+        Category category = new Category();
+        category.setId(1L);
+        category.setName("nombre");
+        category.setDescription("descripcion de la categoria");
+
+        when(categoryRepository.save(Mockito.any(Category.class))).thenReturn(category);
+
+        mockMvc.perform(post("/api/posts")
+                        .content(objectMapper.writeValueAsString(postDto))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
     @Test

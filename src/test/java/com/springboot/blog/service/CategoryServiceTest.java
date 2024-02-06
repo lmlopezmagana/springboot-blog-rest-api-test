@@ -37,7 +37,7 @@ class CategoryServiceTest {
 
 
     @Test
-    void addCategory() {
+    void addCategoryWithAllOk() {
 
         var id = 7L;
         var name = "testName";

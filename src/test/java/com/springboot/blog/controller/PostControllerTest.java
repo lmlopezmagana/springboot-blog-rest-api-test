@@ -3,6 +3,7 @@ package com.springboot.blog.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.PostDto;
+import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.*;
@@ -54,12 +57,30 @@ class PostControllerTest {
     void createPost() {
     }
 
+    //Marco Pertegal
     @Test
-    void getAllPosts() {
-    }
+    void whenPostsFoundThenReturnHttp200() throws Exception{
+        int pageNo = 0;
+        int pageSize = 10;
+        String sortBy = "title";
+        String sortDir = "ASC";
+        PostDto postDto1 = new PostDto();
+        postDto1.setId(2l);
+        postDto1.setTitle("Title1");
+        postDto1.setDescription("Description1");
+        postDto1.setContent("Content1");
+        List<PostDto> postDtoList = List.of(postDto, postDto1);
 
+        PostResponse postResponse = new PostResponse(postDtoList, 0 , 10, 2, 1, true);
+        Mockito.when(postService.getAllPosts(pageNo, pageSize, sortBy, sortDir)).thenReturn(postResponse);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/posts")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+    //Marco Pertegal
     @Test
-    void whenPostIdsPresentThenReturnHttp200() throws Exception{
+    void whenPostFoundThenReturnHttp200() throws Exception{
         Mockito.when(postService.getPostById(idPost)).thenReturn(postDto);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/{id}", idPost)
@@ -68,10 +89,9 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.title", is(postDto.getTitle())));
         Mockito.verify(postService, times(1)).getPostById(idPost);
     }
-
+    //Marco Pertegal
     @Test
     void whenPostIdNotFoundThenReturn404() throws Exception{
-
         Mockito.doThrow(new ResourceNotFoundException("Post", "id", idPost))
                 .when(postService).getPostById(idPost);
 

@@ -6,7 +6,6 @@ import com.springboot.blog.payload.JWTAuthResponse;
 import com.springboot.blog.payload.LoginDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
@@ -18,7 +17,9 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("integration-test")
@@ -49,6 +50,27 @@ public class AuthControllerIntegrationTest {
         //comprobar algo mas con json path o con objectMapper
     }
 
+    @Test
+    public void whenLoginWODto_thenReturn400() throws Exception {
+
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+        ResponseEntity<JWTAuthResponse> response = testRestTemplate.postForEntity("http://localhost:"+port+"/api/auth/login", null, JWTAuthResponse.class);
+        System.out.println("Response Body: " + objectMapper.writeValueAsString(response.getBody()));
+        assertEquals(400, response.getStatusCode().value());
+
+    }
+
+    @Test
+    public void whenLoginUnregisteredUser_thenReturn500() throws Exception {
+
+        LoginDto loginDto = new LoginDto("alex", "1234");
+        TestRestTemplate testRestTemplate = new TestRestTemplate();
+        ResponseEntity<JWTAuthResponse> response = testRestTemplate.postForEntity("http://localhost:"+port+"/api/auth/login", loginDto, JWTAuthResponse.class);
+        System.out.println("Response Body: " + objectMapper.writeValueAsString(response.getBody()));
+        assertEquals(500, response.getStatusCode().value());
+        assertNull(Objects.requireNonNull(response.getBody()).getAccessToken());
+
+    }
 
 
     @Test

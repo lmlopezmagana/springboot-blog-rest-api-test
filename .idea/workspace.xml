@@ -5,12 +5,51 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/PostControllerWOSecurityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/PostControllerWOSecurityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CategoryControllerTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CommentControllerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/SpringbootBlogRestApiApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/SpringbootBlogRestApiApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/config/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/config/SecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/CategoryController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/CategoryController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/CommentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/CommentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/PostController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/controller/PostController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Category.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Category.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Comment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Comment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Post.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/BlogAPIException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/BlogAPIException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/GlobalExceptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/GlobalExceptionHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/ResourceNotFoundException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/exception/ResourceNotFoundException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/CategoryDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/CategoryDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/CommentDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/CommentDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/ErrorDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/ErrorDetails.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/JWTAuthResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/JWTAuthResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/LoginDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/LoginDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/PostDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/PostDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/PostResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/PostResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/RegisterDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/payload/RegisterDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/CategoryRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/CategoryRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/CommentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/CommentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/PostRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/PostRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/RoleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/RoleRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/CustomUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/CustomUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtAuthenticationEntryPoint.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtAuthenticationEntryPoint.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtTokenProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/security/JwtTokenProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/AuthService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/CategoryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/CategoryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/CommentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/CommentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/PostService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/PostService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/AuthServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/AuthServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/CategoryServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/CategoryServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/CommentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/CommentServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/PostServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/service/impl/PostServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/utils/AppConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/utils/AppConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/springboot/blog/utils/PasswordGeneratorEncoder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/utils/PasswordGeneratorEncoder.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +90,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;getPostByCategory&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;integration-login&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/alexl/Desktop/springboot-blog-rest-api-test&quot;
   }
 }</component>
@@ -61,7 +100,7 @@
       <command value="mvn compile" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk">
+  <component name="RunManager" selected="JUnit.AuthControllerTest.login_internalServerError">
     <configuration name="SpringbootBlogRestApiApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.SpringbootBlogRestApiApplication" />
       <module name="springboot-blog-rest-api" />
@@ -75,7 +114,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthControllerIntegrationTest.authRegister_thenReturnCreated" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthControllerIntegrationTest.whenLoginWODto_thenReturn400" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -85,13 +124,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerIntegrationTest" />
-      <option name="METHOD_NAME" value="authRegister_thenReturnCreated" />
+      <option name="METHOD_NAME" value="whenLoginWODto_thenReturn400" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthControllerTest.login_badRequest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -100,39 +139,40 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerIntegrationTest" />
-      <option name="METHOD_NAME" value="whenLoginRegisteredUser_thenReturnOk" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerTest" />
+      <option name="METHOD_NAME" value="login_badRequest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WebServerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthControllerTest.login_internalServerError" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.*" />
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.WebServerTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerTest" />
+      <option name="METHOD_NAME" value="login_internalServerError" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WebServerTests.testServerPort" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AuthControllerTest.login_successful" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.springboot.blog.*" />
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.WebServerTests" />
-      <option name="METHOD_NAME" value="testServerPort" />
+      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.AuthControllerTest" />
+      <option name="METHOD_NAME" value="login_successful" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -140,11 +180,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk" />
-        <item itemvalue="JUnit.WebServerTests.testServerPort" />
-        <item itemvalue="JUnit.WebServerTests" />
-        <item itemvalue="JUnit.AuthControllerIntegrationTest.authRegister_thenReturnCreated" />
+        <item itemvalue="JUnit.AuthControllerTest.login_internalServerError" />
         <item itemvalue="Application.SpringbootBlogRestApiApplication" />
+        <item itemvalue="JUnit.AuthControllerIntegrationTest.whenLoginWODto_thenReturn400" />
+        <item itemvalue="JUnit.AuthControllerTest.login_badRequest" />
+        <item itemvalue="JUnit.AuthControllerTest.login_successful" />
       </list>
     </recent_temporary>
   </component>
@@ -171,6 +211,15 @@
           </properties>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java</url>
+          <line>53</line>
+          <properties class="com.springboot.blog.controller.AuthControllerIntegrationTest" method="whenLoginWODto_thenReturn400">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/com/springboot/blog/controller/PostController.java</url>
           <line>23</line>
@@ -178,8 +227,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerIntegrationTest.java</url>
-          <line>44</line>
+          <line>45</line>
           <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/springboot/blog/controller/AuthController.java</url>
+          <line>25</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -191,8 +250,17 @@
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1706870424527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest_testLogin.ic" NAME="AuthControllerTest.testLogin Coverage Results" MODIFIED="1706871884132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerIntegrationTest_whenLoginUnregisteredUser_thenReturn500.ic" NAME="AuthControllerIntegrationTest.whenLoginUnregisteredUser_thenReturn500 Coverage Results" MODIFIED="1707220843442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest.ic" NAME="CommentServiceTest Coverage Results" MODIFIED="1706984022547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerIntegrationTest_whenLoginRegisteredUser_thenReturnOk.ic" NAME="AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk Coverage Results" MODIFIED="1707220877131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706871942372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
@@ -211,9 +279,6 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_updateComment_CommentNotFound.ic" NAME="CommentServiceTest.updateComment_CommentNotFound Coverage Results" MODIFIED="1706982727549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest_testLogin.ic" NAME="AuthControllerTest.testLogin Coverage Results" MODIFIED="1706871884132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentControllerWSecurityTest_updateComment.ic" NAME="CommentControllerWSecurityTest.updateComment Coverage Results" MODIFIED="1706987933173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>

@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Set;
@@ -21,6 +22,7 @@ import java.util.Set;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -92,8 +94,33 @@ class CommentControllerTest {
 
     //Alejandro Rubens
     @Test
-    void deleteComment() throws Exception{
-        mockMvc.perform(get("/api/v1/posts/{postId}/comments/{id}",1L, "s")
+    @WithMockUser(roles = {"ADMIN"})
+    void deleteComment_expectedResponse200() throws Exception{
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}",1L, 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Comment deleted successfully"));
+    }
+
+    @Test
+    void deleteComment_expectedResponse401() throws Exception{
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}",1L, 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    void deleteComment_expectedResponse200ButNonExistingComment() throws Exception{
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}",1L, 2L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    void deleteComment_expectedResponse400() throws Exception{
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}",1L, "s")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }

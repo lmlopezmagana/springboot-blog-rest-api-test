@@ -128,7 +128,5 @@ class CommentControllerWSecurityTest {
                 .andExpect(jsonPath("$.name", is(updatedComment.getName())));
     }
 
-    @Test
-    void deleteComment() {
-    }
+
 }

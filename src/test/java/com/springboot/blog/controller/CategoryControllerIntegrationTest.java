@@ -3,6 +3,7 @@ package com.springboot.blog.controller;
 import com.springboot.blog.entity.Role;
 import com.springboot.blog.entity.User;
 import com.springboot.blog.payload.CategoryDto;
+import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.repository.UserRepository;
 import com.springboot.blog.security.JwtTokenProvider;
@@ -51,6 +52,8 @@ class CategoryControllerIntegrationTest {
     private Long outIdCategory;
     private Long zeroIdCategory;
 
+    private CategoryDto updatedCategory;
+
     @BeforeEach
     void setUp(){
         testRestTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory());
@@ -70,6 +73,10 @@ class CategoryControllerIntegrationTest {
         adminHeaders=new HttpHeaders();
         adminHeaders.setContentType(MediaType.APPLICATION_JSON);
         adminHeaders.setBearerAuth(adminToken);
+        CategoryDto updatedCategory = new CategoryDto();
+        updatedCategory.setId(1L);
+        updatedCategory.setName("Name");
+        updatedCategory.setDescription("Description");
     }
     @Test
     void addCategory() {
@@ -88,9 +95,32 @@ class CategoryControllerIntegrationTest {
         assertNotNull(response.getBody());
     }
 
+    //Marco Pertegal
     @Test
-    void updateCategory() {
+    void whenCategoryIdFoundAndCategoryDtoIsValidThenReturn200() {
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange(
+                "http://localhost:"+port+"/api/v1/categories" + updatedCategory.getId(),
+                HttpMethod.PUT,new HttpEntity<>(updatedCategory,adminHeaders), CategoryDto.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(idCategory,response.getBody().getId());
+        assertEquals(updatedCategory.getName(), response.getBody().getName());
     }
+
+
+    @Test
+    void whenCategoryIdNotFoundAndCategoryDtoIsValidThenReturn200() {
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange(
+                "http://localhost:"+port+"/api/v1/categories" + idCategory,
+                HttpMethod.PUT,new HttpEntity<>(updatedCategory,adminHeaders), CategoryDto.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(idCategory,response.getBody().getId());
+        assertEquals(updatedCategory.getName(), response.getBody().getName());
+    }
+
+
+
 
     //Cristian Pulido
     @Test

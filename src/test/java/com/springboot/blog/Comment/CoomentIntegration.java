@@ -32,6 +32,7 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -72,7 +73,7 @@ public class CoomentIntegration {
         Authentication auth2 = new UsernamePasswordAuthenticationToken("ToRechulon","1234", authorities2);
         userToken = jwtProvider.generateToken(auth2);
 
-       commentDto.setName("name");
+       commentDto.setName("angel");
        commentDto.setBody("bodyyyyyyyyyyyyyyy");
        commentDto.setEmail("angel@gmail");
        commentDto.setId(1L);
@@ -88,5 +89,10 @@ public class CoomentIntegration {
         ResponseEntity<CommentDto> response = testRestTemplate.exchange("/api/v1/posts/"+1000L+"/comments", HttpMethod.POST, requestBodyHeaders, CommentDto.class);
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
+    @Test
+    void getCommentByIdPostTest(){
+        CommentDto commentDtos = testRestTemplate.exchange("/api/v1/posts/"+1000L+"/comments",HttpMethod.GET,CommentDto);
 
+        assertEquals(1,commentDtos);
+    }
 }

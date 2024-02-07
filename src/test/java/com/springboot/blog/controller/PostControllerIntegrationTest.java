@@ -99,8 +99,13 @@ class PostControllerIntegrationTest {
     void createPost() {
     }
 
+    //Marco Pertegal
     @Test
     void getAllPosts() {
+        int pageNo = 0;
+        int pageSize = 10;
+        String sortBy = "sortBy";
+        String sortDir = "sortDir";
     }
 
     //Sebastián Millán

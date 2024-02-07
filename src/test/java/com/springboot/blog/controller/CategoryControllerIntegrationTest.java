@@ -73,7 +73,7 @@ class CategoryControllerIntegrationTest {
         adminHeaders=new HttpHeaders();
         adminHeaders.setContentType(MediaType.APPLICATION_JSON);
         adminHeaders.setBearerAuth(adminToken);
-        CategoryDto updatedCategory = new CategoryDto();
+        updatedCategory = new CategoryDto();
         updatedCategory.setId(1L);
         updatedCategory.setName("Name");
         updatedCategory.setDescription("Description");
@@ -107,18 +107,23 @@ class CategoryControllerIntegrationTest {
         assertEquals(updatedCategory.getName(), response.getBody().getName());
     }
 
-
+    //Marco Pertegal
     @Test
-    void whenCategoryIdNotFoundAndCategoryDtoIsValidThenReturn200() {
+    void whenCategoryIdNotFoundAndCategoryDtoIsValidThenReturn404() {
         ResponseEntity<CategoryDto> response = testRestTemplate.exchange(
                 "http://localhost:"+port+"/api/v1/categories" + idCategory,
                 HttpMethod.PUT,new HttpEntity<>(updatedCategory,adminHeaders), CategoryDto.class);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertNotNull(response.getBody());
-        assertEquals(idCategory,response.getBody().getId());
-        assertEquals(updatedCategory.getName(), response.getBody().getName());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
+    //Marco Pertegal
+    @Test
+    void whenHasRoleUserThenReturn401() {
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange(
+                "http://localhost:"+port+"/api/v1/categories/" + idCategory,
+                HttpMethod.PUT,new HttpEntity<>(updatedCategory,userHeaders), CategoryDto.class);
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+    }
 
 
 

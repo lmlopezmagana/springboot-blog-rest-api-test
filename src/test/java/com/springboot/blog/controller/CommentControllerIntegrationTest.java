@@ -191,7 +191,45 @@ class CommentControllerIntegrationTest {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
+    //Marco Pertegal
     @Test
-    void deleteComment() {
+    void whenIdPostFoundAndIdIdCommentFoundAndCommentBelongsToThePostThenReturnString() {
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/posts/"+idPost+"/comments/"+idComment,
+                HttpMethod.DELETE,new HttpEntity<>(adminHeaders), String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Comment deleted successfully", response.getBody());
     }
+
+    //Marco Pertegal
+    @Test
+    void whenIdPostNotFoundAndIdCommentFoundAndCommentBelongsToThePostThenReturnException() {
+        Long invalidIdPost = 2L;
+
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/posts/"+invalidIdPost+"/comments/"+idComment,
+                HttpMethod.DELETE,new HttpEntity<>(adminHeaders), String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    //Marco Pertegal
+    @Test
+    void whenIdPostFoundAndIdCommentNotFoundAndCommentBelongsToThePostThenReturnException() {
+        Long invalidIdComment = 2L;
+
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/posts/"+idPost+"/comments/"+invalidIdComment,
+                HttpMethod.DELETE,new HttpEntity<>(adminHeaders), String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    //Marco Pertegal
+    @Test
+    void whenCommentDoesNotBelongsToThePostThenReturnException() {
+        Long invalidIdPost = 2L;
+
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/posts/"+invalidIdPost+"/comments/"+idComment,
+                HttpMethod.DELETE,new HttpEntity<>(adminHeaders), String.class);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        //assertEquals("Comment does not belongs to post", response.getBody()));
+    }
+
+
 }

@@ -40,7 +40,7 @@ class RoleRepositoryTest {
     @Test
     void findByName() {
         Optional<Role> encontradofalse = repository.findByName("trabajador");
-        Optional<Role> encontradotrue = repository.findByName("admin");
+        Optional<Role> encontradotrue = repository.findByName("ROLE_ADMIN");
 
         assertTrue(encontradofalse.isEmpty(),"No se ha encontrado");
         assertTrue(encontradotrue.isPresent(),"Se ha encontrado");

@@ -36,6 +36,48 @@ class CommentControllerIntegrationTest {
     private JwtTokenProvider jwtTokenProvider;
 
     private HttpHeaders adminHeaders;
+    private String token;
+    private Long idPost;
+    private Long idComment;
+    private Long finalIdPost;
+    private Long outIdPost;
+    private Long zeroIdPost;
+    private Long notHasIdComment;
+    private Long finalIdComment;
+    private CommentDto updateCommentDto;
+    private CommentDto emptyUpdateCommentDto;
+
+    @BeforeEach
+    void setUp(){
+        testRestTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+        idPost=1L;
+        idComment=58L;
+        finalIdPost=100L;
+        outIdPost=101L;
+        zeroIdPost=0L;
+        notHasIdComment=200L;
+        finalIdComment=13L;
+        updateCommentDto= new CommentDto();
+        emptyUpdateCommentDto= new CommentDto();
+        updateCommentDto.setName("Nuevo nombre");
+        updateCommentDto.setEmail("emailNuevo@gmail.com");
+        updateCommentDto.setBody("He conseguido editar el comentario");
+        User admin = new User(1L,"Micah Eakle","meakle0","meakle0@newsvine.com", "kJ3(1SY6uMM", Set.of(new Role((short)1,"ADMIN")));
+        token=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
+                admin.getUsername(),admin.getRoles()));
+        adminHeaders=new HttpHeaders();
+        adminHeaders.setContentType(MediaType.APPLICATION_JSON);
+        adminHeaders.setBearerAuth(token);
+    }
+
+    @LocalServerPort
+    private int port;
+    @Autowired
+    private TestRestTemplate testRestTemplate;
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    private HttpHeaders adminHeaders;
     private String adminToken;
     private Long idPost;
     private Long idComment;
@@ -183,8 +225,15 @@ class CommentControllerIntegrationTest {
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 
-
-
+    @Test
+    void whenIdPostIdCommentAndUpdateCommentDtoIsOk_theReturnHttp200() {
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/posts/"+idPost+"/comments/"+idComment,
+                HttpMethod.PUT,new HttpEntity<>(updateCommentDto,adminHeaders), CommentDto.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(idComment,response.getBody().getId());
+        assertEquals(updateCommentDto.getName(), response.getBody().getName());
+    }
 
     //Sebastián Millán
     @Test

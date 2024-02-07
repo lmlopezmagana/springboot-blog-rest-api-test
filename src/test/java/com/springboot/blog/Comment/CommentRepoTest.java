@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @DataJpaTest
 @ActiveProfiles({"test"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@Sql(value = {"classpath:import-test-post.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {"classpath:import-test-comment.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class CommentRepoTest {
 
     @Container
@@ -39,15 +39,15 @@ public class CommentRepoTest {
     CommentRepository repository;
 
     @ParameterizedTest
-    @CsvSource({"1"})
+    @CsvSource({"3","2"})
     void testFindByPostId (Long postId) throws Exception{
 
-        List<Comment> comments = List.of(new Comment(1L,"hola","description","conten", new Post()));
-        if (postId == 1L){
+        List<Comment> comments = List.of(new Comment(1L,"hola","description","contenmnnnnnn", new Post()));
+        if (postId == 1 ){
             assertEquals(1,repository.findByPostId(postId).size());
             assertEquals(comments.get(0).getBody(),repository.findByPostId(postId).get(0).getBody());
         }else {
-            assertEquals(0,repository.findById(postId).size());
+            assertEquals(0,repository.findByPostId(postId).size());
         }
     }
 

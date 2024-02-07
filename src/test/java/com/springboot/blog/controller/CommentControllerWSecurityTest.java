@@ -46,7 +46,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class CommentControllerWSecurityTest {
 
-    //Un comentario
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -58,12 +57,28 @@ class CommentControllerWSecurityTest {
 
     @BeforeEach
     public void setup() {
-        
+
     }
 
 
     @Test
-    void createComment() {
+    @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
+    void createComment() throws Exception {
+
+        long postId = 1L;
+        long commentId = 1L;
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(commentId);
+        commentDto.setName("Paco");
+        commentDto.setEmail("paco@gmail.com");
+        commentDto.setBody("Lorem ipsum dolor sit amet");
+
+        Mockito.when(commentService.createComment(postId, commentDto)).thenReturn(commentDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/posts/{postId}/comments", postId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(commentDto)))
+                .andExpect(status().isCreated());
     }
 
     @Test
@@ -153,7 +168,6 @@ class CommentControllerWSecurityTest {
                 .andExpect(status().isNotFound());
     }
 
-
     @Test
     @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
     void updateComment_Succesful() throws Exception {
@@ -166,8 +180,7 @@ class CommentControllerWSecurityTest {
         updatedComment.setBody("Un comentario guapo");
 
         Mockito.when(commentService.updateComment(postId, commentId, updatedComment)).thenReturn(updatedComment);
-
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
                     .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedComment)))
                 .andExpect(status().isOk())

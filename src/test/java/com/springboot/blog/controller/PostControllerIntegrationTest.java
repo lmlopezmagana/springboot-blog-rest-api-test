@@ -68,6 +68,7 @@ class PostControllerIntegrationTest {
     private Long idPost;
     private Long notExistIdPost;
     private Long outIdPost;
+    private Long outIdCategory;
     private Long finalIdPost;
     private PostDto updatePostDto;
     @BeforeEach
@@ -76,6 +77,7 @@ class PostControllerIntegrationTest {
         idPost=1L;
         notExistIdPost=0L;
         outIdPost=101L;
+        outIdCategory=101L;
         finalIdPost=100L;
         updatePostDto= new PostDto();
         updatePostDto.setTitle("Titulo test");
@@ -104,10 +106,13 @@ class PostControllerIntegrationTest {
     }
 
     //Marco Pertegal
+    //Post-getAllPos
     @Test
     void whenFindAllPostThenReturn200() {
         ResponseEntity<PostResponse> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts",
-                HttpMethod.GET, new HttpEntity<>(userHeaders), PostResponse.class);
+                HttpMethod.GET,
+                new HttpEntity<>(userHeaders),
+                PostResponse.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(1L, response.getBody().getContent().get(0).getId());
@@ -187,6 +192,7 @@ class PostControllerIntegrationTest {
     }
 
     //Marco Pertegal
+    //Post-getPostByCategory
     @Test
     void whenCategoryIdFoundAndFoundPostsThenReturn200() {
         Long categoryId = 1L;
@@ -202,16 +208,14 @@ class PostControllerIntegrationTest {
         assertEquals("Chief Design Engineer",response.getBody().get(0).getTitle());
     }
     //Marco Pertegal
+    //Post-getPostByCategory
     @Test
     void whenCategoryIdNotFoundThenReturnException() {
-        Long categoryId = 3L;
-        ResponseEntity<List<PostDto>> response = testRestTemplate.exchange(
-                "http://localhost:" + port + "/api/posts/category/{id}",
+        ResponseEntity<Object> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/posts/category/" + outIdCategory,
                 HttpMethod.GET,
                 new HttpEntity<>(userHeaders),
-                new ParameterizedTypeReference<List<PostDto>>() {},
-                categoryId
-        );
-        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+                Object.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
 }

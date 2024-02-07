@@ -52,4 +52,5 @@ public class PostControllerIntegrationTest {
         assertEquals(200, response.getStatusCode().value());
         assertEquals(0, Objects.requireNonNull(response.getBody()).getTotalElements());
     }
+
 }

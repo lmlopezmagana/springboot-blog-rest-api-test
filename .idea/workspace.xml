@@ -5,23 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c1b6888-d38d-4d45-8c13-b965e755f5fa" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/target/classes/com/springboot/blog/entity/Post.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CategoryControllerWOSecurityTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/controller/CommentControllerWSecurityTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/CategoryServiceTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/com/springboot/blog/service/CommentServiceTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/blog/SpringbootBlogRestApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/blog/SpringbootBlogRestApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/springboot/blog/entity/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/springboot/blog/entity/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerIntegration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerIntegration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerWOSecurityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CategoryControllerWOSecurityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CommentControllerWSecurityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CommentControllerWSecurityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CategoryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CategoryServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CommentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CommentServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CommentControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CommentControllerIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/PostControllerIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/PostControllerIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +36,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "Merging getPostById2.0ControllerAndService",
+    "git-widget-placeholder": "getCommentByIdIntegrationTest",
     "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
   }
 }]]></component>
@@ -59,7 +45,7 @@
       <command value="mvn clean" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PostServiceTest">
+  <component name="RunManager" selected="JUnit.CommentControllerIntegrationTest.getCommentByIdWith200_OKResponse">
     <configuration name="CategoryControllerIntegration" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
@@ -91,7 +77,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CategoryControllerWOSecurityTest.getCategory" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CommentControllerIntegrationTest.getCommentByIdWith200_OKResponse" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -100,8 +86,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CategoryControllerWOSecurityTest" />
-      <option name="METHOD_NAME" value="getCategory" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.CommentControllerIntegrationTest" />
+      <option name="METHOD_NAME" value="getCommentByIdWith200_OKResponse" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -140,11 +126,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CommentControllerIntegrationTest.getCommentByIdWith200_OKResponse" />
         <item itemvalue="JUnit.PostServiceTest" />
         <item itemvalue="JUnit.CategoryControllerIntegration" />
         <item itemvalue="JUnit.CategoryControllerIntegration.findCategoryById_thenNotFound" />
         <item itemvalue="JUnit.CommentServiceTest.createComment" />
-        <item itemvalue="JUnit.CategoryControllerWOSecurityTest.getCategory" />
       </list>
     </recent_temporary>
   </component>

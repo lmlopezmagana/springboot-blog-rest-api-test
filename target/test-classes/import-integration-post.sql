@@ -1,6 +1,8 @@
+delete from users_roles;
 delete from users;
-delete from comments;
 delete from posts;
+delete from categories;
+delete from comments;
 delete from roles;
 INSERT INTO roles (id, name) VALUES (1, 'ROLE_ADMIN');
 INSERT INTO roles (id, name) VALUES (2, 'ROLE_USER');

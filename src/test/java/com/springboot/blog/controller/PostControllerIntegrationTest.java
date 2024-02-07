@@ -7,6 +7,7 @@ import com.springboot.blog.entity.Role;
 import com.springboot.blog.entity.User;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.payload.PostDto;
+import com.springboot.blog.payload.PostResponse;
 import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.PostService;
 import com.springboot.blog.service.impl.PostServiceImpl;
@@ -38,6 +39,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -101,11 +104,14 @@ class PostControllerIntegrationTest {
 
     //Marco Pertegal
     @Test
-    void getAllPosts() {
-        int pageNo = 0;
-        int pageSize = 10;
-        String sortBy = "sortBy";
-        String sortDir = "sortDir";
+    void whenFindCategoriesThenReturn200() {
+        ResponseEntity<PostResponse> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts",
+                HttpMethod.GET, new HttpEntity<>(userHeaders), PostResponse.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(1L, response.getBody().getContent().get(0).getId());
+        assertEquals("Computer Systems Analyst I", response.getBody().getContent().get(0).getTitle());
+        assertEquals(10, response.getBody().getContent().size());
     }
 
     //Sebastián Millán

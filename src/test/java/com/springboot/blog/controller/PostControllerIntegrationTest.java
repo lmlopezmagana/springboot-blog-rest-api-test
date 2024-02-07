@@ -104,7 +104,6 @@ class PostControllerIntegrationTest {
     void whenIdExistsAndUserRole_thenGetPostDtoAndReturn200() throws Exception{
         ResponseEntity<PostDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+idPost,
                 HttpMethod.GET,new HttpEntity<>(userHeaders), PostDto.class);
-
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals("Computer Systems Analyst I",response.getBody().getTitle());
@@ -126,7 +125,6 @@ class PostControllerIntegrationTest {
     void whenIdNotFoundAndUserRole_thenReturn404() throws Exception{
         ResponseEntity<PostDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+notExistIdPost,
                 HttpMethod.GET,new HttpEntity<>(userHeaders), PostDto.class);
-
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(null,response.getBody().getTitle());
@@ -161,9 +159,6 @@ class PostControllerIntegrationTest {
         ResponseEntity<PostDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+idPost,
                 HttpMethod.PUT,new HttpEntity<>(updatePostDto,adminHeaders), PostDto.class);
         System.out.println(updatePostDto);
-        System.out.println(idPost);
-        System.out.println(adminHeaders);
-        System.out.println(response);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
         assertEquals(idPost, response.getBody().getId());

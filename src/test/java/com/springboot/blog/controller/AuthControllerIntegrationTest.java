@@ -38,7 +38,7 @@ class AuthControllerIntegrationTest {
     private JwtTokenProvider jwtTokenProvider;
 
     private HttpHeaders adminHeaders;
-    private String adminToken;
+    private String token;
     private LoginDto loginDto;
     private LoginDto notRegisterLoginDto;
 
@@ -49,12 +49,12 @@ class AuthControllerIntegrationTest {
         notRegisterLoginDto = new LoginDto("username", "pass");
 
 
-        User admin = new User(1L,"Micah Eakle","meakle0","meakle0@newsvine.com", "kJ3(1SY6uMM", Set.of(new Role((short)1,"ADMIN")));
-        adminToken=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
-                admin.getUsername(),admin.getRoles(), Collections.of(new SimpleGrantedAuthority("ADMIN"))));
+        User user = new User(1L,"Micah Eakle","meakle0","meakle0@newsvine.com", "kJ3(1SY6uMM", Set.of(new Role((short)1,"ADMIN")));
+        token=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
+                user.getUsername(),user.getRoles()));
         adminHeaders=new HttpHeaders();
         adminHeaders.setContentType(MediaType.APPLICATION_JSON);
-        adminHeaders.setBearerAuth(adminToken);
+        adminHeaders.setBearerAuth(token);
     }
 
     //Sebastián Millán

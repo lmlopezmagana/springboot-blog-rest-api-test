@@ -36,7 +36,7 @@ class CommentControllerIntegrationTest {
     private JwtTokenProvider jwtTokenProvider;
 
     private HttpHeaders adminHeaders;
-    private String adminToken;
+    private String token;
     private Long idPost;
     private Long idComment;
     private Long finalIdPost;
@@ -63,11 +63,11 @@ class CommentControllerIntegrationTest {
         updateCommentDto.setEmail("emailNuevo@gmail.com");
         updateCommentDto.setBody("He conseguido editar el comentario");
         User admin = new User(1L,"Micah Eakle","meakle0","meakle0@newsvine.com", "kJ3(1SY6uMM", Set.of(new Role((short)1,"ADMIN")));
-        adminToken=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
-                admin.getUsername(),admin.getRoles(), Collections.of(new SimpleGrantedAuthority("ADMIN"))));
+        token=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
+                admin.getUsername(),admin.getRoles()));
         adminHeaders=new HttpHeaders();
         adminHeaders.setContentType(MediaType.APPLICATION_JSON);
-        adminHeaders.setBearerAuth(adminToken);
+        adminHeaders.setBearerAuth(token);
     }
 
     @Test

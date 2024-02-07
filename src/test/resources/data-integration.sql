@@ -310,8 +310,8 @@ insert into comments (id, post_id, name, email, body) values (99, 89, 'Kelcy Eic
 insert into comments (id, post_id, name, email, body) values (100, 99, 'Rowena Alfwy', 'ralfwy2r@businesswire.com', 'Insertion of testicular prosthesis');
 
 
-INSERT INTO roles (id, name) VALUES(1, 'admin');
-INSERT INTO roles (id, name) VALUES(2, 'user');
+INSERT INTO roles (id, name) VALUES(1, 'ROLE_ADMIN');
+INSERT INTO roles (id, name) VALUES(2, 'ROLE_USER');
 
 insert into users (id, username, email, password, name) values (1, 'meakle0', 'meakle0@newsvine.com', '$2a$12$DCVKHaKCZSDiZcucHQ89pu/giIllprdpDa/wzaljvpKqEKDUMe5Fi', 'Micah Eakle');
 insert into users (id, username, email, password, name) values (2, 'sdruery1', 'sdruery1@github.com', 'zR6+crl+n', 'Say Druery');
@@ -363,7 +363,7 @@ insert into users (id, username, email, password, name) values (47, 'gpiegrome1a
 insert into users (id, username, email, password, name) values (48, 'sgaynor1b', 'sgaynor1b@mac.com', 'dX8<t.Hdcwk', 'Skell Gaynor');
 insert into users (id, username, email, password, name) values (49, 'vhagwood1c', 'vhagwood1c@discuz.net', 'tV1*oMAlK2', 'Vidovic Hagwood');
 insert into users (id, username, email, password, name) values (50, 'zbydaway1d', 'zbydaway1d@oracle.com', 'dA6`KmDX~F', 'Zuzana Bydaway');
-insert into users (id, username, email, password, name) values (51, 'dgirkins1e', 'dgirkins1e@bing.com', '{bcrypt}lE2,%W?IAA', 'Danny Girkins');
+insert into users (id, username, email, password, name) values (51, 'dgirkins1e', 'dgirkins1e@bing.com', '$2a$12$p.5dvvTowEiOpU1Zm9t9ZulcSuozX0MOHy8EAV127zzp.dSk5mBg6', 'Danny Girkins');
 insert into users (id, username, email, password, name) values (52, 'cfoxley1f', 'cfoxley1f@vimeo.com', 'cR1{!wG7i%FCW$_7', 'Corissa Foxley');
 insert into users (id, username, email, password, name) values (53, 'jtrathen1g', 'jtrathen1g@alexa.com', 'zR4+?7Ti}z7(', 'Jerry Trathen');
 insert into users (id, username, email, password, name) values (54, 'ipinock1h', 'ipinock1h@addthis.com', 'qF0@,b!v', 'Iolande Pinock');

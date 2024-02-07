@@ -46,7 +46,6 @@ class PostServiceImplTest {
 
     //Marco Pertegal
     @Test
-    @Disabled
     void whenPostDtoThenCreateNewPost() {
         Long categoryId = 3L;
         PostDto postDto = new PostDto();
@@ -60,8 +59,8 @@ class PostServiceImplTest {
         Post post = new Post(1L, "Sample Title", "Sample Description", "Sample Content", new HashSet<>(), category);
 
         Mockito.when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
-        //Mockito.when(postService.mapToDTO(post)).thenReturn(postDto);
-        //Mockito.when(postService.mapToEntity(postDto)).thenReturn(post);
+        Mockito.when(postService.mapToDTO(post)).thenReturn(postDto);
+        Mockito.when(postService.mapToEntity(postDto)).thenReturn(post);
         Mockito.when(postRepository.save(post)).thenReturn(post);
 
         Optional <Category> result = categoryRepository.findById(categoryId);

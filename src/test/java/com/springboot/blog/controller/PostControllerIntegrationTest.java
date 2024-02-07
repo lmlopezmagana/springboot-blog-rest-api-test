@@ -182,8 +182,16 @@ class PostControllerIntegrationTest {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
+    //Alejandro Rubens
     @Test
     void deletePost() {
+        //Connection to localhost:55432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+        ResponseEntity<PostDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+idPost,
+                HttpMethod.GET,new HttpEntity<>(userHeaders), PostDto.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("Computer Systems Analyst I",response.getBody().getTitle());
+        assertEquals(idPost,response.getBody().getId());
     }
 
     @Test

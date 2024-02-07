@@ -78,8 +78,16 @@ class CommentControllerIntegrationTest {
     void getCommentsByPostId() {
     }
 
+    //Alejandro Rubens
     @Test
     void getCommentById() {
+        //Connection to localhost:55432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/posts/"+idPost+"/comments/"+idComment,
+                HttpMethod.PUT,new HttpEntity<>(updateCommentDto,adminHeaders), CommentDto.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(idComment,response.getBody().getId());
+        assertEquals(updateCommentDto.getName(), response.getBody().getName());
     }
 
     //Sebastián Millán

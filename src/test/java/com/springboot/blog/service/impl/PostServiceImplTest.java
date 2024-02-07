@@ -94,6 +94,7 @@ class PostServiceImplTest {
         assertEquals("Category not found with id : '"+ categoryId+"'", exception.getMessage());
     }
 
+    //Cristian Pulido
     @Test
     void getAllPosts() {
         int pageNo = 0;
@@ -139,6 +140,7 @@ class PostServiceImplTest {
     void getPostById() {
     }
 
+    //Cristian Pulido
     @Test
     void updatePost() {
         PostDto postDto = new PostDto();

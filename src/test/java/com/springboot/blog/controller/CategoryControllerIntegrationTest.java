@@ -3,39 +3,22 @@ package com.springboot.blog.controller;
 import com.springboot.blog.entity.Role;
 import com.springboot.blog.entity.User;
 import com.springboot.blog.payload.CategoryDto;
-import com.springboot.blog.payload.PostDto;
-import com.springboot.blog.repository.UserRepository;
 import com.springboot.blog.security.JwtTokenProvider;
 import io.jsonwebtoken.lang.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.http.client.*;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -123,18 +106,34 @@ class CategoryControllerIntegrationTest {
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
+    // Cristian Pulido
     @Test
-    void getCategory() {
-    }
+    void whenCategoryIsFound_thenReturnHttp200() {
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/categories/" + idCategory,
+                HttpMethod.GET,
+                new HttpEntity<>(adminHeaders),
+                CategoryDto.class);
 
-    @Test
-    void getCategories() {
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
     }
 
     @Test
     void updateCategory() {
     }
 
+    //Cristian Pulido
+    @Test
+    void whenCategoriesIsFound_thenReturnHttp200(){
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/categories",
+                HttpMethod.GET,
+                new HttpEntity<>(adminHeaders),
+                String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertFalse(response.getBody().isEmpty());
+    }
     //Sebastián Millán
     @Test
     void whenCategoryIdIsOkAndAdminRole_thenReturnHttp200() {

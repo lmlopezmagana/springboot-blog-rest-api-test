@@ -38,11 +38,14 @@ class CommentServiceImplTest {
     @Mock
     private ModelMapper modelMapper;
 
+    //Cristian Pulido
     @Test
     void createComment() {
 
         CommentDto commentDto = new CommentDto();
         commentDto.setId(1L);
+        commentDto.setName("CommentName");
+        commentDto.setEmail("myemail@gmail.com");
         commentDto.setBody("Nuevo Comentario");
 
         Comment comment = new Comment();

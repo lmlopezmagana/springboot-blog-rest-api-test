@@ -46,6 +46,8 @@ class AuthControllerTest {
     void setUp(){
         loginDto = new LoginDto("username", "password");
     }
+
+    //Cristian Pulido
     @Test
     void whenLoginIsValid_thenReturnHttp200() throws Exception {
 
@@ -60,6 +62,7 @@ class AuthControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.accessToken").value("token"));
     }
+    //Cristian Pulido
     @Test
     void whenLoginIsNull_thenReturnHttp400()  throws Exception{
         String token = "token";

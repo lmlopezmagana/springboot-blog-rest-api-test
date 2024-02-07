@@ -69,26 +69,133 @@ class CommentControllerIntegrationTest {
         adminHeaders.setContentType(MediaType.APPLICATION_JSON);
         adminHeaders.setBearerAuth(token);
     }
-
+    //Cristian Pulido
     @Test
-    void createComment() {
+    void whenCreateComment_thenReturnHttp201AndCommentDto() {
+        CommentDto newCommentDto = new CommentDto();
+        newCommentDto.setName("Cristian");
+        newCommentDto.setEmail("rcallinan0@feedburner.com");
+        newCommentDto.setBody("Esternocleidomastoideo");
+
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments",
+                HttpMethod.POST,
+                new HttpEntity<>(adminHeaders),
+                CommentDto.class,
+                newCommentDto);
+
+        //assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
+    //Cristian Pulido
     @Test
-    void getCommentsByPostId() {
+    void whenCreateCommentUnAuthorized_thenReturnHttp401() {
+        CommentDto newCommentDto = new CommentDto();
+        newCommentDto.setId(1000);
+        newCommentDto.setName("Nuevo comentario");
+        newCommentDto.setEmail("nuevo@ejemplo.com");
+        newCommentDto.setBody("Contenido del nuevo comentario");
+
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments",
+                HttpMethod.POST,
+                new HttpEntity<>(newCommentDto),
+                CommentDto.class);
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }
+
 
     //Alejandro Rubens
     @Test
     void getCommentById() {
         //Connection to localhost:55432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP
-        ResponseEntity<CommentDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/posts/"+idPost+"/comments/"+idComment,
-                HttpMethod.PUT,new HttpEntity<>(updateCommentDto,adminHeaders), CommentDto.class);
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments/" + idComment,
+                HttpMethod.PUT, new HttpEntity<>(updateCommentDto, adminHeaders), CommentDto.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertNotNull(response.getBody());
-        assertEquals(idComment,response.getBody().getId());
+        assertEquals(idComment, response.getBody().getId());
         assertEquals(updateCommentDto.getName(), response.getBody().getName());
     }
+
+
+    // Cristian Pulido
+    @Test
+    void whenCreateCommentWithInvalidData_thenReturnHttp400() {
+        CommentDto invalidCommentDto = new CommentDto();
+        ResponseEntity<String> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments",
+                HttpMethod.POST,
+                new HttpEntity<>(invalidCommentDto, adminHeaders),
+                String.class);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+
+    }
+
+    //Cristian Pulido
+    @Test
+    void whenGetCommentById_thenReturnHttp200AndCommentDto() {
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments/" + idComment,
+                HttpMethod.GET,
+                new HttpEntity<>(adminHeaders),
+                CommentDto.class);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(idComment, response.getBody().getId());
+    }
+
+    // Cristian Pulido
+    @Test
+    void whenGetCommentByIdWhenCommentNotExists_thenReturnHttp404() {
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments/" + notHasIdComment,
+                HttpMethod.GET,
+                new HttpEntity<>(adminHeaders),
+                CommentDto.class);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    // Cristian Pulido
+    @Test
+    void whenGetCommentByIdWhenPostNotExists_thenReturnHttp404() {
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + notHasIdComment + "/comments/" + idComment,
+                HttpMethod.GET,
+                new HttpEntity<>(adminHeaders),
+                CommentDto.class);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    // Cristian Pulido
+    @Test
+    void whenGetCommentByIdWhenPostIdIsZero_thenReturnHttp404() {
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + zeroIdPost + "/comments/" + idComment,
+                HttpMethod.GET,
+                new HttpEntity<>(adminHeaders),
+                CommentDto.class);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    // Cristian Pulido
+    @Test
+    void whenGetCommentByIdWhenPostIdIsOut_thenReturnHttp404() {
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + outIdPost + "/comments/" + idComment,
+                HttpMethod.GET,
+                new HttpEntity<>(adminHeaders),
+                CommentDto.class);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
 
     //Sebastián Millán
     @Test

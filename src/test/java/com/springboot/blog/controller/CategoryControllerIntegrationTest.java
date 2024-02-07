@@ -3,9 +3,6 @@ package com.springboot.blog.controller;
 import com.springboot.blog.entity.Role;
 import com.springboot.blog.entity.User;
 import com.springboot.blog.payload.CategoryDto;
-import com.springboot.blog.payload.CommentDto;
-import com.springboot.blog.payload.PostDto;
-import com.springboot.blog.repository.UserRepository;
 import com.springboot.blog.security.JwtTokenProvider;
 import io.jsonwebtoken.lang.Collections;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,18 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 
 import java.util.Set;
 
@@ -52,7 +43,7 @@ class CategoryControllerIntegrationTest {
     private Long outIdCategory;
     private Long zeroIdCategory;
 
-    private CategoryDto updatedCategory;
+    private CategoryDto updatedCategoryDto;
 
     @BeforeEach
     void setUp(){
@@ -73,10 +64,9 @@ class CategoryControllerIntegrationTest {
         adminHeaders=new HttpHeaders();
         adminHeaders.setContentType(MediaType.APPLICATION_JSON);
         adminHeaders.setBearerAuth(adminToken);
-        updatedCategory = new CategoryDto();
-        updatedCategory.setId(2L);
-        updatedCategory.setName("Name");
-        updatedCategory.setDescription("Description");
+        updatedCategoryDto = new CategoryDto();
+        updatedCategoryDto.setName("Name");
+        updatedCategoryDto.setDescription("Description");
     }
     @Test
     void addCategory() {
@@ -99,16 +89,16 @@ class CategoryControllerIntegrationTest {
     //Category-updateCategory
     @Test
     void whenCategoryIdFoundAndCategoryDtoIsValidThenReturn200() {
-        Long id = 1L;
         ResponseEntity<CategoryDto> response = testRestTemplate.exchange(
-                "http://localhost:" + port + "/api/v1/categories"+idCategory,
+                "http://localhost:" + port + "/api/v1/categories/" + idCategory,
                 HttpMethod.PUT,
-                new HttpEntity<>(updatedCategory, adminHeaders),
+                new HttpEntity<>(updatedCategoryDto, adminHeaders),
                 CategoryDto.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
         /*assertNotNull(response.getBody());
         assertEquals(idCategory,response.getBody().getId());
         assertEquals(updatedCategory.getName(), response.getBody().getName());*/
+
 
     }
 
@@ -119,7 +109,7 @@ class CategoryControllerIntegrationTest {
         ResponseEntity<CategoryDto> response = testRestTemplate.exchange(
                 "http://localhost:"+port+"/api/v1/categories" + outIdCategory,
                 HttpMethod.PUT,
-                new HttpEntity<>(updatedCategory,adminHeaders),
+                new HttpEntity<>(updatedCategoryDto,adminHeaders),
                 CategoryDto.class);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -131,7 +121,7 @@ class CategoryControllerIntegrationTest {
         ResponseEntity<CategoryDto> response = testRestTemplate.exchange(
                 "http://localhost:"+port+"/api/v1/categories/" + idCategory,
                 HttpMethod.PUT,
-                new HttpEntity<>(updatedCategory,userHeaders),
+                new HttpEntity<>(updatedCategoryDto,userHeaders),
                 CategoryDto.class);
         assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }

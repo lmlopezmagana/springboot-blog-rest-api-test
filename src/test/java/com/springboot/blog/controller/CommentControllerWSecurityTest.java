@@ -42,12 +42,8 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-//@WebMvcTest(CommentController.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-/*@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class,
-        DataSourceTransactionManagerAutoConfiguration.class,
-        HibernateJpaAutoConfiguration.class})*/
 class CommentControllerWSecurityTest {
 
     @Autowired
@@ -57,19 +53,11 @@ class CommentControllerWSecurityTest {
     @InjectMocks
     private CommentController commentController;
     @MockBean
-    //private CommentServiceImpl commentService;
     private CommentService commentService;
-
-    //@MockBean
-    //private JwtTokenProvider jwtTokenProvider;
-
-    //@Autowired
-    //private WebApplicationContext webApplicationContext;
 
     @BeforeEach
     public void setup() {
-        //Init MockMvc Object and build
-        //mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        
     }
 
 

@@ -3,6 +3,7 @@ package com.springboot.blog.user;
 
 import com.springboot.blog.payload.JWTAuthResponse;
 import com.springboot.blog.payload.LoginDto;
+import com.springboot.blog.payload.RegisterDto;
 import com.springboot.blog.security.JwtTokenProvider;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
@@ -14,40 +15,27 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import java.util.Arrays;
-import java.util.Collection;
+
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles({"test"})
 @Testcontainers
 @Sql(value = "classpath:import-integration.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(scripts = "classpath:cleanup.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 
 public class AuthIntegrationTest {
 
     @Autowired
     TestRestTemplate testRestTemplate;
-
-    @Autowired
-    JwtTokenProvider jwtProvider;
 
     @Container
     @ServiceConnection
@@ -56,27 +44,70 @@ public class AuthIntegrationTest {
             .withPassword("user")
             .withDatabaseName("test");
 
-    @LocalServerPort
-    int port;
-
-    String userToken;
     LoginDto loginDto = new LoginDto();
 
-    @BeforeEach
-    void  setUp(){
-        Collection<GrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
-        Authentication auth = new UsernamePasswordAuthenticationToken("ToRechulon", "1234", authorities);
-
-        testRestTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-        token = jwtProvider.generateToken(aut);
-    }
 
     @Test
     void validLogin_then200(){
-        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        HttpEntity<Object> responseHeaders = new HttpEntity<>(loginDto, headers);
+        loginDto.setUsernameOrEmail("ToRechulon");
+        loginDto.setPassword("1234");
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<LoginDto> responseHeaders = new HttpEntity<>(loginDto, headers);
         ResponseEntity<JWTAuthResponse> response = testRestTemplate.exchange("/api/auth/login", HttpMethod.POST, responseHeaders, JWTAuthResponse.class);
-        System.out.printf(response.toString());
         Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void invalidLogin_then500(){
+        loginDto.setUsernameOrEmail("Paco");
+        loginDto.setPassword("1234");
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<LoginDto> responseHeaders = new HttpEntity<>(loginDto, headers);
+        ResponseEntity<JWTAuthResponse> response = testRestTemplate.exchange("/api/auth/login", HttpMethod.POST, responseHeaders, JWTAuthResponse.class);
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode()); //no tiene gestion de errores y da error 500
+    }
+
+    @Test
+    void validRegistration_then201() {
+        RegisterDto registerDto = new RegisterDto();
+        registerDto.setName("Nuevo Usuario");
+        registerDto.setUsername("nuevoUsuario");
+        registerDto.setEmail("nuevoUsuario@example.com");
+        registerDto.setPassword("password123");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<RegisterDto> request = new HttpEntity<>(registerDto, headers);
+        ResponseEntity<String> response = testRestTemplate.postForEntity("/api/auth/register", request, String.class);
+        Assertions.assertEquals(HttpStatus.CREATED, response.getStatusCode());
+    }
+
+    @Test
+    void invalidRegistration_then400() {
+        RegisterDto registerDto = new RegisterDto();
+        registerDto.setName("Nuevo Usuario");
+        registerDto.setUsername("ToRechulon");
+        registerDto.setEmail("nuevoUsuario@example.com");
+        registerDto.setPassword("password123");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<RegisterDto> request = new HttpEntity<>(registerDto, headers);
+        ResponseEntity<String> response = testRestTemplate.postForEntity("/api/auth/register", request, String.class);
+        Assertions.assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+    @Test
+    void invalidRegistration_then500() {
+        RegisterDto registerDto = new RegisterDto();
+        registerDto.setName("Nuevo Usuario");
+        registerDto.setEmail("nuevoUsuario@example.com");
+        registerDto.setPassword("password123");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<RegisterDto> request = new HttpEntity<>(registerDto, headers);
+        ResponseEntity<String> response = testRestTemplate.postForEntity("/api/auth/register", request, String.class);
+        Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode()); //no tiene gestion de errores para nulos son obligatorios en la tabla y da error 500
     }
 }

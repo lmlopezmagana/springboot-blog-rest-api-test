@@ -38,21 +38,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles({"test"})
-@Testcontainers
-@Sql(value = "classpath:import-integration.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@ActiveProfiles({"integration-test"})
+@Sql(value = "classpath:import-integration-post.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class PostIntegrationTest {
 
     @Autowired
     TestRestTemplate testRestTemplate;
     @Autowired
     JwtTokenProvider jwtProvider;
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer postgres = new PostgreSQLContainer(DockerImageName.parse("postgres:16-alpine"))
-            .withUsername("user")
-            .withPassword("user")
-            .withDatabaseName("test");
 
     @LocalServerPort
     int port;
@@ -75,7 +68,7 @@ public class PostIntegrationTest {
         postDto.setDescription("description");
         postDto.setContent("contenidos guapos");
         postDto.setComments(Set.of());
-        postDto.setCategoryId(1L);
+        postDto.setCategoryId(1000L);
         postDto.setId(1);
     }
 
@@ -108,11 +101,21 @@ public class PostIntegrationTest {
         ResponseEntity<PostDto> response = testRestTemplate.exchange("/api/posts", HttpMethod.POST, requestBodyHeaders, PostDto.class);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
+    @Test
+    void whenCreatePost_then404(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        postDto.setCategoryId(1L);
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(postDto, headers);
+        ResponseEntity<PostDto> response = testRestTemplate.exchange("/api/posts", HttpMethod.POST, requestBodyHeaders, PostDto.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
 
     @Test
     void whenGetAllPost_then200(){
         PostResponse postResponse = testRestTemplate.getForObject("/api/posts", PostResponse.class);
-        assertEquals(1, postResponse.getContent().size());
+        assertEquals(2, postResponse.getContent().size());
     }
 
     @Test

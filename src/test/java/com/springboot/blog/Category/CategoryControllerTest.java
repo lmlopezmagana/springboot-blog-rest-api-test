@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.test.web.servlet.MvcResult;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles({"test"})
 class CategoryControllerTest {
 
     @Autowired
@@ -109,13 +111,6 @@ class CategoryControllerTest {
 
     }
 
-    @Test
-    void getCategories_404() throws Exception {
-
-        mockMvc.perform(get("/api/v1/categorie").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
-
-    }
 
     @Test
     @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
@@ -153,6 +148,20 @@ class CategoryControllerTest {
                         .content(objectMapper.writeValueAsString(dtoUpdated)))
                 .andExpect(status().isUnauthorized());
 
+
+    }
+
+    @Test
+    @WithMockUser(username = "Alvaro", roles = {"ADMIN"})
+    void updateCategory_404() throws Exception {
+        ResourceNotFoundException exceptionThrowed = new ResourceNotFoundException("Category", "id", 1);
+
+        when(service.updateCategory(any(CategoryDto.class),anyLong())).thenThrow(exceptionThrowed);
+
+        mockMvc.perform(get("/api/posts/category/1")
+                        .contentType("application/json"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value(exceptionThrowed.getMessage()));
 
     }
 

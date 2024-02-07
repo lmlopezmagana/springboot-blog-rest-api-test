@@ -23,6 +23,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -54,6 +55,7 @@ import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles({"test"})
 public class PostControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -62,8 +64,6 @@ public class PostControllerTest {
 
     @MockBean
     PostService postService;
-
-    ModelMapper modelMapper = new ModelMapper();
 
     @Test
     @WithMockUser(username = "Javi", roles = {"ADMIN"})

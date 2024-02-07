@@ -180,7 +180,7 @@ class CommentControllerWSecurityTest {
         updatedComment.setBody("Un comentario guapo");
 
         Mockito.when(commentService.updateComment(postId, commentId, updatedComment)).thenReturn(updatedComment);
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
                     .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedComment)))
                 .andExpect(status().isOk())

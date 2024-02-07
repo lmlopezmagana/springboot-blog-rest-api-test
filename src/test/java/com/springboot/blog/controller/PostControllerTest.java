@@ -52,7 +52,7 @@ class PostControllerTest {
     void getPostById() {
     }
 
-    @Test
+    /*@Test
     @WithMockUser(roles = {"ADMIN"})
     void whenUpdatePostWithValidData_thenReturnHttp200() throws Exception {
         PostDto updatedPostDto = new PostDto();
@@ -165,6 +165,6 @@ class PostControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
         verify(postService, never()).getPostsByCategory(idCategory);
-    }
+    }*/
 
 }

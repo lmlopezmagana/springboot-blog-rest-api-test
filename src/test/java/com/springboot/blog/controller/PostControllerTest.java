@@ -2,6 +2,7 @@ package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.payload.PostDto;
+import com.springboot.blog.service.CategoryService;
 import com.springboot.blog.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,7 @@ class PostControllerTest {
     private ObjectMapper objectMapper;
     @MockBean
     private PostService postService;
+
     @InjectMocks
     private PostController commentController;
 
@@ -62,7 +64,7 @@ class PostControllerTest {
         updatedPostDto.setContent("Content");
 
         long postId = 1L;
-        when(categoryService.updatePost(updatedPostDto, postId)).thenReturn(updatedPostDto);
+        when(postService.updatePost(updatedPostDto, postId)).thenReturn(updatedPostDto);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/posts/{id}", postId)
                         .content(objectMapper.writeValueAsString(updatedPostDto))
@@ -70,7 +72,7 @@ class PostControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.title").value(updatedPostDto.getTitle()));
-        verify(categoryService, times(1)).updatePost(updatedPostDto, postId);
+        verify(postService, times(1)).updatePost(updatedPostDto, postId);
     }
     @Test
     @WithMockUser(authorities = {"USER"})
@@ -88,7 +90,7 @@ class PostControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnauthorized());
-        verify(categoryService, never()).updatePost(updatedPostDto, postId);
+        verify(postService, never()).updatePost(updatedPostDto, postId);
     }
 
 
@@ -105,7 +107,7 @@ class PostControllerTest {
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
 
-        verify(categoryService, never()).updatePost(updatedPostDto, postId);
+        verify(postService, never()).updatePost(updatedPostDto, postId);
     }
 
 

@@ -67,6 +67,7 @@ class CategoryControllerWOSecurityTest {
                 .andExpect(status().isOk());
     }
 
+
     @Test
     void getCategories() throws Exception {
         CategoryDto categoryDto = new CategoryDto(1L, "Ropa", "Esto es una buena categoria");
@@ -82,6 +83,9 @@ class CategoryControllerWOSecurityTest {
                 .andExpect(content().json(objectMapper.writeValueAsString(categories)));
     }
 
+    @Test
+    void updateCategory() {
+    }
 
     @Test
     void deleteCategory() {

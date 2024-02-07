@@ -1,6 +1,5 @@
 package com.springboot.blog.service;
 
-import com.springboot.blog.entity.Category;
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.BlogAPIException;
@@ -9,8 +8,6 @@ import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.impl.CommentServiceImpl;
-import org.checkerframework.checker.units.qual.C;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -20,14 +17,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CommentServiceTest {
@@ -46,6 +38,37 @@ class CommentServiceTest {
 
     @Test
     void createComment() {
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(1L);
+        commentDto.setName("Paco");
+        commentDto.setEmail("paco@gmail.com");
+        commentDto.setBody("Lorem ipsum dolor sit amet");
+
+        Post post = new Post(
+                1L,
+                "Title",
+                "Lorem ipsum dolor sit amet",
+                "asdfasdf",
+                new HashSet<>(),
+                new Category()
+        );
+
+        Comment comment = new Comment();
+        comment.setId(commentDto.getId());
+        comment.setName(commentDto.getName());
+        comment.setBody(commentDto.getBody());
+        comment.setEmail(commentDto.getEmail());
+        comment.setPost(post);
+
+        Mockito.when(modelMapper.map(commentDto, Comment.class)).thenReturn(comment);
+        Mockito.when(postRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(post));
+        Mockito.when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(comment);
+
+        CommentDto result = commentService.createComment(post.getId(), commentDto);
+
+        assertEquals("Paco", result.getName());
+        Mockito.verify(commentRepository, Mockito.times(1)).save(Mockito.any(Comment.class));
+        Mockito.verify(postRepository).findById(eq(1L));
     }
 
     @Test

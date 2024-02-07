@@ -26,6 +26,7 @@ import org.testcontainers.utility.DockerImageName;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -67,28 +68,26 @@ public class CategoryControllerIntegration {
     }
 
     @Test
-    public void findCategoryById_thenReturnOk() throws Exception {
-
-        Long idCategory = 1L;
+    public void getCategory_thenReturnOk() throws Exception{
+        long categoryId = 1L;
 
         TestRestTemplate testRestTemplate = new TestRestTemplate();
 
-        ResponseEntity<CategoryDto> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/v1/categories/" + idCategory, CategoryDto.class);
-        assertEquals(200,response.getStatusCode().value());
-        assertEquals("Teal",response.getBody().getName());
+        ResponseEntity<CategoryDto> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/v1/categories/" + categoryId, CategoryDto.class);
 
+        assertEquals(200,response.getStatusCode().value());
+        assertEquals("Teal", Objects.requireNonNull(response.getBody()).getName());
     }
 
     @Test
-    public void findCategoryById_thenNotFound() throws Exception {
-
-        Long idCategory = 1000L;
+    public void getCategory_thenNotFound() throws Exception{
+        long idCategory = 7L;
 
         TestRestTemplate testRestTemplate = new TestRestTemplate();
 
         ResponseEntity<CategoryDto> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/v1/categories/" + idCategory, CategoryDto.class);
-        assertEquals(404,response.getStatusCode().value());
 
+        assertEquals(404,response.getStatusCode().value());
     }
 
     @Test

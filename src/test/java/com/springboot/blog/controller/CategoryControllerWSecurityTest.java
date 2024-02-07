@@ -3,6 +3,7 @@ package com.springboot.blog.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.security.JwtTokenProvider;
+import com.springboot.blog.service.CategoryService;
 import com.springboot.blog.service.impl.CategoryServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,8 @@ import org.springframework.web.context.WebApplicationContext;
 import static org.mockito.Mockito.never;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(CategoryController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 public class CategoryControllerWSecurityTest {
 
     @Autowired
@@ -36,17 +38,11 @@ public class CategoryControllerWSecurityTest {
     private CategoryController categoryController;
 
     @MockBean
-    private CategoryServiceImpl categoryService;
-
-   @MockBean
-    private JwtTokenProvider jwtTokenProvider;
-   @Autowired
-    private WebApplicationContext webApplicationContext;
+    private CategoryService categoryService;
 
     @BeforeEach
-   public void setup(){
-     mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();}
-
+   public void setup() {
+    }
     @Test
     @WithMockUser(username = "username", roles = "{ADMIN}")
     void addCategoryWithResponse201Created() throws Exception {

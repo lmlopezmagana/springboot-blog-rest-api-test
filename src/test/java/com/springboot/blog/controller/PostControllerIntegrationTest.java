@@ -20,6 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -104,7 +105,7 @@ class PostControllerIntegrationTest {
 
     //Marco Pertegal
     @Test
-    void whenFindCategoriesThenReturn200() {
+    void whenFindAllPostThenReturn200() {
         ResponseEntity<PostResponse> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts",
                 HttpMethod.GET, new HttpEntity<>(userHeaders), PostResponse.class);
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -185,7 +186,32 @@ class PostControllerIntegrationTest {
     void deletePost() {
     }
 
+    //Marco Pertegal
     @Test
-    void getPostsByCategory() {
+    void whenCategoryIdFoundAndFoundPostsThenReturn200() {
+        Long categoryId = 1L;
+        ResponseEntity<List<PostDto>> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/posts/category/{id}",
+                HttpMethod.GET,
+                new HttpEntity<>(userHeaders),
+                new ParameterizedTypeReference<List<PostDto>>() {},
+                categoryId);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(8, response.getBody().get(0).getId());
+        assertEquals("Chief Design Engineer",response.getBody().get(0).getTitle());
+    }
+    //Marco Pertegal
+    @Test
+    void whenCategoryIdNotFoundThenReturnException() {
+        Long categoryId = 3L;
+        ResponseEntity<List<PostDto>> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/posts/category/{id}",
+                HttpMethod.GET,
+                new HttpEntity<>(userHeaders),
+                new ParameterizedTypeReference<List<PostDto>>() {},
+                categoryId
+        );
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 }

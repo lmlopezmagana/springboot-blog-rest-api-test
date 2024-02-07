@@ -7,8 +7,6 @@ import com.springboot.blog.security.JwtTokenProvider;
 import io.jsonwebtoken.lang.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -16,24 +14,12 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.client.*;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
-import org.springframework.util.CollectionUtils;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -107,8 +93,23 @@ class CategoryControllerIntegrationTest {
         updatedCategoryDto.setName("Name");
         updatedCategoryDto.setDescription("Description");
     }
+
+    //Alejandro Rubens
     @Test
-    void addCategory() {
+    void addCategory_response400() {
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/categories",
+                HttpMethod.POST,new HttpEntity<>(adminHeaders), CategoryDto.class);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+    //Alejandro Rubens
+    @Test
+    void addCategory_response201() {
+        CategoryDto categoryDto = new CategoryDto(13L, "nombre", "descripcion");
+        ResponseEntity<CategoryDto> response = testRestTemplate.exchange("http://localhost:"+port+"/api/v1/categories",
+                HttpMethod.POST, new HttpEntity<>(categoryDto, adminHeaders), CategoryDto.class);
+        System.out.println(response);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
 
     // Cristian Pulido

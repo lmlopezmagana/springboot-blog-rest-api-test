@@ -1,7 +1,12 @@
 package com.springboot.blog.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.blog.entity.Comment;
+import com.springboot.blog.entity.Post;
+import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.service.CommentService;
+import com.springboot.blog.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,7 +20,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @AutoConfigureMockMvc
@@ -41,7 +49,7 @@ class CommentControllerTest {
         commentDto.setBody("Me ha encantado la reseña");
         commentDto.setEmail("sebas@gmail.com");
         commentDto.setName("Sebastián");
-
+        when(commentService.getCommentById(1L, 1L)).thenReturn(commentDto);
     }
 
     //Sebastián Millán
@@ -52,7 +60,7 @@ class CommentControllerTest {
                         content(objectMapper.writeValueAsString(commentDto))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
-                        .andExpect(status().isCreated());
+                .andExpect(status().isCreated());
         verify(commentService, times(1)).createComment(postId, commentDto);
 
     }
@@ -89,7 +97,7 @@ class CommentControllerTest {
     //Sebastián Millán
     @Test
     void whenPostIdExistsAndAuth_thenReturnHttp200() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{postId}/comments",postId)
+        mockMvc.perform(get("/api/v1/posts/{postId}/comments",postId)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
         verify(commentService, times(1)).getCommentsByPostId(postId);
@@ -97,21 +105,73 @@ class CommentControllerTest {
     //Sebastián Millán
     @Test
     void whenPostIdIsWrongAndAuth_thenReturnHttp401() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{postId}/comments","a")
+        mockMvc.perform(get("/api/v1/posts/{postId}/comments","a")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
         verify(commentService, never()).getCommentsByPostId(postId);
     }
 
+    //Alejandro Rubens
     @Test
-    void getCommentById() {
+    void getCommentById_expectedResponse200() throws Exception{
+        mockMvc.perform(get("/api/v1/posts/{postId}/comments/{id}",1L, 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id",is(1)))
+                .andExpect(jsonPath("$.name",is(commentDto.getName())))
+                .andExpect(jsonPath("$.email",is(commentDto.getEmail())))
+                .andExpect(jsonPath("$.body",is(commentDto.getBody())));
+    }
+    //Alejandro Rubens
+    @Test
+    void getCommentById_expectedResponse200EmptyBody() throws Exception{
+        mockMvc.perform(get("/api/v1/posts/{postId}/comments/{id}",1L, 2L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string(""));
+    }
+    //Alejandro Rubens
+    @Test
+    void getCommentById_expectedResponse400() throws Exception{
+        mockMvc.perform(get("/api/v1/posts/{postId}/comments/{id}",1L, "s")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
     void updateComment() {
     }
 
+    //Alejandro Rubens
     @Test
-    void deleteComment() {
+    @WithMockUser(roles = {"ADMIN"})
+    void deleteComment_expectedResponse200() throws Exception{
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}",1L, 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Comment deleted successfully"));
+    }
+
+    @Test
+    void deleteComment_expectedResponse401() throws Exception{
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}",1L, 1L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized());
+    }
+
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    void deleteComment_expectedResponse200ButNonExistingComment() throws Exception{
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}",1L, 2L)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    void deleteComment_expectedResponse400() throws Exception{
+        mockMvc.perform(delete("/api/v1/posts/{postId}/comments/{id}",1L, "s")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 }

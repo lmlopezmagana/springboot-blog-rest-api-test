@@ -27,8 +27,7 @@ import org.testcontainers.utility.DockerImageName;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles({"test"})
-@Testcontainers
+@ActiveProfiles({"integration-test"})
 @Sql(value = "classpath:import-integration.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(scripts = "classpath:cleanup.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 
@@ -36,13 +35,6 @@ public class AuthIntegrationTest {
 
     @Autowired
     TestRestTemplate testRestTemplate;
-
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer postgres = new PostgreSQLContainer(DockerImageName.parse("postgres:16-alpine"))
-            .withUsername("user")
-            .withPassword("user")
-            .withDatabaseName("test");
 
     LoginDto loginDto = new LoginDto();
 

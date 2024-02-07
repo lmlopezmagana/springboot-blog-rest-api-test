@@ -1,15 +1,14 @@
 package com.springboot.blog.controller;
 
+
+import com.springboot.blog.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springboot.blog.entity.Comment;
-import com.springboot.blog.entity.Post;
-import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.service.CommentService;
-import com.springboot.blog.service.PostService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,8 +17,9 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -138,8 +138,43 @@ class CommentControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    //Marco Pertegal
     @Test
-    void updateComment() {
+    @WithMockUser(username = "Leticia",  roles = {"USER","ADMIN"})
+    void whenCorrectDataThenReturn200() throws Exception{
+        Mockito.when(commentService.updateComment(postId, commentDto.getId(), commentDto)).thenReturn(commentDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentDto.getId())
+                                .content(objectMapper.writeValueAsString(commentDto))
+                                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.body", is(commentDto.getBody())));
+    }
+    //Marco Pertegal
+    @Test
+    @WithMockUser(username = "Leticia",  roles = {"USER","ADMIN"})
+    void whenPostIdNotFoundThenReturn404() throws Exception{
+
+        Mockito.doThrow(new ResourceNotFoundException("Post", "id", postId))
+                .when(commentService).updateComment(postId, commentDto.getId(), commentDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentDto.getId(), commentDto)
+                        .content(objectMapper.writeValueAsString(commentDto))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+    //Marco Pertegal
+    @Test
+    @WithMockUser(username = "Leticia",  roles = {"USER","ADMIN"})
+    void whenCommentIdNotFoundThenReturn404() throws Exception{
+
+        Mockito.doThrow(new ResourceNotFoundException("Comment", "id", commentDto.getId()))
+                .when(commentService).updateComment(postId, commentDto.getId(), commentDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentDto.getId(), commentDto)
+                        .content(objectMapper.writeValueAsString(commentDto))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
     //Alejandro Rubens

@@ -27,13 +27,11 @@ import static org.mockito.ArgumentMatchers.any;
 import java.util.HashSet;
 import java.util.Optional;
 
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
 class PostServiceImplTest {
-
 
     @InjectMocks
     private PostServiceImpl postService;

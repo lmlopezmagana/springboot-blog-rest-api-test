@@ -5,6 +5,7 @@ import com.springboot.blog.entity.User;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.payload.JWTAuthResponse;
 import com.springboot.blog.payload.LoginDto;
+import com.springboot.blog.payload.RegisterDto;
 import com.springboot.blog.security.JwtTokenProvider;
 import io.jsonwebtoken.lang.Collections;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,11 +43,14 @@ class AuthControllerIntegrationTest {
     private LoginDto loginDto;
     private LoginDto notRegisterLoginDto;
 
+    private RegisterDto registerDto;
+
     @BeforeEach
     void setUp(){
         testRestTemplate.getRestTemplate().setRequestFactory(new HttpComponentsClientHttpRequestFactory());
         loginDto= new LoginDto("wbahls2r","sQ0|KHKUN$I|/*");
         notRegisterLoginDto = new LoginDto("username", "pass");
+        registerDto = new RegisterDto("name", "username", "email@email.com", "securepassword");
 
 
         User user = new User(1L,"Micah Eakle","meakle0","meakle0@newsvine.com", "kJ3(1SY6uMM", Set.of(new Role((short)1,"ADMIN")));
@@ -56,6 +60,7 @@ class AuthControllerIntegrationTest {
         adminHeaders.setContentType(MediaType.APPLICATION_JSON);
         adminHeaders.setBearerAuth(token);
     }
+
 
     //Sebastián Millán
     @Test
@@ -76,7 +81,13 @@ class AuthControllerIntegrationTest {
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
+    //Alejandro Rubens
     @Test
     void register() {
+        ResponseEntity<JWTAuthResponse> response = testRestTemplate.postForEntity("http://localhost:"+port+"/api/auth/register",
+                new HttpEntity<>(registerDto ,adminHeaders), JWTAuthResponse.class);
+        System.out.println(response);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
     }
 }

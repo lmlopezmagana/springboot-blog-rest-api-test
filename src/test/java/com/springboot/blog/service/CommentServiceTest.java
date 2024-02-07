@@ -1,5 +1,6 @@
 package com.springboot.blog.service;
 
+import com.springboot.blog.entity.Category;
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.BlogAPIException;
@@ -8,75 +9,70 @@ import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.impl.CommentServiceImpl;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import static org.mockito.ArgumentMatchers.any;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 
+import java.util.HashSet;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
 
 @ExtendWith(MockitoExtension.class)
 class CommentServiceTest {
 
     @Mock
-    static CommentRepository commentRepository;
+    private PostRepository postRepository;
+
     @Mock
-    static PostRepository postRepository;
-    static ModelMapper modelMapper = new ModelMapper();
-    static Post p = Mockito.mock(Post.class);
-    static Comment comment = new Comment();
-    static CommentDto c = new CommentDto();
+    private CommentRepository commentRepository;
+
+    @Mock
+    private ModelMapper modelMapper;
 
     @InjectMocks
-    static CommentService commentService = new CommentServiceImpl(commentRepository, postRepository, modelMapper);
-
-    @BeforeAll
-    static void init() {
-        c.setId(2L);
-        c.setName("Comment name");
-        c.setBody("Comment body");
-        c.setEmail("email@email.com");
-
-        comment = modelMapper.map(c, Comment.class);
-
-        comment.setPost(p);
-    }
+    private CommentServiceImpl commentService;
 
     @Test
     void createComment() {
-        long postId = 1L;
-        long commentId = 1L;
-        Post post = new Post();
-        post.setId(1L);
-        Comment comment = new Comment();
-        comment.setId(1L);
-        comment.setPost(post);
         CommentDto commentDto = new CommentDto();
-        commentDto.setId(commentId);
+        commentDto.setId(1L);
         commentDto.setName("Paco");
         commentDto.setEmail("paco@gmail.com");
         commentDto.setBody("Lorem ipsum dolor sit amet");
 
-        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.of(post));
+        Post post = new Post(
+                1L,
+                "Title",
+                "Lorem ipsum dolor sit amet",
+                "asdfasdf",
+                new HashSet<>(),
+                new Category()
+        );
+
+        Comment comment = new Comment();
+        comment.setId(commentDto.getId());
+        comment.setName(commentDto.getName());
+        comment.setBody(commentDto.getBody());
+        comment.setEmail(commentDto.getEmail());
+        comment.setPost(post);
+
         Mockito.when(modelMapper.map(commentDto, Comment.class)).thenReturn(comment);
+        Mockito.when(postRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(post));
         Mockito.when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(comment);
 
         CommentDto result = commentService.createComment(post.getId(), commentDto);
 
-        Mockito.verify(postRepository).findById(commentDto.getId());
-        Mockito.verify(commentRepository).save(any(Comment.class));
-
-        assertEquals(commentDto.getName(), result.getName());
-        assertEquals(commentDto.getEmail(), result.getEmail());
-        assertEquals(commentDto.getBody(), result.getBody());
+        assertEquals("Paco", result.getName());
+        Mockito.verify(commentRepository, Mockito.times(1)).save(Mockito.any(Comment.class));
+        Mockito.verify(postRepository).findById(eq(1L));
     }
 
     @Test

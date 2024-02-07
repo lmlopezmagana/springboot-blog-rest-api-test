@@ -161,6 +161,7 @@ class CategoryControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
+    //Cristian Pulido
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void whenDeleteCategoryExistsAndAdminRole_thenReturnHttp200() throws Exception {
@@ -172,6 +173,7 @@ class CategoryControllerTest {
         verify(categoryService).deleteCategory(categoryId);
     }
 
+    //Cristian Pulido
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void whenDeleteCategoryNotExistsAndAdminRole_thenReturnHttp400() throws Exception {
@@ -183,6 +185,7 @@ class CategoryControllerTest {
         verify(categoryService, never()).deleteCategory(nonExistentCategoryId);
     }
 
+    //Cristian Pulido
     @Test
     @WithMockUser()
     void whenDeleteCategoryAndUserRole_thenReturnHttp401() throws Exception {

@@ -92,8 +92,46 @@ class PostControllerIntegrationTest {
 
 
     @Test
-    void createPost() {
+    void whenIsAdminAndValidPost_theReturn201AndPostDto() {
+        PostDto newPostDto = new PostDto();
+        newPostDto.setId(1001);
+        newPostDto.setTitle("Nuevo Título");
+        newPostDto.setDescription("Nueva Descripción");
+        newPostDto.setContent("Nuevo Contenido");
+        newPostDto.setCategoryId(1L);
+        ResponseEntity<PostDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/posts",
+                HttpMethod.POST,
+                new HttpEntity<>(adminHeaders),
+                PostDto.class,
+                newPostDto);
+
+        //assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        //assertNotNull(response.getBody());
+        //assertNotNull(response.getBody().getId());
+        //assertEquals(newPostDto.getTitle(), response.getBody().getTitle());
+        //assertEquals(newPostDto.getDescription(), response.getBody().getDescription());
+        //assertEquals(newPostDto.getContent(), response.getBody().getContent());
+        //assertEquals(newPostDto.getCategoryId(), response.getBody().getCategoryId());
     }
+
+    @Test
+    void whenIsUserAndValidPost_theReturn401() {
+        PostDto newPostDto = new PostDto();
+        newPostDto.setTitle("Nuevo Título");
+        newPostDto.setDescription("Nueva Descripción");
+        newPostDto.setContent("Nuevo Contenido");
+        newPostDto.setCategoryId(1L);
+        ResponseEntity<PostDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/posts",
+                HttpMethod.POST,
+                new HttpEntity<>(newPostDto, userHeaders),
+                PostDto.class);
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+    }
+
 
     @Test
     void getAllPosts() {

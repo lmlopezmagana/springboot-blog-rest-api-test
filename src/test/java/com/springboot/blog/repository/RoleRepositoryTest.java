@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Testcontainers
 @Sql(value = "classpath:insert-test.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = "classpath:delete-test.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+//Cristian Pulido entiry tests
 class RoleRepositoryTest {
 
     @Autowired

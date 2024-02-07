@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="">
+    <list default="true" id="80fec2b0-20e1-42ee-adc2-ba8c7e5cc474" name="Changes" comment="Cambios locos de Luismi">
       <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CommentControllerWSecurityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/CommentControllerWSecurityTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,24 +50,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.CommentControllerWSecurityTest.getCommentByIdWithAnInvalidCommentIdWithStatusCode404NotFound.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CommentControllerWSecurityTest.getCommentByIdWithStatusCode200_OK.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CommentControllerWSecurityTest.getCommentByIdWithValidCommentAndEmptyPostWithStatusCode404NotFound.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CommentControllerWSecurityTest.getCommentByIdWithValidPostAndEmptyCommentWithStatusCode404NotFound.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CommentServiceTest.getCommentByIdWithAValidCommentIdButInvalidPostIdThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CommentServiceTest.getCommentByIdWithAValidPostIdButInvalidCommentIdThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CommentServiceTest.getCommentByIdWithAnInvalidCommentIdThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CommentServiceTest.getCommentByIdWithEmptyContentThrowException.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.CommentServiceTest.getCommentByIdWithSuccess.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;arreglo-seguridad&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexl/Desktop/springboot-blog-rest-api-test&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.CommentControllerWSecurityTest.getCommentByIdWithAnInvalidCommentIdWithStatusCode404NotFound.executor": "Run",
+    "JUnit.CommentControllerWSecurityTest.getCommentByIdWithStatusCode200_OK.executor": "Run",
+    "JUnit.CommentControllerWSecurityTest.getCommentByIdWithValidCommentAndEmptyPostWithStatusCode404NotFound.executor": "Run",
+    "JUnit.CommentControllerWSecurityTest.getCommentByIdWithValidPostAndEmptyCommentWithStatusCode404NotFound.executor": "Run",
+    "JUnit.CommentServiceTest.getCommentByIdWithAValidCommentIdButInvalidPostIdThrowException.executor": "Run",
+    "JUnit.CommentServiceTest.getCommentByIdWithAValidPostIdButInvalidCommentIdThrowException.executor": "Run",
+    "JUnit.CommentServiceTest.getCommentByIdWithAnInvalidCommentIdThrowException.executor": "Run",
+    "JUnit.CommentServiceTest.getCommentByIdWithEmptyContentThrowException.executor": "Run",
+    "JUnit.CommentServiceTest.getCommentByIdWithSuccess.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "integration-deletepostbyid2",
+    "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
   }
-}</component>
+}]]></component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn compile" />
@@ -187,7 +187,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Cambios locos de Luismi" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambios locos de Luismi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

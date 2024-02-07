@@ -6,14 +6,20 @@ import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.security.JwtTokenProvider;
+import com.springboot.blog.service.CommentService;
 import com.springboot.blog.service.impl.CommentServiceImpl;
-import jakarta.validation.constraints.NotNull;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +28,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -32,11 +39,14 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(CommentController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class CommentControllerWSecurityTest {
 
+    //Un comentario
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -44,16 +54,10 @@ class CommentControllerWSecurityTest {
     @InjectMocks
     private CommentController commentController;
     @MockBean
-    private CommentServiceImpl commentService;
-    @MockBean
-    private JwtTokenProvider jwtTokenProvider;
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+    private CommentService commentService;
 
     @BeforeEach
     public void setup() {
-        //Init MockMvc Object and build
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
 
@@ -140,13 +144,13 @@ class CommentControllerWSecurityTest {
     @Test
     @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
     void getCommentByIdWithValidCommentAndEmptyPostWithStatusCode404NotFound() throws Exception {
-        Long postId = null;
+        Long postId = 277L;
         Long commentId = 1L;
         CommentDto commentDto = new CommentDto();
         commentDto.setId(commentId);
         commentDto.setBody("Comment");
 
-        Mockito.when(commentService.getCommentById(postId, commentId)).thenReturn(commentDto);
+        Mockito.when(commentService.getCommentById(postId, commentId)).thenThrow(ResourceNotFoundException.class);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{postId}/comments/{id}", postId, commentId))
                 .andExpect(status().isNotFound());
@@ -164,6 +168,7 @@ class CommentControllerWSecurityTest {
                 .andExpect(status().isNotFound());
     }
 
+
     @Test
     @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
     void updateComment_Succesful() throws Exception {
@@ -176,12 +181,12 @@ class CommentControllerWSecurityTest {
         updatedComment.setBody("Un comentario guapo");
 
         Mockito.when(commentService.updateComment(postId, commentId, updatedComment)).thenReturn(updatedComment);
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
                     .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedComment)))
-                .andExpect(status().isOk()).andReturn();
-
-        result.getResponse().getContentAsByteArray().toString();
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name", is(updatedComment.getName())));
     }
 
     @Test

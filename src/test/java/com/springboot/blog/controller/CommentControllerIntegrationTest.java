@@ -3,10 +3,10 @@ package com.springboot.blog.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.entity.Role;
 import com.springboot.blog.entity.User;
+import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.payload.LoginDto;
 import com.springboot.blog.security.JwtTokenProvider;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -161,30 +161,51 @@ public class CommentControllerIntegrationTest {
     }
 
     @Test
-    void getCommentByIdWith200_OKResponse(){
-        long commentId = 1L;
-        long postId = 1L;
+    void deleteComment_Ok(){
+        long postId = 1;
+        long commentId = 1;
 
-        CommentDto commentDto = new CommentDto();
-        commentDto.setId(commentId);
+
 
         String path = "http://localhost:"+port+"/api/v1/posts/"+postId+"/comments/"+commentId;
 
-       ResponseEntity<CommentDto> expectedResponse = testRestTemplate.getForEntity(path, CommentDto.class);
+        ResponseEntity<String> response = testRestTemplate.exchange(
+                path,HttpMethod.DELETE,new HttpEntity<>(null, headers),String.class);
 
-       assertEquals(HttpStatus.OK, expectedResponse.getStatusCode());
-       assertEquals(commentDto.getId(), expectedResponse.getBody().getId());
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals("Comment deleted successfully",response.getBody());
+
 
     }
 
-    
+    @Test
+    void deleteComment_NotFound(){
+        long postId = 10000;
+        long commentId = 1000;
+
+
+
+        String path = "http://localhost:"+port+"/api/v1/posts/"+postId+"/comments/"+commentId;
+
+        ResponseEntity<String> response = testRestTemplate.exchange(
+                path,HttpMethod.DELETE,new HttpEntity<>(null, headers),String.class);
+
+        assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
+    }
+
+    @Test
+    void deleteComment_BadRequest(){
+        long postId = 5;
+        long commentId = 1;
+
+
+
+        String path = "http://localhost:"+port+"/api/v1/posts/"+postId+"/comments/"+commentId;
+
+        ResponseEntity<String> response = testRestTemplate.exchange(
+                path,HttpMethod.DELETE,new HttpEntity<>(null, headers),String.class);
+
+        assertEquals(HttpStatus.BAD_REQUEST,response.getStatusCode());
+    }
+
 }
-/*
-@Test
-    public void getAllPosts_ReturnsOk(){
-        ResponseEntity<PostResponse> response = testRestTemplate.getForEntity("http://localhost:"+port+"/api/posts", PostResponse.class);
-        assertEquals(200, response.getStatusCode().value());
-        assertEquals(11, Objects.requireNonNull(response.getBody()).getTotalElements());
-        assertEquals(1, response.getBody().getContent().get(0).getId());
-    }
- */

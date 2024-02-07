@@ -1,6 +1,5 @@
 package com.springboot.blog.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.springboot.blog.payload.CategoryDto;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("integration-test")
-public class CategoryControllerIntegration {
+public class CategoryControllerIntegrationTest {
 
     @LocalServerPort
     private int port;

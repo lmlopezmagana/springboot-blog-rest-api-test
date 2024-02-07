@@ -70,14 +70,62 @@ class CommentControllerIntegrationTest {
         adminHeaders.setBearerAuth(adminToken);
     }
 
+    //Cristian Pulido
     @Test
-    void createComment() {
+    void whenCreateComment_thenReturnHttp201AndCommentDto() {
+        CommentDto newCommentDto = new CommentDto();
+        newCommentDto.setId(1000L);
+        newCommentDto.setName("Cristian");
+        newCommentDto.setEmail("rcallinan0@feedburner.com");
+        newCommentDto.setBody("Vasectomy");
+
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments",
+                HttpMethod.POST,
+                new HttpEntity<>(adminHeaders),
+                CommentDto.class,
+                newCommentDto);
+        System.out.println(newCommentDto);
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertNotNull(response.getBody().getId());
+        assertEquals(newCommentDto.getName(), response.getBody().getName());
+        assertEquals(newCommentDto.getEmail(), response.getBody().getEmail());
+        assertEquals(newCommentDto.getBody(), response.getBody().getBody());
+    }
+    //Cristian Pulido
+    @Test
+    void whenCreateCommentUnAuthorized_thenReturnHttp401() {
+        CommentDto newCommentDto = new CommentDto();
+        newCommentDto.setId(1000);
+        newCommentDto.setName("Nuevo comentario");
+        newCommentDto.setEmail("nuevo@ejemplo.com");
+        newCommentDto.setBody("Contenido del nuevo comentario");
+
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments",
+                HttpMethod.POST,
+                new HttpEntity<>(newCommentDto),
+                CommentDto.class);
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }
 
+
+    // Cristian Pulido
     @Test
-    void getCommentsByPostId() {
+    void whenCreateCommentWithInvalidData_thenReturnHttp400() {
+        CommentDto invalidCommentDto = new CommentDto();
+        ResponseEntity<String> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments",
+                HttpMethod.POST,
+                new HttpEntity<>(invalidCommentDto, adminHeaders),
+                String.class);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
+    //Cristian Pulido
     @Test
     void whenGetCommentById_thenReturnHttp200AndCommentDto() {
         ResponseEntity<CommentDto> response = testRestTemplate.exchange(

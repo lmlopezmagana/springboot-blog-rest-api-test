@@ -207,7 +207,6 @@ insert into posts (id, title, description, content, category_id) values (98, 'Ed
 insert into posts (id, title, description, content, category_id) values (99, 'Systems Administrator III', 'Terrorism involving chemical weapons, civilian injured, subs', 'High Dose Rate (HDR) Brachytherapy of Trachea using Palladium 103 (Pd-103)', 43);
 insert into posts (id, title, description, content, category_id) values (100, 'Food Chemist', 'Glaucoma secondary to oth eye disorders, bi, mild stage', 'Excision of Left Axilla, Percutaneous Approach, Diagnostic', 22);
 
-
 insert into comments (id, post_id, name, email, body) values (1, 66, 'Ravid Callinan', 'rcallinan0@feedburner.com', 'Vasectomy');
 insert into comments (id, post_id, name, email, body) values (2, 37, 'Daffie Carrell', 'dcarrell1@nationalgeographic.com', 'Control of (postoperative) hemorrhage of prostate');
 insert into comments (id, post_id, name, email, body) values (3, 2, 'Cherida Jacobsohn', 'cjacobsohn2@mit.edu', 'Open mediastinal biopsy');

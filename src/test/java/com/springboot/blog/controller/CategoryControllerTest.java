@@ -151,6 +151,34 @@ class CategoryControllerTest {
     }
 
     @Test
-    void deleteCategory() {
+    @WithMockUser(roles = {"ADMIN"})
+    void whenDeleteCategoryExistsAndAdminRole_thenReturnHttp200() throws Exception {
+        Long categoryId = 1L;
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/categories/{id}", categoryId))
+                .andExpect(status().isOk());
+
+        verify(categoryService).deleteCategory(categoryId);
+    }
+
+    @Test
+    @WithMockUser(roles = {"ADMIN"})
+    void whenDeleteCategoryNotExistsAndAdminRole_thenReturnHttp400() throws Exception {
+        Long nonExistentCategoryId = 99L;
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/categories/{id}","null"))
+                .andExpect(status().isBadRequest());
+
+        verify(categoryService, never()).deleteCategory(nonExistentCategoryId);
+    }
+
+    @Test
+    @WithMockUser()
+    void whenDeleteCategoryAndUserRole_thenReturnHttp401() throws Exception {
+        Long categoryId = 1L;
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/categories/{id}", categoryId))
+                .andExpect(status().isUnauthorized());
+
+        verify(categoryService, never()).deleteCategory(categoryId);
     }
 }

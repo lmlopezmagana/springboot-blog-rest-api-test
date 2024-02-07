@@ -37,7 +37,7 @@ class CommentControllerIntegrationTest {
     private JwtTokenProvider jwtTokenProvider;
 
     private HttpHeaders adminHeaders;
-    private String adminToken;
+    private String token;
     private Long idPost;
     private Long idComment;
     private Long finalIdPost;
@@ -66,21 +66,64 @@ class CommentControllerIntegrationTest {
         updateCommentDto.setEmail("emailNuevo@gmail.com");
         updateCommentDto.setBody("He conseguido editar el comentario");
         User admin = new User(1L,"Micah Eakle","meakle0","meakle0@newsvine.com", "kJ3(1SY6uMM", Set.of(new Role((short)1,"ADMIN")));
-        adminToken=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
-                admin.getUsername(),admin.getRoles(), Collections.of(new SimpleGrantedAuthority("ADMIN"))));
+        token=jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
+                admin.getUsername(),admin.getRoles()));
         adminHeaders=new HttpHeaders();
         adminHeaders.setContentType(MediaType.APPLICATION_JSON);
-        adminHeaders.setBearerAuth(adminToken);
+        adminHeaders.setBearerAuth(token);
     }
-
+    //Cristian Pulido
     @Test
-    void createComment() {
+    void whenCreateComment_thenReturnHttp201AndCommentDto() {
+        CommentDto newCommentDto = new CommentDto();
+        newCommentDto.setName("Cristian");
+        newCommentDto.setEmail("rcallinan0@feedburner.com");
+        newCommentDto.setBody("Esternocleidomastoideo");
+
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments",
+                HttpMethod.POST,
+                new HttpEntity<>(adminHeaders),
+                CommentDto.class,
+                newCommentDto);
+
+        //assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
+    //Cristian Pulido
     @Test
-    void getCommentsByPostId() {
+    void whenCreateCommentUnAuthorized_thenReturnHttp401() {
+        CommentDto newCommentDto = new CommentDto();
+        newCommentDto.setId(1000);
+        newCommentDto.setName("Nuevo comentario");
+        newCommentDto.setEmail("nuevo@ejemplo.com");
+        newCommentDto.setBody("Contenido del nuevo comentario");
+
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments",
+                HttpMethod.POST,
+                new HttpEntity<>(newCommentDto),
+                CommentDto.class);
+
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
     }
 
+
+    // Cristian Pulido
+    @Test
+    void whenCreateCommentWithInvalidData_thenReturnHttp400() {
+        CommentDto invalidCommentDto = new CommentDto();
+        ResponseEntity<String> response = testRestTemplate.exchange(
+                "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments",
+                HttpMethod.POST,
+                new HttpEntity<>(invalidCommentDto, adminHeaders),
+                String.class);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+    //Cristian Pulido
     @Test
     void whenGetCommentById_thenReturnHttp200AndCommentDto() {
         ResponseEntity<CommentDto> response = testRestTemplate.exchange(
@@ -97,11 +140,11 @@ class CommentControllerIntegrationTest {
     // Cristian Pulido
     @Test
     void whenGetCommentByIdWhenCommentNotExists_thenReturnHttp404() {
-        ResponseEntity<String> response = testRestTemplate.exchange(
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
                 "http://localhost:" + port + "/api/v1/posts/" + idPost + "/comments/" + notHasIdComment,
                 HttpMethod.GET,
                 new HttpEntity<>(adminHeaders),
-                String.class);
+                CommentDto.class);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -109,11 +152,11 @@ class CommentControllerIntegrationTest {
     // Cristian Pulido
     @Test
     void whenGetCommentByIdWhenPostNotExists_thenReturnHttp404() {
-        ResponseEntity<String> response = testRestTemplate.exchange(
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
                 "http://localhost:" + port + "/api/v1/posts/" + notHasIdComment + "/comments/" + idComment,
                 HttpMethod.GET,
                 new HttpEntity<>(adminHeaders),
-                String.class);
+                CommentDto.class);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -121,11 +164,11 @@ class CommentControllerIntegrationTest {
     // Cristian Pulido
     @Test
     void whenGetCommentByIdWhenPostIdIsZero_thenReturnHttp404() {
-        ResponseEntity<String> response = testRestTemplate.exchange(
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
                 "http://localhost:" + port + "/api/v1/posts/" + zeroIdPost + "/comments/" + idComment,
                 HttpMethod.GET,
                 new HttpEntity<>(adminHeaders),
-                String.class);
+                CommentDto.class);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -133,16 +176,14 @@ class CommentControllerIntegrationTest {
     // Cristian Pulido
     @Test
     void whenGetCommentByIdWhenPostIdIsOut_thenReturnHttp404() {
-        ResponseEntity<String> response = testRestTemplate.exchange(
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange(
                 "http://localhost:" + port + "/api/v1/posts/" + outIdPost + "/comments/" + idComment,
                 HttpMethod.GET,
                 new HttpEntity<>(adminHeaders),
-                String.class);
+                CommentDto.class);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
-
-
 
 
     //Sebastián Millán

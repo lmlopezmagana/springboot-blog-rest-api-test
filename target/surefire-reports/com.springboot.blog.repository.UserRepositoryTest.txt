@@ -1,17 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.springboot.blog.repository.UserRepositoryTest
 -------------------------------------------------------------------------------
-Tests run: 8, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 8.068 s <<< FAILURE! -- in com.springboot.blog.repository.UserRepositoryTest
-com.springboot.blog.repository.UserRepositoryTest.existsByEmailTrueStatement -- Time elapsed: 0.110 s <<< FAILURE!
-org.opentest4j.AssertionFailedError: 
-
-Expecting value to be true but was false
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
-	at com.springboot.blog.repository.UserRepositoryTest.existsByEmailTrueStatement(UserRepositoryTest.java:113)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.008 s -- in com.springboot.blog.repository.UserRepositoryTest

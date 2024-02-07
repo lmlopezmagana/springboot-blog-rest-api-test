@@ -45,7 +45,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 @Testcontainers
 @Sql(value = "classpath:import-integration-comment.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class CoomentIntegration {
-
+//
     @Autowired
     TestRestTemplate testRestTemplate;
     @Autowired

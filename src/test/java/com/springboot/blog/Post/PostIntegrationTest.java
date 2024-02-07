@@ -181,5 +181,59 @@ public class PostIntegrationTest {
         ResponseEntity<String> response = testRestTemplate.exchange("/api/posts/category/{id}", HttpMethod.GET, responseHeaders, String.class, 1);
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
+
+
+    @Test
+    void whebUpdatePost_then200(){
+        PostDto postDto = new PostDto();
+        postDto.setId(1001);
+        postDto.setDescription("Description");
+        postDto.setContent("contents");
+        postDto.setTitle("Title");
+        postDto.setCategoryId(1000L);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        HttpEntity<PostDto> responseHeader = new HttpEntity<>(postDto, headers);
+        ResponseEntity<PostDto> response = testRestTemplate.exchange("/api/posts/{id}", HttpMethod.PUT, responseHeader, PostDto.class, 1001);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(response.getBody().getDescription(), "Description");
+
+    }
+
+    @Test
+    void whebUpdatePost_then404(){
+        PostDto postDto = new PostDto();
+        postDto.setId(1001);
+        postDto.setDescription("Description");
+        postDto.setContent("contents");
+        postDto.setTitle("Title");
+        postDto.setCategoryId(1000L);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        HttpEntity<PostDto> responseHeader = new HttpEntity<>(postDto, headers);
+        ResponseEntity<PostDto> response = testRestTemplate.exchange("/api/posts/{id}", HttpMethod.PUT, responseHeader, PostDto.class, 1);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void whenUpdatePost_then400 (){
+        PostDto postDto = new PostDto();
+        postDto.setId(1001);
+        postDto.setDescription("Description");
+        postDto.setContent("contents");
+        postDto.setCategoryId(1000L);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        HttpEntity<PostDto> responseHeader = new HttpEntity<>(postDto, headers);
+        ResponseEntity<PostDto> response = testRestTemplate.exchange("/api/posts/{id}", HttpMethod.PUT, responseHeader, PostDto.class, 1);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
     
 }

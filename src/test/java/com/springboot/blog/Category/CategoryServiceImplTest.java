@@ -1,6 +1,7 @@
 package com.springboot.blog.Category;
 
 import com.springboot.blog.entity.Category;
+import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.repository.CategoryRepository;
 import com.springboot.blog.service.impl.CategoryServiceImpl;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -62,6 +64,17 @@ class CategoryServiceImplTest {
         assertEquals(result.getDescription(),"Posts de accion");
         assertEquals(result.getName(),"Accion");
         Assertions.assertNotEquals(2,result.getId());
+
+    }
+
+    @Test
+    void getCategory_WhenCategoryNotFound() {
+        Category category = new Category();
+        category.setId(1L);
+
+        when(repository.findById(category.getId())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> service.getCategory(category.getId()));
 
     }
 
@@ -111,6 +124,19 @@ class CategoryServiceImplTest {
     }
 
     @Test
+    void updateCategory_whenCategoryIdNotFound() {
+        Category c1 = new Category(1L,"Drama","Posts de drama", Collections.emptyList());
+        CategoryDto dto = new CategoryDto(1L, "Drama editado", "Descripcion editada");
+
+
+        when(repository.findById(c1.getId())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> service.updateCategory(dto, c1.getId()));
+
+    }
+
+
+    @Test
     void deleteCategory() {
         Category c1 = new Category(1L,"Drama","Posts de drama", Collections.emptyList());
 
@@ -119,6 +145,16 @@ class CategoryServiceImplTest {
         service.deleteCategory(c1.getId());
 
         verify(repository, times(1)).delete(c1);
+
+    }
+
+    @Test
+    void deleteCategory_whenCategoryIdNotFound() {
+        Category c1 = new Category(1L,"Drama","Posts de drama", Collections.emptyList());
+
+        when(repository.findById(c1.getId())).thenReturn(Optional.empty());
+
+        assertThrows(ResourceNotFoundException.class, () -> service.deleteCategory(c1.getId()));
 
     }
 }

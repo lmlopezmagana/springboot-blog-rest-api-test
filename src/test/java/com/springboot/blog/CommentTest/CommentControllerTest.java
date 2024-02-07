@@ -73,6 +73,28 @@ public class CommentControllerTest {
 
     @Test
     @WithMockUser(username = "Javi", roles = {"ADMIN"})
+    void testCreateComment400() throws  Exception{
+        Comment comment = new Comment(1L,"angel","angel@gmail","body",new Post());
+        long postId = 1L;
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(comment.getId());
+        commentDto.setName(comment.getName());
+        commentDto.setEmail(comment.getEmail());
+        commentDto.setBody(comment.getBody());
+        when(commentService.createComment(any(Long.class),any(CommentDto.class))).thenReturn(commentDto);
+        mockMvc.perform(post("/api/v1/posts/"+postId+"/comments")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(commentDto)).accept(APPLICATION_JSON)).andExpect(status().isBadRequest());
+
+        MvcResult mvcResult = mockMvc.perform(post("/api/v1/posts/"+postId+"/comments")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(commentDto)).accept(APPLICATION_JSON)).andReturn();
+
+        String resultado = mvcResult.getResponse().getContentAsString();
+        assertThat(resultado);
+    }
+    @Test
+    @WithMockUser(username = "Javi", roles = {"ADMIN"})
     void testGetByPostIdComment() throws  Exception{
         long postId = 1L;
         Comment comment = new Comment(1L,"hola","angel@gmail","bodyyyyyyyyyyyyy",new Post());
@@ -136,6 +158,28 @@ public class CommentControllerTest {
         String resultado = mvcResult.getResponse().getContentAsString();
 
         assertThat(resultado).isEqualToIgnoringCase(objectMapper.writeValueAsString(commentDto));
+    }
+    @Test
+    @WithMockUser(username = "Javi", roles = {"ADMIN"})
+    void testUpdateComment400 () throws Exception{
+        long postId = 1L;
+        long commentId = 1L;
+        Comment comment = new Comment(1L,"hola","angel@gmail","body",new Post());
+        CommentDto commentDto = new CommentDto();
+
+        commentDto.setName(comment.getName());
+        commentDto.setEmail(comment.getEmail());
+        commentDto.setBody(comment.getBody());
+        when(commentService.updateComment(any(Long.class),any(Long.class),any(CommentDto.class))).thenReturn(commentDto);
+
+        MvcResult mvcResult = mockMvc.perform(put("/api/v1/posts/"+postId+"/comments/"+commentId)
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(commentDto))
+                .accept(APPLICATION_JSON)).andExpect(status().isBadRequest()).andReturn();
+
+        String resultado = mvcResult.getResponse().getContentAsString();
+
+        assertThat(resultado);
     }
     @Test
     @WithMockUser(username = "Javi", roles = {"ADMIN"})

@@ -46,7 +46,6 @@ class PostServiceImplTest {
 
     //Marco Pertegal
     @Test
-    @Disabled
     void whenPostDtoThenCreateNewPost() {
         Long categoryId = 3L;
         PostDto postDto = new PostDto();

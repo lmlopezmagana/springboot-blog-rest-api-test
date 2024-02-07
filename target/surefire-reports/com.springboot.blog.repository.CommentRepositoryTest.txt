@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.springboot.blog.repository.CommentRepositoryTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 15.04 s <<< FAILURE! -- in com.springboot.blog.repository.CommentRepositoryTest
-com.springboot.blog.repository.CommentRepositoryTest.whenPostIdIsPresent_thenCommentListIsPresent -- Time elapsed: 0.450 s <<< FAILURE!
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 14.97 s <<< FAILURE! -- in com.springboot.blog.repository.CommentRepositoryTest
+com.springboot.blog.repository.CommentRepositoryTest.whenPostIdIsPresent_thenCommentListIsPresent -- Time elapsed: 0.101 s <<< FAILURE!
 org.opentest4j.AssertionFailedError: expected: <SebastiÃ¡n> but was: <Sebastián>
 	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
 	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)

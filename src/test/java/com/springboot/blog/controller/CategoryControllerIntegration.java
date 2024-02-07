@@ -70,24 +70,18 @@ public class CategoryControllerIntegration {
     @Test
     public void getCategory_thenReturnOk() throws Exception{
         long categoryId = 1L;
-
-        TestRestTemplate testRestTemplate = new TestRestTemplate();
-
-        ResponseEntity<CategoryDto> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/v1/categories/" + categoryId, CategoryDto.class);
-
-        assertEquals(200,response.getStatusCode().value());
-        assertEquals("Teal", Objects.requireNonNull(response.getBody()).getName());
+        TestRestTemplate restTemplate = new TestRestTemplate();
+        ResponseEntity<CategoryDto> categoryDtoResponseEntity = restTemplate.getForEntity("http://localhost:"+port+"/api/v1/categories/"+categoryId, CategoryDto.class);
+        assertEquals(200, categoryDtoResponseEntity.getStatusCode().value());
+        assertEquals("Teal", Objects.requireNonNull(categoryDtoResponseEntity.getBody()).getName());
     }
 
     @Test
-    public void getCategory_thenNotFound() throws Exception{
-        long idCategory = 7L;
-
-        TestRestTemplate testRestTemplate = new TestRestTemplate();
-
-        ResponseEntity<CategoryDto> response = testRestTemplate.getForEntity("http://localhost:" + port + "/api/v1/categories/" + idCategory, CategoryDto.class);
-
-        assertEquals(404,response.getStatusCode().value());
+    public void getCategory_thenNotFound() throws Exception {
+        long categoryId = 7L;
+        TestRestTemplate restTemplate = new TestRestTemplate();
+        ResponseEntity<CategoryDto> categoryDtoResponseEntity = restTemplate.getForEntity("http://localhost:" + port + "/api/v1/categories/" + categoryId, CategoryDto.class);
+        assertEquals(404, categoryDtoResponseEntity.getStatusCode().value());
     }
 
     @Test

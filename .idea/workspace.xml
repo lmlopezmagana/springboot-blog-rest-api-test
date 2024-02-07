@@ -8,8 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_02_2024_23_15__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_01_02_2024_23_15__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/PostControllerWOSecurityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/PostControllerWOSecurityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CommentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/CommentServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/PostServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/springboot/blog/service/PostServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,39 +49,69 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.CommentControllerWSecurityTest.getCommentByIdWithAnInvalidCommentIdWithStatusCode404NotFound.executor": "Run",
-    "JUnit.CommentControllerWSecurityTest.getCommentByIdWithStatusCode200_OK.executor": "Run",
-    "JUnit.CommentControllerWSecurityTest.getCommentByIdWithValidCommentAndEmptyPostWithStatusCode404NotFound.executor": "Run",
-    "JUnit.CommentControllerWSecurityTest.getCommentByIdWithValidPostAndEmptyCommentWithStatusCode404NotFound.executor": "Run",
-    "JUnit.CommentServiceTest.getCommentByIdWithAValidCommentIdButInvalidPostIdThrowException.executor": "Run",
-    "JUnit.CommentServiceTest.getCommentByIdWithAValidPostIdButInvalidCommentIdThrowException.executor": "Run",
-    "JUnit.CommentServiceTest.getCommentByIdWithAnInvalidCommentIdThrowException.executor": "Run",
-    "JUnit.CommentServiceTest.getCommentByIdWithEmptyContentThrowException.executor": "Run",
-    "JUnit.CommentServiceTest.getCommentByIdWithSuccess.executor": "Run",
-    "JUnit.PostControllerWOSecurityTest.getPostByIdWithIdNullOrNotExistsThrowException.executor": "Run",
-    "JUnit.PostControllerWOSecurityTest.getPostByIdWithStatusCode200_OK.executor": "Run",
-    "JUnit.PostServiceTest.getPostByIdWithIdNullOrNotExistsThrowException.executor": "Run",
-    "JUnit.PostServiceTest.getPostByIdWithIdNullThrowException.executor": "Run",
-    "JUnit.PostServiceTest.getPostByIdWithNullCategoryThrowException.executor": "Run",
-    "JUnit.PostServiceTest.getPostByIdWithSuccess.executor": "Run",
-    "JUnit.PostServiceTest.getPostsByCategory_CategoryNotFound.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "getPostById2.0ControllerAndService",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/alexl/Desktop/springboot-blog-rest-api-test"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.CommentControllerWSecurityTest.getCommentByIdWithAnInvalidCommentIdWithStatusCode404NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentControllerWSecurityTest.getCommentByIdWithStatusCode200_OK.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentControllerWSecurityTest.getCommentByIdWithValidCommentAndEmptyPostWithStatusCode404NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentControllerWSecurityTest.getCommentByIdWithValidPostAndEmptyCommentWithStatusCode404NotFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentServiceTest.getCommentByIdWithAValidCommentIdButInvalidPostIdThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentServiceTest.getCommentByIdWithAValidPostIdButInvalidCommentIdThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentServiceTest.getCommentByIdWithAnInvalidCommentIdThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentServiceTest.getCommentByIdWithEmptyContentThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CommentServiceTest.getCommentByIdWithSuccess.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostControllerWOSecurityTest.getPostByIdWithIdNullOrNotExistsThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostControllerWOSecurityTest.getPostByIdWithStatusCode200_OK.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostServiceTest.getPostByIdWithIdNullOrNotExistsThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostServiceTest.getPostByIdWithIdNullThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostServiceTest.getPostByIdWithNullCategoryThrowException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostServiceTest.getPostByIdWithSuccess.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PostServiceTest.getPostsByCategory_CategoryNotFound.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;getPostById2.0ControllerAndService&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/alexl/Desktop/springboot-blog-rest-api-test&quot;
   }
-}]]></component>
+}</component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
       <command value="mvn compile" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.PostControllerWOSecurityTest.getPostByIdWithStatusCode200_OK">
+  <component name="RunManager" selected="JUnit.CommentServiceTest">
+    <configuration name="CommentServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.CommentServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PostControllerWOSecurityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="springboot-blog-rest-api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.springboot.blog.controller" />
+      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.controller.PostControllerWOSecurityTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PostControllerWOSecurityTest.getPostByIdWithIdNullOrNotExistsThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
@@ -116,7 +144,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PostServiceTest.getPostByIdWithIdNullOrNotExistsThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PostServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
@@ -126,51 +154,18 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
       <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.PostServiceTest" />
-      <option name="METHOD_NAME" value="getPostByIdWithIdNullOrNotExistsThrowException" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PostServiceTest.getPostByIdWithIdNullThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.PostServiceTest" />
-      <option name="METHOD_NAME" value="getPostByIdWithIdNullThrowException" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PostServiceTest.getPostByIdWithNullCategoryThrowException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="springboot-blog-rest-api" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.springboot.blog.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.springboot.blog.service" />
-      <option name="MAIN_CLASS_NAME" value="com.springboot.blog.service.PostServiceTest" />
-      <option name="METHOD_NAME" value="getPostByIdWithNullCategoryThrowException" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CommentServiceTest" />
+        <item itemvalue="JUnit.PostServiceTest" />
+        <item itemvalue="JUnit.PostControllerWOSecurityTest" />
         <item itemvalue="JUnit.PostControllerWOSecurityTest.getPostByIdWithStatusCode200_OK" />
         <item itemvalue="JUnit.PostControllerWOSecurityTest.getPostByIdWithIdNullOrNotExistsThrowException" />
-        <item itemvalue="JUnit.PostServiceTest.getPostByIdWithIdNullOrNotExistsThrowException" />
-        <item itemvalue="JUnit.PostServiceTest.getPostByIdWithNullCategoryThrowException" />
-        <item itemvalue="JUnit.PostServiceTest.getPostByIdWithIdNullThrowException" />
       </list>
     </recent_temporary>
   </component>
@@ -215,11 +210,6 @@
           <option name="timeStamp" value="18" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/springboot/blog/controller/PostController.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/java/com/springboot/blog/controller/AuthControllerTest.java</url>
           <line>96</line>
           <option name="timeStamp" value="31" />
@@ -236,65 +226,65 @@
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest.ic" NAME="PostServiceTest Coverage Results" MODIFIED="1707062192340" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerIntegrationTest_whenLoginRegisteredUser_thenReturnOk.ic" NAME="AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk Coverage Results" MODIFIED="1707220877131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest_deletePostById.ic" NAME="PostServiceTest.deletePostById Coverage Results" MODIFIED="1707219923273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_updateComment_CommentNotFound.ic" NAME="CommentServiceTest.updateComment_CommentNotFound Coverage Results" MODIFIED="1706982727549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_getCommentsByPostId.ic" NAME="CommentServiceTest.getCommentsByPostId Coverage Results" MODIFIED="1707153536733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1706870424527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$SpringbootBlogRestApiApplicationTests.ic" NAME="SpringbootBlogRestApiApplicationTests Coverage Results" MODIFIED="1706790868690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest_testLogin.ic" NAME="AuthControllerTest.testLogin Coverage Results" MODIFIED="1706871884132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostControllerWOSecurityTest_getAllPosts.ic" NAME="PostControllerWOSecurityTest.getAllPosts Coverage Results" MODIFIED="1707063510445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest.ic" NAME="CommentServiceTest Coverage Results" MODIFIED="1707165084138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryServiceTest_updateCategory.ic" NAME="CategoryServiceTest.updateCategory Coverage Results" MODIFIED="1707050838490" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest_getAllPosts_OrderAsc.ic" NAME="PostServiceTest.getAllPosts_OrderAsc Coverage Results" MODIFIED="1707062156883" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentControllerWSecurityTest_getCommentsByPostId.ic" NAME="CommentControllerWSecurityTest.getCommentsByPostId Coverage Results" MODIFIED="1707162776659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706789829412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentControllerWSecurityTest_updateComment.ic" NAME="CommentControllerWSecurityTest.updateComment Coverage Results" MODIFIED="1706987933173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryServiceTest.ic" NAME="CategoryServiceTest Coverage Results" MODIFIED="1707051249576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_updateComment_Successful.ic" NAME="CommentServiceTest.updateComment_Successful Coverage Results" MODIFIED="1706984009664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.service.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryControllerWSecurity_updateCategory.ic" NAME="CategoryControllerWSecurity.updateCategory Coverage Results" MODIFIED="1707130843718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest_testLogin.ic" NAME="AuthControllerTest.testLogin Coverage Results" MODIFIED="1706871884132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryControllerTest_getCategories.ic" NAME="CategoryControllerTest.getCategories Coverage Results" MODIFIED="1706870432795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostControllerWOSecurityTest_getAllPosts.ic" NAME="PostControllerWOSecurityTest.getAllPosts Coverage Results" MODIFIED="1707063510445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest_getAllPosts_OrderAsc.ic" NAME="PostServiceTest.getAllPosts_OrderAsc Coverage Results" MODIFIED="1707062156883" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_updateComment_Successful.ic" NAME="CommentServiceTest.updateComment_Successful Coverage Results" MODIFIED="1706984009664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentControllerWSecurityTest_updateComment.ic" NAME="CommentControllerWSecurityTest.updateComment Coverage Results" MODIFIED="1706987933173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerIntegrationTest_whenLoginUnregisteredUser_thenReturn500.ic" NAME="AuthControllerIntegrationTest.whenLoginUnregisteredUser_thenReturn500 Coverage Results" MODIFIED="1707220843442" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest_deletePostById.ic" NAME="PostServiceTest.deletePostById Coverage Results" MODIFIED="1707219923273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthServiceTest.ic" NAME="AuthServiceTest Coverage Results" MODIFIED="1706789829412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerIntegrationTest_whenLoginRegisteredUser_thenReturnOk.ic" NAME="AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk Coverage Results" MODIFIED="1707220877131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryServiceTest.ic" NAME="CategoryServiceTest Coverage Results" MODIFIED="1707051249576" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1706870424527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentControllerWSecurityTest_getCommentsByPostId.ic" NAME="CommentControllerWSecurityTest.getCommentsByPostId Coverage Results" MODIFIED="1707162776659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_updateComment_CommentNotFound.ic" NAME="CommentServiceTest.updateComment_CommentNotFound Coverage Results" MODIFIED="1706982727549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest.ic" NAME="CommentServiceTest Coverage Results" MODIFIED="1706984022547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest_getPostsByCategory_CategoryNotFound.ic" NAME="PostServiceTest.getPostsByCategory_CategoryNotFound Coverage Results" MODIFIED="1707065491875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CategoryControllerWSecurity_updateCategory.ic" NAME="CategoryControllerWSecurity.updateCategory Coverage Results" MODIFIED="1707130843718" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
   </component>
 </project>

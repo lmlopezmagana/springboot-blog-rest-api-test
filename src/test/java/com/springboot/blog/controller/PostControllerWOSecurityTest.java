@@ -94,7 +94,7 @@ class PostControllerWOSecurityTest {
 
         Mockito.when(postService.getPostById(postId)).thenReturn(postDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{id}", postDto.getId()))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/{id}", postDto.getId()))
                 .andExpect(status().isOk());
     }
 

@@ -31,7 +31,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles({"integration-test"})
-@Testcontainers
 @Sql(value = "classpath:import-integration-category.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class CategoryIntegrationTest {
 

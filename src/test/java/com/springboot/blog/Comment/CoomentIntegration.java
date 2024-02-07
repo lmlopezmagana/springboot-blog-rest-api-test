@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,7 +35,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -90,9 +93,131 @@ public class CoomentIntegration {
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
     }
     @Test
-    void getCommentByIdPostTest(){
-        CommentDto commentDtos = testRestTemplate.exchange("/api/v1/posts/"+1000L+"/comments",HttpMethod.GET,CommentDto);
-
-        assertEquals(1,commentDtos);
+    void createCommentWithInvalidPostId(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(commentDto, headers);
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("/api/v1/posts/"+9999L+"/comments", HttpMethod.POST, requestBodyHeaders, CommentDto.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
+
+    @Test
+    void createCommentWithInvalidData(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        commentDto.setEmail("invalid email");
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(commentDto, headers);
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("/api/v1/posts/"+1000L+"/comments", HttpMethod.POST, requestBodyHeaders, CommentDto.class);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+
+    @Test
+    void getCommentByIdPostTest(){
+        ResponseEntity<List<CommentDto>> response = testRestTemplate.exchange(
+                "/api/v1/posts/"+1000L+"/comments",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<CommentDto>>() {}
+        );
+
+        List<CommentDto> commentDtos = response.getBody();
+
+        assertFalse(commentDtos.isEmpty());
+        assertEquals(1, commentDtos.size());
+        assertEquals("angel", commentDtos.get(0).getName());
+        assertEquals("bodyyyyyyyyyyyyyyy", commentDtos.get(0).getBody());
+        assertEquals("angel@gmail.com", commentDtos.get(0).getEmail());
+        assertEquals(1L, commentDtos.get(0).getId());
+    }
+    @Test
+    void getCommentByIdTest(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(headers);
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("/api/v1/posts/"+1000L+"/comments/"+1L, HttpMethod.GET, requestBodyHeaders, CommentDto.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+    }
+    @Test
+    void getCommentByIdWithInvalidPostIdTest(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(headers);
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("/api/v1/posts/"+9999L+"/comments/"+1L, HttpMethod.GET, requestBodyHeaders, CommentDto.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void updateCommentTest(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        commentDto.setName("Nuevo nombre");
+        commentDto.setBody("Nuevo cuerpo");
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(commentDto, headers);
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("/api/v1/posts/"+1000L+"/comments/"+1L, HttpMethod.PUT, requestBodyHeaders, CommentDto.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals("Nuevo nombre", response.getBody().getName());
+        assertEquals("Nuevo cuerpo", response.getBody().getBody());
+    }
+    @Test
+    void updateCommentWithInvalidPostIdTest(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        commentDto.setName("Nuevo nombre");
+        commentDto.setBody("Nuevo cuerpo");
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(commentDto, headers);
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("/api/v1/posts/"+9999L+"/comments/"+1L, HttpMethod.PUT, requestBodyHeaders, CommentDto.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void updateCommentWithInvalidDataTest(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        commentDto.setName(""); // Nombre vacío, lo que es inválido
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(commentDto, headers);
+        ResponseEntity<CommentDto> response = testRestTemplate.exchange("/api/v1/posts/"+1000L+"/comments/"+1L, HttpMethod.PUT, requestBodyHeaders, CommentDto.class);
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    }
+    @Test
+    void deleteCommentTest(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(headers);
+        ResponseEntity<String> response = testRestTemplate.exchange("/api/v1/posts/"+1000L+"/comments/"+1L, HttpMethod.DELETE, requestBodyHeaders, String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals("Comment deleted successfully", response.getBody());
+    }
+
+    @Test
+    void deleteCommentWithInvalidPostIdTest(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(headers);
+        ResponseEntity<String> response = testRestTemplate.exchange("/api/v1/posts/"+9999L+"/comments/"+1L, HttpMethod.DELETE, requestBodyHeaders, String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void deleteCommentWithInvalidCommentIdTest(){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setBearerAuth(adminToken);
+        HttpEntity<Object> requestBodyHeaders = new HttpEntity<>(headers);
+        ResponseEntity<String> response = testRestTemplate.exchange("/api/v1/posts/"+1000L+"/comments/"+9999L, HttpMethod.DELETE, requestBodyHeaders, String.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+
+
 }

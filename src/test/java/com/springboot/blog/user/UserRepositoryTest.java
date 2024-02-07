@@ -1,4 +1,4 @@
-package com.springboot.blog.userRepositoryTest;
+package com.springboot.blog.user;
 
 import com.springboot.blog.entity.User;
 import com.springboot.blog.repository.UserRepository;

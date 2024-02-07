@@ -217,7 +217,7 @@ public class CommentControllerTest {
     void testUpdateCommentWithInvalidData() throws Exception {
         CommentDto commentDto = new CommentDto();
         commentDto.setId(1L);
-        commentDto.setName(""); 
+        commentDto.setName("");
         commentDto.setEmail("angel@gmail");
         commentDto.setBody("bodyyyyyyyyyyyyy");
 

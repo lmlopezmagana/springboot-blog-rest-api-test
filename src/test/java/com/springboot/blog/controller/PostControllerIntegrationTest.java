@@ -1,17 +1,25 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.blog.payload.CommentDto;
+import com.springboot.blog.payload.LoginDto;
 import com.springboot.blog.payload.PostResponse;
+import com.springboot.blog.security.JwtTokenProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 import java.util.Objects;
 
@@ -30,7 +38,12 @@ public class PostControllerIntegrationTest {
     ObjectMapper objectMapper;
 
     @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
+    @Autowired
     private TestRestTemplate testRestTemplate;
+
+    private MultiValueMap<String, String> headers;
 
     @BeforeEach
     public void setup(){
@@ -51,5 +64,50 @@ public class PostControllerIntegrationTest {
         ResponseEntity<PostResponse> response = testRestTemplate.getForEntity("http://localhost:"+port+"/api/posts", PostResponse.class);
         assertEquals(200, response.getStatusCode().value());
         assertEquals(0, Objects.requireNonNull(response.getBody()).getTotalElements());
+    }
+
+    @Test
+    public void deletePost_AdminRoleReturnsOk(){
+        LoginDto loginDto = new LoginDto("amatushevich4@nifty.com", "zE5#8$x7\"mk>");
+        String userToken = jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
+                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+        System.out.println(userToken);
+        headers=new LinkedMultiValueMap<>();
+        headers.add("content-type","application/json");
+        headers.add("Authorization","Bearer "+ userToken);
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+1, HttpMethod.DELETE,new HttpEntity<>("Post entity deleted successfully.", headers), String.class);
+        assertEquals(200, response.getStatusCode().value());
+    }
+
+    @Test
+    public void deletePost_UserRoleReturns401(){
+        LoginDto loginDto = new LoginDto("sbrane1", "aH5_V1Oar1");
+        String userToken = jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
+                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+        System.out.println(userToken);
+        headers=new LinkedMultiValueMap<>();
+        headers.add("content-type","application/json");
+        headers.add("Authorization","Bearer "+ userToken);
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+1, HttpMethod.DELETE,new HttpEntity<>("Post entity deleted successfully.", headers), String.class);
+        assertEquals(401, response.getStatusCode().value());
+    }
+
+    @Test
+    public void deletePost_AnonymousUserReturns401(){
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+1, HttpMethod.DELETE,new HttpEntity<>("Post entity deleted successfully.", headers), String.class);
+        assertEquals(401, response.getStatusCode().value());
+    }
+
+    @Test
+    public void deletePost_ReturnsNotFound(){
+        LoginDto loginDto = new LoginDto("amatushevich4@nifty.com", "zE5#8$x7\"mk>");
+        String userToken = jwtTokenProvider.generateToken(new UsernamePasswordAuthenticationToken(
+                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
+        System.out.println(userToken);
+        headers=new LinkedMultiValueMap<>();
+        headers.add("content-type","application/json");
+        headers.add("Authorization","Bearer "+ userToken);
+        ResponseEntity<String> response = testRestTemplate.exchange("http://localhost:"+port+"/api/posts/"+21, HttpMethod.DELETE,new HttpEntity<>("Post entity deleted successfully.", headers), String.class);
+        assertEquals(404, response.getStatusCode().value());
     }
 }

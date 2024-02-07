@@ -6,6 +6,7 @@ import com.springboot.blog.entity.Post;
 import com.springboot.blog.exception.ResourceNotFoundException;
 import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.security.JwtTokenProvider;
+import com.springboot.blog.service.CommentService;
 import com.springboot.blog.service.impl.CommentServiceImpl;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,7 +15,14 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -34,7 +42,12 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(CommentController.class)
+//@WebMvcTest(CommentController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
+/*@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class,
+        DataSourceTransactionManagerAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class})*/
 class CommentControllerWSecurityTest {
 
     @Autowired
@@ -44,16 +57,19 @@ class CommentControllerWSecurityTest {
     @InjectMocks
     private CommentController commentController;
     @MockBean
-    private CommentServiceImpl commentService;
-    @MockBean
-    private JwtTokenProvider jwtTokenProvider;
-    @Autowired
-    private WebApplicationContext webApplicationContext;
+    //private CommentServiceImpl commentService;
+    private CommentService commentService;
+
+    //@MockBean
+    //private JwtTokenProvider jwtTokenProvider;
+
+    //@Autowired
+    //private WebApplicationContext webApplicationContext;
 
     @BeforeEach
     public void setup() {
         //Init MockMvc Object and build
-        mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+        //mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
 

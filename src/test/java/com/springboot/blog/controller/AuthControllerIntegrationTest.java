@@ -61,6 +61,7 @@ class AuthControllerIntegrationTest {
         adminHeaders.setBearerAuth(token);
     }
 
+
     //Sebastián Millán
     @Test
     void whenLoginDtoIsOk_thenReturnHttp200() {

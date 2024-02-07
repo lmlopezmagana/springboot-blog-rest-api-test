@@ -26,7 +26,7 @@ class PostControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
     @MockBean
-    private PostService categoryService;
+    private PostService postService;
     @InjectMocks
     private PostController commentController;
 
@@ -117,7 +117,7 @@ class PostControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/posts/{id}",idPost))
                 .andExpect(content().string("Post entity deleted successfully."))
                 .andExpect(status().isOk());
-        verify(categoryService, times(1)).deletePostById(idPost);
+        verify(postService, times(1)).deletePostById(idPost);
     }
 
     //Sebastián Millán
@@ -126,7 +126,7 @@ class PostControllerTest {
     void whenPostIdIsWrongAndAdminRole_thenReturnHttp400() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/posts/{id}","null"))
                 .andExpect(status().isBadRequest());
-        verify(categoryService, never()).deletePostById(idPost);
+        verify(postService, never()).deletePostById(idPost);
     }
 
     //Sebastián Millán
@@ -135,7 +135,7 @@ class PostControllerTest {
     void whenPostIdExistsAndUserRole_thenReturnHttp401() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/posts/{id}",idPost))
                 .andExpect(status().isUnauthorized());
-        verify(categoryService, never()).deletePostById(idPost);
+        verify(postService, never()).deletePostById(idPost);
 
     }
 
@@ -146,7 +146,7 @@ class PostControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isUnauthorized());
-        verify(categoryService, never()).deletePostById(idPost);
+        verify(postService, never()).deletePostById(idPost);
 
     }
 
@@ -156,7 +156,7 @@ class PostControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/category/{id}",idCategory)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-        verify(categoryService, times(1)).getPostsByCategory(idCategory);
+        verify(postService, times(1)).getPostsByCategory(idCategory);
     }
     //Sebastián Millán
     @Test
@@ -164,7 +164,7 @@ class PostControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/category/{id}","null")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
-        verify(categoryService, never()).getPostsByCategory(idCategory);
+        verify(postService, never()).getPostsByCategory(idCategory);
     }
 
 }

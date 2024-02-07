@@ -48,6 +48,7 @@ class PostServiceImplTest {
     void createPost() {
     }
 
+    //Cristian Pulido
     @Test
     void getAllPosts() {
         int pageNo = 0;
@@ -93,6 +94,7 @@ class PostServiceImplTest {
     void getPostById() {
     }
 
+    //Cristian Pulido
     @Test
     void updatePost() {
         PostDto postDto = new PostDto();

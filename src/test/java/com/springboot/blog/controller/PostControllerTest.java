@@ -52,6 +52,7 @@ class PostControllerTest {
     void getPostById() {
     }
 
+    //Cristian Pulido
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void whenUpdatePostWithValidData_thenReturnHttp200() throws Exception {
@@ -72,10 +73,10 @@ class PostControllerTest {
                 .andExpect(jsonPath("$.title").value(updatedPostDto.getTitle()));
         verify(categoryService, times(1)).updatePost(updatedPostDto, postId);
     }
+    //Cristian Pulido
     @Test
     @WithMockUser(authorities = {"USER"})
     void whenUpdatePostWithValidData_thenReturnHttp401() throws Exception {
-        // Arrange
         PostDto updatedPostDto = new PostDto();
         updatedPostDto.setId(1L);
         updatedPostDto.setTitle("Title");
@@ -90,9 +91,7 @@ class PostControllerTest {
                 .andExpect(status().isUnauthorized());
         verify(categoryService, never()).updatePost(updatedPostDto, postId);
     }
-
-
-
+    //Cristian Pulido
     @Test
     @WithMockUser(roles = {"ADMIN"})
     void whenUpdatePostWithInvalidData_thenReturnHttp400() throws Exception {

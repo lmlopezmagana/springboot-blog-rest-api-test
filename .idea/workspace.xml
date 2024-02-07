@@ -128,6 +128,7 @@
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.springboot.blog.controller.*" />
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -142,6 +143,7 @@
       <module name="springboot-blog-rest-api" />
       <extension name="coverage">
         <pattern>
+          <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="PATTERN" value="com.springboot.blog.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
@@ -234,8 +236,11 @@
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest.ic" NAME="AuthControllerTest Coverage Results" MODIFIED="1706870424527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostControllerWOSecurityTest_getAllPosts.ic" NAME="PostControllerWOSecurityTest.getAllPosts Coverage Results" MODIFIED="1707063510445" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>com.springboot.blog.controller.*</FILTER>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest_deletePostById.ic" NAME="PostServiceTest.deletePostById Coverage Results" MODIFIED="1707219923273" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_getCommentsByPostId.ic" NAME="CommentServiceTest.getCommentsByPostId Coverage Results" MODIFIED="1707153536733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.springboot.blog.service.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerTest_testLogin.ic" NAME="AuthControllerTest.testLogin Coverage Results" MODIFIED="1706871884132" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
@@ -270,7 +275,7 @@
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$PostServiceTest_getPostsByCategory_CategoryNotFound.ic" NAME="PostServiceTest.getPostsByCategory_CategoryNotFound Coverage Results" MODIFIED="1707065491875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.service.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentControllerWSecurityTest_getCommentsByPostId.ic" NAME="CommentControllerWSecurityTest.getCommentsByPostId Coverage Results" MODIFIED="1707162776659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$AuthControllerIntegrationTest_whenLoginRegisteredUser_thenReturnOk.ic" NAME="AuthControllerIntegrationTest.whenLoginRegisteredUser_thenReturnOk Coverage Results" MODIFIED="1707220877131" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.springboot.blog.controller.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/springboot_blog_rest_api_test$CommentServiceTest_updateComment_Successful.ic" NAME="CommentServiceTest.updateComment_Successful Coverage Results" MODIFIED="1706984009664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

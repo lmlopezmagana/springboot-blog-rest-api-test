@@ -63,6 +63,22 @@ class CategoryServiceTest {
 
     @Test
     void getCategory() {
+        Category category = new Category();
+        Long categoryId = 1L;
+        category.setId(categoryId);
+
+        Mockito.when(categoryRepository.findById(categoryId)).thenReturn(Optional.of(category));
+
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId(category.getId());
+
+        Mockito.when(modelMapper.map(Mockito.any(Category.class), Mockito.eq(CategoryDto.class)))
+                .thenReturn(categoryDto);
+
+        CategoryDto result = categoryService.getCategory(categoryDto.getId());
+
+        assertNotNull(result);
+        assertEquals(category.getId(), result.getId());
     }
 
     @Test

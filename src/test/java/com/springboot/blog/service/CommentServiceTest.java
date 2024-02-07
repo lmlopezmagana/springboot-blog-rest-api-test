@@ -9,11 +9,11 @@ import com.springboot.blog.payload.CommentDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.repository.PostRepository;
 import com.springboot.blog.service.impl.CommentServiceImpl;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -24,9 +24,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,6 +46,37 @@ class CommentServiceTest {
 
     @Test
     void createComment() {
+        CommentDto commentDto = new CommentDto();
+        commentDto.setId(1L);
+        commentDto.setName("Paco");
+        commentDto.setEmail("paco@gmail.com");
+        commentDto.setBody("Lorem ipsum dolor sit amet");
+
+        Post post = new Post(
+                1L,
+                "Title",
+                "Lorem ipsum dolor sit amet",
+                "asdfasdf",
+                new HashSet<>(),
+                new Category()
+        );
+
+        Comment comment = new Comment();
+        comment.setId(commentDto.getId());
+        comment.setName(commentDto.getName());
+        comment.setBody(commentDto.getBody());
+        comment.setEmail(commentDto.getEmail());
+        comment.setPost(post);
+
+        when(modelMapper.map(commentDto, Comment.class)).thenReturn(comment);
+        when(postRepository.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(post));
+        when(commentRepository.save(Mockito.any(Comment.class))).thenReturn(comment);
+
+        CommentDto result = commentService.createComment(post.getId(), commentDto);
+
+        assertEquals("Paco", result.getName());
+        verify(commentRepository, Mockito.times(1)).save(Mockito.any(Comment.class));
+        verify(postRepository).findById(eq(1L));
     }
 
     @Test
@@ -70,8 +101,6 @@ class CommentServiceTest {
         when(commentRepository.findByPostId(postId)).thenReturn(listComment);
 
         Assertions.assertEquals(commentService.getCommentsByPostId(postId).size(),4);
-
-
     }
 
     @Test
@@ -86,9 +115,9 @@ class CommentServiceTest {
         commentDto.setId(comment.getId());
         commentDto.setBody("Comment");
 
-        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.of(post));
-        Mockito.when(commentRepository.findById(commentId)).thenReturn(Optional.of(comment));
-        Mockito.when(modelMapper.map(comment, CommentDto.class)).thenReturn(commentDto);
+        when(postRepository.findById(postId)).thenReturn(Optional.of(post));
+        when(commentRepository.findById(commentId)).thenReturn(Optional.of(comment));
+        when(modelMapper.map(comment, CommentDto.class)).thenReturn(commentDto);
 
         CommentDto expectedResult = commentService.getCommentById(postId, commentId);
 
@@ -100,7 +129,7 @@ class CommentServiceTest {
     void getCommentByIdWithEmptyContentThrowException(){
         Long postId = null;
         Long commentId = null;
-        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.empty());
+        when(postRepository.findById(postId)).thenReturn(Optional.empty());
 
         assertThrows(Exception.class, () -> commentService.getCommentById(postId, commentId));
     }
@@ -118,8 +147,8 @@ class CommentServiceTest {
         Long postId = null;
         Long commentId = 1L;
 
-        Mockito.when(postRepository.findById(postId)).thenReturn(Optional.of(new Post()));
-        Mockito.when(commentRepository.findById(commentId)).thenReturn(Optional.of(new Comment()));
+        when(postRepository.findById(postId)).thenReturn(Optional.of(new Post()));
+        when(commentRepository.findById(commentId)).thenReturn(Optional.of(new Comment()));
 
         assertThrows(Exception.class, () -> commentService.getCommentById(postId, commentId));
     }
@@ -183,7 +212,7 @@ class CommentServiceTest {
         when(postRepository.findById(postId)).thenReturn(Optional.of(post));
         when(commentRepository.findById(commentId)).thenReturn(Optional.of(comment));
         when(commentRepository.save(Mockito.any())).thenAnswer(invocation -> invocation.getArgument(0));
-        when(modelMapper.map(Mockito.any(), Mockito.eq(CommentDto.class))).thenReturn(commentRequest);
+        when(modelMapper.map(Mockito.any(), eq(CommentDto.class))).thenReturn(commentRequest);
 
         CommentDto updatedComment = commentService.updateComment(postId, commentId, commentRequest);
 

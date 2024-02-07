@@ -18,6 +18,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.parameters.P;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -83,7 +84,28 @@ class PostControllerWOSecurityTest {
     }
 
     @Test
-    void getPostById() {
+    void getPostByIdWithStatusCode200_OK() throws Exception{
+        ModelMapper modelMapper = new ModelMapper();
+        long postId = 1L;
+        Post post = new Post();
+        post.setId(1L);
+        post.setTitle("Title");
+        PostDto postDto = modelMapper.map(post, PostDto.class);
+
+        Mockito.when(postService.getPostById(postId)).thenReturn(postDto);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/posts/{id}", postDto.getId()))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void getPostByIdWithIdNullOrNotExistsThrowException() throws Exception {
+        long postId = 2L;
+
+        Mockito.when(postService.getPostById(postId)).thenThrow(ResourceNotFoundException.class);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/posts/{id}", postId))
+                .andExpect(status().isNotFound());
     }
 
     @Test

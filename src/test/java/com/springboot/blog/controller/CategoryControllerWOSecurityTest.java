@@ -1,6 +1,7 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.springboot.blog.entity.Category;
 import com.springboot.blog.payload.CategoryDto;
 import com.springboot.blog.security.JwtTokenProvider;
 import com.springboot.blog.service.CategoryService;
@@ -17,8 +18,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(CategoryController.class)
@@ -46,8 +50,23 @@ class CategoryControllerWOSecurityTest {
     }
 
     @Test
-    void getCategory() {
+    void getCategory() throws Exception {
+
+        Category category = new Category();
+        Long categoryId = 1L;
+        category.setId(categoryId);
+
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setId(category.getId());
+
+        CategoryDto result = categoryService.getCategory(categoryDto.getId());
+
+        Mockito.when(categoryService.getCategory(categoryId)).thenReturn(result);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/categories/{id}", categoryId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
+
 
     @Test
     void getCategories() throws Exception {
@@ -64,6 +83,9 @@ class CategoryControllerWOSecurityTest {
                 .andExpect(content().json(objectMapper.writeValueAsString(categories)));
     }
 
+    @Test
+    void updateCategory() {
+    }
 
     @Test
     void deleteCategory() {

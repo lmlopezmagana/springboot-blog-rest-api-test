@@ -1,10 +1,11 @@
 package com.springboot.blog.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.dockerjava.api.exception.InternalServerErrorException;
-import com.github.dockerjava.api.exception.NotFoundException;
-import com.springboot.blog.payload.LoginDto;
+import com.springboot.blog.exception.BlogAPIException;
+import com.springboot.blog.payload.RegisterDto;
 import com.springboot.blog.service.AuthService;
+import com.github.dockerjava.api.exception.InternalServerErrorException;
+import com.springboot.blog.payload.LoginDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -14,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.http.MediaType;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,16 +29,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 class AuthControllerTest {
+    @Autowired
+    MockMvc mockMvc;
 
     @Autowired
-    private MockMvc mockMvc;
-    @Autowired
-    private ObjectMapper objectMapper;
+    ObjectMapper objectMapper;
+
     @MockBean
-    private AuthService authService;
+    AuthService authService;
 
     @InjectMocks
-    private AuthController authController;
+    AuthController authController;
+
     private LoginDto loginDto;
     @BeforeEach
     void setUp(){
@@ -83,9 +88,52 @@ class AuthControllerTest {
                 .andExpect(status().isInternalServerError());
     }
 
-
+    //Marco Pertegal
     @Test
-    @Disabled
-    void register() {
+    void whenValidCredentialsThenReturnHttp201() throws Exception{
+        RegisterDto registerDto = new RegisterDto();
+        registerDto.setEmail("marco@gmail.com");
+        registerDto.setUsername("Marco");
+        registerDto.setPassword("12345");
+
+        mockMvc.perform(post("/api/auth/register")
+                                .content(objectMapper.writeValueAsString(registerDto))
+                                .contentType(MediaType.APPLICATION_JSON)
+                        ).andExpect(status().isCreated());
     }
+    //Marco Pertegal
+    @Test
+    void whenExistEmailThenReturnHttp400() throws Exception{
+        RegisterDto registerDto = new RegisterDto();
+        registerDto.setEmail("marco@gmail.com");
+        registerDto.setUsername("Marco");
+        registerDto.setPassword("12345");
+
+        Mockito.doThrow(new BlogAPIException(HttpStatus.BAD_REQUEST, "Email is already exists!."))
+                .when(authService).register(Mockito.any(RegisterDto.class));
+
+        mockMvc.perform(post("/api/auth/register")
+                                .content(objectMapper.writeValueAsString(registerDto))
+                                .contentType(MediaType.APPLICATION_JSON)
+                        ).andExpect(status().isBadRequest());
+
+    }
+    //Marco Pertegal
+    @Test
+    void whenExistUsernameThenReturnHttp400() throws Exception{
+        RegisterDto registerDto = new RegisterDto();
+        registerDto.setEmail("marco@gmail.com");
+        registerDto.setUsername("Marco");
+        registerDto.setPassword("12345");
+
+        Mockito.doThrow(new BlogAPIException(HttpStatus.BAD_REQUEST, "Username is already exists!."))
+                .when(authService).register(Mockito.any(RegisterDto.class));
+
+        mockMvc.perform(post("/api/auth/register")
+                .content(objectMapper.writeValueAsString(registerDto))
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isBadRequest());
+
+    }
+
 }

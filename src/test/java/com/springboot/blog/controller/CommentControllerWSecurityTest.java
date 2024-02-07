@@ -46,7 +46,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class CommentControllerWSecurityTest {
 
-    //Un comentario
     @Autowired
     private MockMvc mockMvc;
     @Autowired
@@ -58,6 +57,7 @@ class CommentControllerWSecurityTest {
 
     @BeforeEach
     public void setup() {
+
     }
 
 
@@ -168,7 +168,6 @@ class CommentControllerWSecurityTest {
                 .andExpect(status().isNotFound());
     }
 
-
     @Test
     @WithMockUser(username = "username",  roles = {"USER","ADMIN"})
     void updateComment_Succesful() throws Exception {
@@ -181,7 +180,6 @@ class CommentControllerWSecurityTest {
         updatedComment.setBody("Un comentario guapo");
 
         Mockito.when(commentService.updateComment(postId, commentId, updatedComment)).thenReturn(updatedComment);
-
         mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/posts/{postId}/comments/{id}", postId, commentId)
                     .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedComment)))

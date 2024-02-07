@@ -1,6 +1,5 @@
-package com.springboot.blog.CommentTest;
+package com.springboot.blog.Comment;
 
-import com.springboot.blog.entity.Category;
 import com.springboot.blog.entity.Comment;
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.payload.CommentDto;
@@ -18,7 +17,6 @@ import org.modelmapper.ModelMapper;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

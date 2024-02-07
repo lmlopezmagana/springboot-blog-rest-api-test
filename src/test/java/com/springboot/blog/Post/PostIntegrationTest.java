@@ -38,8 +38,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles({"test"})
-@Testcontainers
+@ActiveProfiles({"integration-test"})
 @Sql(value = "classpath:import-integration-post.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 public class PostIntegrationTest {
 
@@ -47,12 +46,6 @@ public class PostIntegrationTest {
     TestRestTemplate testRestTemplate;
     @Autowired
     JwtTokenProvider jwtProvider;
-    @Container
-    @ServiceConnection
-    static PostgreSQLContainer postgres = new PostgreSQLContainer(DockerImageName.parse("postgres:16-alpine"))
-            .withUsername("postgres")
-            .withPassword("12345678")
-            .withDatabaseName("test");
 
     @LocalServerPort
     int port;
